@@ -1,8 +1,10 @@
- public class Main {
+import static org.fusesource.jansi.Ansi.ansi;
+
+public class Main {
 
    static public void  main(String [] args)
     {
-        System.out.println("Paf");
+        System.out.println(ansi().fgBlue().a("Paf"));
     }
 
 }
