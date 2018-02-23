@@ -9,7 +9,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: org.fausesource.jainsi:jainsi:2.9.4" level="project" />
-    <orderEntry type="library" name="jansi-1.17 (2)" level="application" />
+    <orderEntry type="library" name="Gradle: org.fusesource.jansi:jansi:1.17" level="project" />
   </component>
 </module>
