@@ -4,6 +4,7 @@ package Util;
 
     Uses cellular automata to generate the cave, using the 4-5 rule
 
+    Ver 0.1: Working, but creating orphaned isle
 
  */
 
@@ -33,7 +34,6 @@ public class MapGenerator
         int wallCount;
         for (int i = 0; i < height; i++)
         {
-
             for (int j = 0; j < width; j++)
             {
                 wallCount = 0;
@@ -58,7 +58,7 @@ public class MapGenerator
                     if(mapArrayChar[i][j - 2] == Constants.CWall)
                         wallCount++;
 
-                    //we check according to the tile we are in
+                    //we check according to the rule
                     if(wallCount >=5)
                     {
                         mapArrayChar[i][j] = Constants.CWall;
