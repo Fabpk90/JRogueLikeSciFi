@@ -29,7 +29,7 @@ public class MapGenerator
         return getStringFromCharMatrix(mapArrayChar);
     }
 
-    private static void iterateOnMap(char[][] mapArrayChar)
+    static private void iterateOnMap(char[][] mapArrayChar)
     {
         int wallCount;
         for (int i = 0; i < height; i++)
