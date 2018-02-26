@@ -10,7 +10,7 @@ public class Main {
     {
 
 
-        System.out.println(ansi().fgBlue().a(MapGenerator.getMap(10, 15, 2)));
+        System.out.println(ansi().fgBlue().a(MapGenerator.getMap(8, 25, 1)));
     }
 
 }

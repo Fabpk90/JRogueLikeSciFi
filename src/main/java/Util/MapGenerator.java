@@ -30,33 +30,63 @@ public class MapGenerator
 
     private static void iterateOnMap(char[][] mapArrayChar)
     {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                if(i - 1 >= 0 && i + 1 <= height - 1 && j - 1 >= 0 && j + 1 <= width - 1) // check for array boundaries
+        int wallCount;
+        for (int i = 0; i < height; i++)
+        {
+
+            for (int j = 0; j < width; j++)
+            {
+                wallCount = 0;
+                if(i - 2 >= 0 && i + 2 <= height - 1 && j - 2 >= 0 && j + 2 <= width - 1) // check for array boundaries
                 {
-                    if(!(mapArrayChar[i][j] == Constants.CWall && mapArrayChar[i - 1][j] == mapArrayChar[i][j]
-                    && mapArrayChar[i + 1][j] == mapArrayChar[i][j] && mapArrayChar[i][j + 1] == mapArrayChar[i][j]
-                            && mapArrayChar[i][j - 1] == mapArrayChar[i][j]))
+                    //we count surrounding walls
+                    // applying 4-5 rule
+                    if(mapArrayChar[i - 1][j] == Constants.CWall)
+                        wallCount++;
+                    if(mapArrayChar[i + 1][j] == Constants.CWall)
+                        wallCount++;
+                    if(mapArrayChar[i - 2][j] == Constants.CWall)
+                        wallCount++;
+                    if(mapArrayChar[i + 2][j] == Constants.CWall)
+                        wallCount++;
+                    if(mapArrayChar[i][j + 1] == Constants.CWall)
+                        wallCount++;
+                    if(mapArrayChar[i][j - 1] == Constants.CWall)
+                        wallCount++;
+                    if(mapArrayChar[i][j + 2] == Constants.CWall)
+                        wallCount++;
+                    if(mapArrayChar[i][j - 2] == Constants.CWall)
+                        wallCount++;
+
+                    //we check according to the tile we are in
+                    if(wallCount >=5)
+                    {
+                        mapArrayChar[i][j] = Constants.CWall;
+                    }
+                    else
                     {
                         mapArrayChar[i][j] = Constants.CFloor;
                     }
-                }
+
+                } //make the edges walls
+                else if (i  == 0 || i + 1 == height || j == 0 || j + 1 == width)
+                    mapArrayChar[i][j] = Constants.CWall;
             }
         }
     }
 
     static private String getStringFromCharMatrix(char[][] charMatrix)
     {
-        String str = "";
+        StringBuilder str = new StringBuilder();
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                str += charMatrix[i][j];
+                str.append(charMatrix[i][j]);
             }
-            str += '\n';
+            str.append('\n');
         }
 
-        return str;
+        return str.toString();
     }
 
     static private void generateWalls(char [][] map)
