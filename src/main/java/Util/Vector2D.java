@@ -14,6 +14,17 @@ public class Vector2D {
     private float y;
 
 
+    static Vector2D getVector2DOne()
+    {
+        return new Vector2D(1, 1);
+    }
+    static Vector2D getVector2DZero() { return new Vector2D(0, 0); }
+
+    static Vector2D getVector2DUp() { return new Vector2D(0, 1); }
+    static Vector2D getVector2DDown() { return new Vector2D(0, -1); }
+    static Vector2D getVector2DRight() { return new Vector2D(1, 0); }
+    static Vector2D getVector2DLeft() { return new Vector2D(-1, 0); }
+
     static Vector2D add(Vector2D v1, Vector2D v2)
     {
         Vector2D v = new Vector2D();
@@ -21,12 +32,6 @@ public class Vector2D {
         v.setY(v1.y + v2.y);
 
         return v;
-    }
-
-
-    static Vector2D getVector2DOne()
-    {
-        return new Vector2D(1, 1);
     }
 
     public Vector2D()
@@ -50,6 +55,22 @@ public class Vector2D {
         return (float) Math.sqrt(x2 - y2);
     }
 
+    public float getMagnitude()
+    {
+        return (float) Math.sqrt((x*x) + (y*y));
+    }
+
+    public void add(float x, float y)
+    {
+        this.x += x;
+        this.y += y;
+    }
+
+    public void add(Vector2D v)
+    {
+        this.x += v.x;
+        this.y += v.y;
+    }
 
     public float getX() {
         return x;
