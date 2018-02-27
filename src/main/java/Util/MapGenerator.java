@@ -13,7 +13,7 @@ public class MapGenerator
     static private int height;
     static private int width;
 
-    static public String getMap(int height, int width, int iterations)
+    static public char[][] getMap(int height, int width, int iterations)
     {
         char mapArrayChar[][] = new char[height][width];
 
@@ -26,7 +26,7 @@ public class MapGenerator
             iterateOnMap(mapArrayChar);
         }
 
-        return getStringFromCharMatrix(mapArrayChar);
+        return (mapArrayChar);
     }
 
     static private void iterateOnMap(char[][] mapArrayChar)
@@ -75,19 +75,7 @@ public class MapGenerator
         }
     }
 
-    static private String getStringFromCharMatrix(char[][] charMatrix)
-    {
-        StringBuilder str = new StringBuilder();
 
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                str.append(charMatrix[i][j]);
-            }
-            str.append('\n');
-        }
-
-        return str.toString();
-    }
 
     static private void generateWalls(char [][] map)
     {
