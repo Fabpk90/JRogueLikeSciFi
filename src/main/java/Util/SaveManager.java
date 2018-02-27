@@ -26,11 +26,11 @@ public class SaveManager {
         GameManager gm = null;
 
         try {
-            FileInputStream fileOut = new FileInputStream("save.yaya");
-            ObjectInputStream in = new ObjectInputStream(fileOut);
+            FileInputStream fileIn = new FileInputStream("save.yaya");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
             gm = (GameManager) in.readObject();
             in.close();
-            fileOut.close();
+            fileIn.close();
         } catch (IOException i) {
             i.printStackTrace();
             return null;
