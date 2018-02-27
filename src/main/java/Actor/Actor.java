@@ -1,14 +1,17 @@
 package Actor;
 
-public class Player extends Placeable{
+import org.fusesource.jansi.Ansi;
+import org.fusesource.jansi.AnsiConsole;
+
+public class Actor extends Placeable{
 
     private int health;
     private int atk;
     private int def;
 
-    public Player(char glyph, int health, int atk, int def)
+    public Actor(char glyph, Ansi.Color color, int health, int atk, int def)
     {
-        super(glyph);
+        super(glyph, color);
 
         this.health = health;
         this.atk = atk;
