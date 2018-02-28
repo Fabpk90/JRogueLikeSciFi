@@ -17,7 +17,7 @@ public class GameManager implements Serializable {
         this.width = width;
     }
 
-    public void generateMap(int iterations)
+    private void generateMap(int iterations)
     {
         charMatrix = MapGenerator.getMap(height, width, iterations);
     }
@@ -35,6 +35,12 @@ public class GameManager implements Serializable {
         }
 
         return str.toString();
+    }
+
+    public String getMap(int iterations)
+    {
+        generateMap(iterations);
+        return getStringFromCharMatrix(charMatrix);
     }
 
 }

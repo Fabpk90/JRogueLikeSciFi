@@ -1,5 +1,3 @@
-
-
 import Actor.Placeable;
 import Util.GameManager;
 import Util.MapGenerator;
@@ -28,7 +26,8 @@ public class Main {
         System.out.println(SaveManager.loadSave().toString());
         */
         //Testing map generation
-        //System.out.println(ansi().fgBlue().a(MapGenerator.getMap(11, 25, 3 )));
+        /*GameManager gm = new GameManager(10, 10);
+        System.out.println(ansi().fgBlue().a(gm.getMap(5)));*/
     }
 
 }

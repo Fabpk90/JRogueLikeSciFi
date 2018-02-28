@@ -23,7 +23,8 @@ public class Placeable {
         this.glyph = glyph;
     }
 
-    public Ansi.Color getColor() {
+    public Ansi.Color getColor()
+    {
         return color;
     }
 

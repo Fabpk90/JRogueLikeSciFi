@@ -7,8 +7,7 @@ public class SaveManager {
     static public boolean saveInstance(GameManager gm)
     {
         try {
-            FileOutputStream fileOut =
-                    new FileOutputStream("save.yaya");
+            FileOutputStream fileOut = new FileOutputStream("save.yaya");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(gm);
             out.close();
@@ -23,7 +22,7 @@ public class SaveManager {
 
     static public GameManager loadSave()
     {
-        GameManager gm = null;
+        GameManager gm;
 
         try {
             FileInputStream fileIn = new FileInputStream("save.yaya");

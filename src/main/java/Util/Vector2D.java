@@ -46,7 +46,6 @@ public class Vector2D {
         this.y = y;
     }
 
-
     public float getDistanceFrom(Vector2D v)
     {
         float x2 = (x - v.x) * (x - v.x);

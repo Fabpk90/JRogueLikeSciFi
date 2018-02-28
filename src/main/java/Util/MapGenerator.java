@@ -22,60 +22,69 @@ public class MapGenerator
 
         generateWalls(mapArrayChar);
 
-        for (int i = 0; i < iterations; i++) {
-            iterateOnMap(mapArrayChar);
-        }
+        iterateOnMap(mapArrayChar, iterations);
 
         return (mapArrayChar);
     }
 
-    static private void iterateOnMap(char[][] mapArrayChar)
+    static private void iterateOnMap(char[][] mapArrayChar, int iterations)
     {
         int wallCount;
-        for (int i = 0; i < height; i++)
+        for(int iter = 0; iter < iterations; iter++)
         {
-            for (int j = 0; j < width; j++)
+            for (int i = 0; i < height; i++)
             {
-                wallCount = 0;
-                if(i - 2 >= 0 && i + 2 <= height - 1 && j - 2 >= 0 && j + 2 <= width - 1) // check for array boundaries
+                for (int j = 0; j < width; j++)
                 {
-                    //we count surrounding walls
-                    // applying 4-5 rule
-                    if(mapArrayChar[i - 1][j] == Constants.CWall)
-                        wallCount++;
-                    if(mapArrayChar[i + 1][j] == Constants.CWall)
-                        wallCount++;
-                    if(mapArrayChar[i - 2][j] == Constants.CWall)
-                        wallCount++;
-                    if(mapArrayChar[i + 2][j] == Constants.CWall)
-                        wallCount++;
-                    if(mapArrayChar[i][j + 1] == Constants.CWall)
-                        wallCount++;
-                    if(mapArrayChar[i][j - 1] == Constants.CWall)
-                        wallCount++;
-                    if(mapArrayChar[i][j + 2] == Constants.CWall)
-                        wallCount++;
-                    if(mapArrayChar[i][j - 2] == Constants.CWall)
-                        wallCount++;
-
-                    //we check according to the rule
-                    if(wallCount >=5)
+                    wallCount = 0;
+                    if(i - 2 >= 0 && i + 2 <= height - 1 && j - 2 >= 0 && j + 2 <= width - 1) // check for array boundaries
                     {
+                        //we count surrounding walls
+                        // applying 4-5 rule
+                        if(mapArrayChar[i - 1][j] == Constants.CWall)
+                            wallCount++;
+                        if(mapArrayChar[i + 1][j] == Constants.CWall)
+                            wallCount++;
+                        if(mapArrayChar[i - 2][j] == Constants.CWall)
+                            wallCount++;
+                        if(mapArrayChar[i + 2][j] == Constants.CWall)
+                            wallCount++;
+                        if(mapArrayChar[i][j + 1] == Constants.CWall)
+                            wallCount++;
+                        if(mapArrayChar[i][j - 1] == Constants.CWall)
+                            wallCount++;
+                        if(mapArrayChar[i][j + 2] == Constants.CWall)
+                            wallCount++;
+                        if(mapArrayChar[i][j - 2] == Constants.CWall)
+                            wallCount++;
+
+                        if(mapArrayChar[i][j] == Constants.CWall)
+                        {
+                            //we check according to the rule
+                            if(wallCount >= 5 || wallCount <= 1)
+                            {
+                                mapArrayChar[i][j] = Constants.CWall;
+                            }
+                            else
+                            {
+                                mapArrayChar[i][j] = Constants.CFloor;
+                            }
+                        }
+                        else if (mapArrayChar[i][j] == Constants.CFloor)
+                        {
+                            if(wallCount > 5)
+                                mapArrayChar[i][j] = Constants.CWall;
+                        }
+
+
+                    } //make the edges walls
+                    else if (i  == 0 || i + 1 == height || j == 0 || j + 1 == width)
                         mapArrayChar[i][j] = Constants.CWall;
-                    }
-                    else
-                    {
-                        mapArrayChar[i][j] = Constants.CFloor;
-                    }
-
-                } //make the edges walls
-                else if (i  == 0 || i + 1 == height || j == 0 || j + 1 == width)
-                    mapArrayChar[i][j] = Constants.CWall;
+                }
             }
         }
+
     }
-
-
 
     static private void generateWalls(char [][] map)
     {
