@@ -13,16 +13,22 @@ public class Vector2D {
     private float x;
     private float y;
 
-
+    /* @return x = y = 1 */
     static public Vector2D getVector2DOne()
     {
         return new Vector2D(1, 1);
     }
+
+    /* @return x = y = 0 */
     static public Vector2D getVector2DZero() { return new Vector2D(0, 0); }
 
+    /* @return x = 0, y = 1 */
     static public Vector2D getVector2DUp() { return new Vector2D(0, 1); }
+    /* @return x = 0, y = -1 */
     static public Vector2D getVector2DDown() { return new Vector2D(0, -1); }
+    /* @return x = 1, y = 0 */
     static public Vector2D getVector2DRight() { return new Vector2D(1, 0); }
+    /* @return x = -1, y = 0 */
     static public Vector2D getVector2DLeft() { return new Vector2D(-1, 0); }
 
     static Vector2D add(Vector2D v1, Vector2D v2)
