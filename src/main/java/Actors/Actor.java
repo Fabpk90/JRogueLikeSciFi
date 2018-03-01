@@ -1,13 +1,25 @@
-package Actor;
+package Actors;
 
+import Utils.Constants;
+import Utils.Vector2D;
 import org.fusesource.jansi.Ansi;
-import org.fusesource.jansi.AnsiConsole;
 
 public class Actor extends Placeable{
+
+    private Vector2D position;
 
     private int health;
     private int atk;
     private int def;
+
+    public Actor()
+    {
+        super(Constants.CActor, Constants.ACActor);
+
+        this.health = 5;
+        this.atk = this.def = 0;
+        this.position = Vector2D.getVector2DOne();
+    }
 
     public Actor(char glyph, Ansi.Color color, int health, int atk, int def)
     {
@@ -16,6 +28,19 @@ public class Actor extends Placeable{
         this.health = health;
         this.atk = atk;
         this.def =  def;
+
+        position = new Vector2D();
+    }
+
+    public Actor(char glyph, Ansi.Color color, int health, int atk, int def, Vector2D position)
+    {
+        super(glyph, color);
+
+        this.health = health;
+        this.atk = atk;
+        this.def =  def;
+
+        this.position = position;
     }
 
     public int getAtk() {
@@ -28,6 +53,10 @@ public class Actor extends Placeable{
 
     public int getDef() {
         return def;
+    }
+
+    public Vector2D getPosition() {
+        return position;
     }
 
     public void setAtk(int atk) {

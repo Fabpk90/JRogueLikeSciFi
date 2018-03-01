@@ -1,4 +1,4 @@
-package Util;
+package Utils;
 
 /*
 
@@ -14,16 +14,16 @@ public class Vector2D {
     private float y;
 
 
-    static Vector2D getVector2DOne()
+    static public Vector2D getVector2DOne()
     {
         return new Vector2D(1, 1);
     }
-    static Vector2D getVector2DZero() { return new Vector2D(0, 0); }
+    static public Vector2D getVector2DZero() { return new Vector2D(0, 0); }
 
-    static Vector2D getVector2DUp() { return new Vector2D(0, 1); }
-    static Vector2D getVector2DDown() { return new Vector2D(0, -1); }
-    static Vector2D getVector2DRight() { return new Vector2D(1, 0); }
-    static Vector2D getVector2DLeft() { return new Vector2D(-1, 0); }
+    static public Vector2D getVector2DUp() { return new Vector2D(0, 1); }
+    static public Vector2D getVector2DDown() { return new Vector2D(0, -1); }
+    static public Vector2D getVector2DRight() { return new Vector2D(1, 0); }
+    static public Vector2D getVector2DLeft() { return new Vector2D(-1, 0); }
 
     static Vector2D add(Vector2D v1, Vector2D v2)
     {
@@ -85,5 +85,17 @@ public class Vector2D {
 
     public void setY(float y) {
         this.y = y;
+    }
+
+    public void set(float x, float y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void set(Vector2D vec)
+    {
+        this.x = vec.x;
+        this.y = vec.y;
     }
 }

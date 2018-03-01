@@ -1,6 +1,8 @@
-package Actor;
+package Actors;
 
 import org.fusesource.jansi.Ansi;
+
+import static org.fusesource.jansi.Ansi.ansi;
 
 public class Placeable {
 
@@ -30,5 +32,11 @@ public class Placeable {
 
     public void setColor(Ansi.Color color) {
         this.color = color;
+    }
+
+    @Override
+    public String toString()
+    {
+        return ""+ansi().fg(color).a(glyph);
     }
 }
