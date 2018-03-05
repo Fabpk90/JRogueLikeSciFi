@@ -1,5 +1,7 @@
 package Utils;
 
+import Actors.Actor;
+
 public class Terrain {
 
     private int height;
@@ -7,7 +9,7 @@ public class Terrain {
 
     private char [][] charMatrix;
 
-    //private Player player;
+    private Actor player;
     //private ArrayList monsters;
 
     public Terrain(int height, int width)
@@ -43,8 +45,8 @@ public class Terrain {
         return getStringFromCharMatrix(charMatrix);
     }
 
-    /*public void setPlayer(Player player)
+    public void setPlayer(Actor player)
     {
         this.player = player;
-    }*/
+    }
 }
