@@ -6,8 +6,8 @@ package Utils;
 
 import org.fusesource.jansi.Ansi;
 
-public class Constants {
-
+public class Constants
+{
     static public final char CWall = 'X';
     static public final char CFloor = ' ';
 
@@ -16,6 +16,4 @@ public class Constants {
 
     static public final Ansi.Color ACActor = Ansi.Color.YELLOW;
     static public final Ansi.Color ACPlayer = Ansi.Color.WHITE;
-
-
 }
