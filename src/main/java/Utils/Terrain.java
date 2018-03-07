@@ -30,7 +30,13 @@ public class Terrain {
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                str.append(charMatrix[i][j]);
+
+                if(player.getPosition().getX()==i && player.getPosition().getY()==j)
+                {
+                    str.append(player.getGlyph());
+                }
+                else
+                    str.append(charMatrix[i][j]);
             }
             str.append('\n');
         }
