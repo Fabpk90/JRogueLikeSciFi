@@ -11,14 +11,14 @@ public class Main {
    static public void  main(String [] args)
     {
         Scanner sc = new Scanner(System.in);
-        String input = "";
+        String input;
 
         GameManager gm = new GameManager(10, 10);
 
         do {
-            input = sc.nextLine();
             gm.render();
-        }while(input != "exit")
+            input = sc.nextLine();
+        }while(!input.equals("exit"));
     }
 
 }

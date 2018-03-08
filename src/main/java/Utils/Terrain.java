@@ -47,7 +47,7 @@ public class Terrain {
     //Generates and returns the map
     public String getMap()
     {
-        generateMap(4);
+        generateMap();
         return getStringFromCharMatrix(charMatrix);
     }
 
