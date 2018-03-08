@@ -18,9 +18,9 @@ public class Terrain {
         this.width = width;
     }
 
-    private void generateMap(int iterations)
+    private void generateMap()
     {
-        charMatrix = MapGenerator.getMap(height, width, iterations);
+        charMatrix = MapGenerator.getMap(height, width);
     }
 
 

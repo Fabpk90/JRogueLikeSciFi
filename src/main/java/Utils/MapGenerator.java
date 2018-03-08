@@ -13,7 +13,7 @@ public class MapGenerator
     static private int height;
     static private int width;
 
-    static public char[][] getMap(int height, int width, int iterations)
+    static public char[][] getMap(int height, int width)
     {
         char mapArrayChar[][] = new char[height][width];
 
@@ -22,7 +22,7 @@ public class MapGenerator
 
         generateWalls(mapArrayChar);
 
-        iterateOnMap(mapArrayChar, iterations);
+        iterateOnMap(mapArrayChar, 5);
 
         return (mapArrayChar);
     }
