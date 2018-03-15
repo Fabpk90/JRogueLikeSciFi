@@ -33,7 +33,7 @@ public class Terrain {
 
                 if(player.getPosition().getX()==i && player.getPosition().getY()==j)
                 {
-                    str.append(player.getGlyph());
+                    str.append(player.getTile().getGlyph());
                 }
                 else
                     str.append(charMatrix[i][j]);
