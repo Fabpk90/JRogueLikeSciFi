@@ -12,7 +12,7 @@ public class Actor extends Placeable{
 
     public Actor()
     {
-        super(Constants.CActor, Constants.ACActor);
+        super(Constants.CActor, Constants.ACActor, new Vector2D());
 
         this.health = 5;
         this.atk = this.def = 0;
@@ -20,7 +20,7 @@ public class Actor extends Placeable{
 
     public Actor(char glyph, Ansi.Color color, int health, int atk, int def)
     {
-        super(glyph, color);
+        super(glyph, color, new Vector2D());
 
         this.health = health;
         this.atk = atk;
@@ -30,7 +30,7 @@ public class Actor extends Placeable{
 
     public Actor(char glyph, Ansi.Color color, int health, int atk, int def, Vector2D position)
     {
-        super(glyph, color);
+        super(glyph, color, position);
 
         this.health = health;
         this.atk = atk;

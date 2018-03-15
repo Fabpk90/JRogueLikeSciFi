@@ -44,10 +44,14 @@ public class Placeable {
     private Tile tile;
     private Vector2D position;
 
-    public Placeable(char glyph, Ansi.Color color)
+    public Placeable(char glyph, Ansi.Color color, Vector2D position)
     {
+        //set a fake tile, just to have it set
+        tile = Tile.FLOOR;
         tile.setGlyph(glyph);
         tile.setColor(color);
+
+        this.position = position;
     }
 
     @Override
