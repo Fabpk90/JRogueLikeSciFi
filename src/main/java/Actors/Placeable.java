@@ -10,7 +10,7 @@ public class Placeable {
     public enum Tile
     {
         WALL('X', Ansi.Color.WHITE),
-        FLOOR(' ', Ansi.Color.WHITE),
+        FLOOR('.', Ansi.Color.WHITE),
         ACTOR('A', Ansi.Color.YELLOW),
         PLAYER('P', Ansi.Color.BLUE),
         NPC('N', Ansi.Color.RED);
@@ -43,6 +43,12 @@ public class Placeable {
 
     private Tile tile;
     private Vector2D position;
+
+    public Placeable(Tile tile, Vector2D position)
+    {
+        this.tile = tile;
+        this.position = position;
+    }
 
     public Placeable(char glyph, Ansi.Color color, Vector2D position)
     {

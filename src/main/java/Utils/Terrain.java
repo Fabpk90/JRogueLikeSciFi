@@ -16,6 +16,8 @@ public class Terrain {
     {
         this.height = height;
         this.width = width;
+
+        generateMap();
     }
 
     private void generateMap()
@@ -24,7 +26,11 @@ public class Terrain {
     }
 
 
-    private String getStringFromCharMatrix(char[][] charMatrix)
+    //generates a string based on the char matrix and other placeable in the map
+    //goes trough the entire matrix and check whether an object is at the position
+    //not very good, but works. Handles the case where monsters die, because it generates the entire map each time
+    //TODO: Store the actors in the char matrix, remember that if something is on a position, it is a floor
+    public String getMap()
     {
         StringBuilder str = new StringBuilder();
 
@@ -42,13 +48,6 @@ public class Terrain {
         }
 
         return str.toString();
-    }
-
-    //Generates and returns the map
-    public String getMap()
-    {
-        generateMap();
-        return getStringFromCharMatrix(charMatrix);
     }
 
     public void setPlayer(Actor player)

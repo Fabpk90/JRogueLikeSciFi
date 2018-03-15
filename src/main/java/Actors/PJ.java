@@ -18,7 +18,7 @@ public class PJ extends Actor {
 
     public PJ(Ansi.Color color, int health, int atk, int def, Vector2D position)
     {
-        super(Constants.CPlayer, color, health, atk, def, position);
+        super(Tile.PLAYER.getGlyph(), color, health, atk, def, position);
         //inv = new ArrayList <items>();
     }
 }

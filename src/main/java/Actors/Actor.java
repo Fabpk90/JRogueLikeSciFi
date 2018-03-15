@@ -12,7 +12,7 @@ public class Actor extends Placeable{
 
     public Actor()
     {
-        super(Constants.CActor, Constants.ACActor, new Vector2D());
+        super(Tile.ACTOR, new Vector2D());
 
         this.health = 5;
         this.atk = this.def = 0;

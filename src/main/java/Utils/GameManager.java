@@ -19,6 +19,7 @@ public class GameManager implements Serializable {
         terrain = new Terrain(height, width);
 
         player = new Actor();
+        player.setPosition(Vector2D.getVector2DOne());
         terrain.setPlayer(player);
     }
 

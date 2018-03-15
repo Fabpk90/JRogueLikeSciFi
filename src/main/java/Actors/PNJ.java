@@ -4,8 +4,6 @@ import Utils.Constants;
 import Utils.Vector2D;
 import org.fusesource.jansi.Ansi;
 
-import static Utils.Constants.CActor;
-
 public class PNJ extends Actor {
 
     //int exp;
@@ -20,7 +18,7 @@ public class PNJ extends Actor {
     //Si on a pas de glyph particulié a utiliser
     public PNJ(Ansi.Color color, int health, int atk, int def, Vector2D position)
     {
-        super(Constants.CActor, color, health, atk, def, position);
+        super(Tile.NPC.getGlyph(), color, health, atk, def, position);
     }
 
     //Par défaut absolu

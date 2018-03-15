@@ -1,6 +1,6 @@
 package Utils;
 
-/*
+import Actors.Placeable;/*
 
     Uses cellular automata to generate the cave, using the 4-5 rule
 
@@ -12,24 +12,30 @@ public class MapGenerator
 {
     static private int height;
     static private int width;
+    
+    static private char [][] charMatrix;
 
     static public char[][] getMap(int height, int width)
     {
-        char mapArrayChar[][] = new char[height][width];
+        charMatrix = new char[height][width];
 
         MapGenerator.height = height;
         MapGenerator.width = width;
 
-        generateWalls(mapArrayChar);
+        generateWalls();
 
-        iterateOnMap(mapArrayChar, 5);
+        iterateOnMap(5);
 
-        return (mapArrayChar);
+        return charMatrix;
     }
 
-    static private void iterateOnMap(char[][] mapArrayChar, int iterations)
+    static private void iterateOnMap( int iterations)
     {
         int wallCount;
+        //used to store the matrix when is being modified
+        //so that the algorithm modify generation by generation the map
+        char [][] charMatrixCopy = charMatrix.clone();
+
         for(int iter = 0; iter < iterations; iter++)
         {
             for (int i = 0; i < height; i++)
@@ -41,60 +47,62 @@ public class MapGenerator
                     {
                         //we count surrounding walls
                         // applying 4-5 rule
-                        if(mapArrayChar[i - 1][j] == Constants.CWall)
+                        if(charMatrix[i - 1][j] == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
-                        if(mapArrayChar[i + 1][j] == Constants.CWall)
+                        if(charMatrix[i + 1][j] == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
-                        if(mapArrayChar[i - 2][j] == Constants.CWall)
+                        if(charMatrix[i - 2][j] == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
-                        if(mapArrayChar[i + 2][j] == Constants.CWall)
+                        if(charMatrix[i + 2][j] == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
-                        if(mapArrayChar[i][j + 1] == Constants.CWall)
+                        if(charMatrix[i][j + 1] == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
-                        if(mapArrayChar[i][j - 1] == Constants.CWall)
+                        if(charMatrix[i][j - 1] == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
-                        if(mapArrayChar[i][j + 2] == Constants.CWall)
+                        if(charMatrix[i][j + 2] == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
-                        if(mapArrayChar[i][j - 2] == Constants.CWall)
+                        if(charMatrix[i][j - 2] == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
 
-                        if(mapArrayChar[i][j] == Constants.CWall)
+                        if(charMatrix[i][j] == Placeable.Tile.WALL.getGlyph())
                         {
                             //we check according to the rule
                             if(wallCount >= 5 || wallCount <= 1)
                             {
-                                mapArrayChar[i][j] = Constants.CWall;
+                                charMatrixCopy[i][j] = Placeable.Tile.WALL.getGlyph();
                             }
                             else
                             {
-                                mapArrayChar[i][j] = Constants.CFloor;
+                                charMatrixCopy[i][j] = Placeable.Tile.FLOOR.getGlyph();
                             }
                         }
-                        else if (mapArrayChar[i][j] == Constants.CFloor)
+                        else if (charMatrix[i][j] == Placeable.Tile.FLOOR.getGlyph())
                         {
                             if(wallCount > 5)
-                                mapArrayChar[i][j] = Constants.CWall;
+                                charMatrixCopy[i][j] = Placeable.Tile.WALL.getGlyph();
                         }
 
 
                     } //make the edges walls
                     else if (i  == 0 || i + 1 == height || j == 0 || j + 1 == width)
-                        mapArrayChar[i][j] = Constants.CWall;
+                        charMatrixCopy[i][j] = Placeable.Tile.WALL.getGlyph();
                 }
             }
+
+            charMatrix = charMatrixCopy;
         }
 
     }
 
-    static private void generateWalls(char [][] map)
+    static private void generateWalls()
     {
         for(int i = 0; i < height; i++)
         {
             for (int j = 0; j < width; j++) {
-                if(Math.random()  < .45)
-                    map[i][j] = Constants.CWall;
+                if(Math.random()  <= .45)
+                    charMatrix[i][j] = Placeable.Tile.WALL.getGlyph();
                 else
-                    map[i][j] = Constants.CFloor;
+                    charMatrix[i][j] = Placeable.Tile.FLOOR.getGlyph();
             }
         }
     }
