@@ -25,6 +25,6 @@ public class GameManager implements Serializable {
 
     public void render()
     {
-        System.out.println(ansi().fgBlue().a( terrain.getMap()));
+        terrain.printMap();
     }
 }

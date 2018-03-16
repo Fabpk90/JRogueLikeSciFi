@@ -1,6 +1,9 @@
 package Utils;
 
 import Actors.Actor;
+import Actors.Placeable;
+
+import static org.fusesource.jansi.Ansi.ansi;
 
 public class Terrain {
 
@@ -30,24 +33,22 @@ public class Terrain {
     //goes trough the entire matrix and check whether an object is at the position
     //not very good, but works. Handles the case where monsters die, because it generates the entire map each time
     //TODO: Store the actors in the char matrix, remember that if something is on a position, it is a floor
-    public String getMap()
+    public void printMap()
     {
-        StringBuilder str = new StringBuilder();
-
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-
+        for(int i=0;i<height;i++)
+        {
+            for(int j=0;j<width;j++)
+            {
                 if(player.getPosition().getX()==i && player.getPosition().getY()==j)
                 {
-                    str.append(player.getTile().getGlyph());
+                    System.out.print(ansi().fg(player.getTile().getColor()).a(player.getTile().getGlyph()));
                 }
                 else
-                    str.append(charMatrix[i][j]);
-            }
-            str.append('\n');
-        }
+                    System.out.print(ansi().fg(Placeable.Tile.WALL.getColor()).a(charMatrix[i][j]));
 
-        return str.toString();
+            }
+            System.out.print("\n");
+        }
     }
 
     public void setPlayer(Actor player)
