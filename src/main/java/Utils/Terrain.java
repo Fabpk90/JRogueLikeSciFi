@@ -3,6 +3,8 @@ package Utils;
 import Actors.Actor;
 import Actors.Placeable;
 
+import java.util.Random;
+
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class Terrain {
@@ -51,8 +53,49 @@ public class Terrain {
         }
     }
 
+    private Vector2D getPlayerRandomposition()
+    {
+        int floorTiles = 0;
+        int i,j;
+
+        Random r = new Random();
+
+        while (true)
+        {
+            i = r.nextInt(height);
+            j = r.nextInt(width);
+
+            //if the selected tile is a wall, do no consider it
+            if(getTileAt(i, j) == Placeable.Tile.FLOOR.getGlyph())
+            {
+                floorTiles++;
+
+                floorTiles += getTileAt(i, j - 1) == Placeable.Tile.FLOOR.getGlyph() ? 1 : 0;
+                floorTiles += getTileAt(i, j + 1) == Placeable.Tile.FLOOR.getGlyph() ? 1 : 0;
+                floorTiles += getTileAt(i - 1, j) == Placeable.Tile.FLOOR.getGlyph() ? 1 : 0;
+                floorTiles += getTileAt(i + 1, j) == Placeable.Tile.FLOOR.getGlyph() ? 1 : 0;
+
+                if(floorTiles > 3)
+                    return new Vector2D(i, j);
+            }
+        }
+    }
+
+    public char getTileAt(int x, int y)
+    {
+        if(x < 0 || x > width
+                || y < 0 || y > height)
+            return Placeable.Tile.WALL.getGlyph();
+
+        return charMatrix[x][y];
+    }
+
     public void setPlayer(Actor player)
     {
         this.player = player;
+
+        player.setPosition(getPlayerRandomposition());
     }
+
+
 }
