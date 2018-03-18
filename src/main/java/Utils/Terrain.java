@@ -12,7 +12,7 @@ public class Terrain {
     private int height;
     private int width;
 
-    private char [][] charMatrix;
+    private MapData mapData;
 
     private Actor player;
     //private ArrayList monsters;
@@ -22,12 +22,15 @@ public class Terrain {
         this.height = height;
         this.width = width;
 
+        mapData = new MapData(height, width);
+
         generateMap();
+        generateExit();
     }
 
     private void generateMap()
     {
-        charMatrix = MapGenerator.getMap(height, width);
+        mapData = MapGenerator.getMap(height, width);
     }
 
 
@@ -41,19 +44,13 @@ public class Terrain {
         {
             for(int j=0;j<width;j++)
             {
-                if(player.getPosition().getX()==i && player.getPosition().getY()==j)
-                {
-                    System.out.print(ansi().fg(player.getTile().getColor()).a(player.getTile().getGlyph()));
-                }
-                else
-                    System.out.print(ansi().fg(Placeable.Tile.WALL.getColor()).a(charMatrix[i][j]));
-
+                System.out.print(ansi().fg(mapData.getTileAt(i,j).getColor()).a(mapData.getTileAt(i,j)));
             }
             System.out.print("\n");
         }
     }
 
-    private Vector2D getPlayerRandomposition()
+    private Vector2D getPlayerRandomPosition()
     {
         int floorTiles = 0;
         int i,j;
@@ -66,14 +63,14 @@ public class Terrain {
             j = r.nextInt(width);
 
             //if the selected tile is a wall, do no consider it
-            if(getTileAt(i, j) == Placeable.Tile.FLOOR.getGlyph())
+            if(mapData.getTileAt(i, j) == Placeable.Tile.FLOOR)
             {
                 floorTiles++;
 
-                floorTiles += getTileAt(i, j - 1) == Placeable.Tile.FLOOR.getGlyph() ? 1 : 0;
-                floorTiles += getTileAt(i, j + 1) == Placeable.Tile.FLOOR.getGlyph() ? 1 : 0;
-                floorTiles += getTileAt(i - 1, j) == Placeable.Tile.FLOOR.getGlyph() ? 1 : 0;
-                floorTiles += getTileAt(i + 1, j) == Placeable.Tile.FLOOR.getGlyph() ? 1 : 0;
+                floorTiles += mapData.getTileAt(i, j - 1) == Placeable.Tile.FLOOR ? 1 : 0;
+                floorTiles += mapData.getTileAt(i, j + 1) == Placeable.Tile.FLOOR ? 1 : 0;
+                floorTiles += mapData.getTileAt(i - 1, j) == Placeable.Tile.FLOOR ? 1 : 0;
+                floorTiles += mapData.getTileAt(i + 1, j) == Placeable.Tile.FLOOR ? 1 : 0;
 
                 if(floorTiles > 3)
                     return new Vector2D(i, j);
@@ -81,20 +78,43 @@ public class Terrain {
         }
     }
 
-    public char getTileAt(int x, int y)
+    //generate an exit by searching a "free" Tile from the bottom
+    //It starts searching from the opposite position of the player -> the bottom
+    private void generateExit()
     {
-        if(x < 0 || x > width
-                || y < 0 || y > height)
-            return Placeable.Tile.WALL.getGlyph();
+        int floorTiles = 0;
+        boolean found = false;
 
-        return charMatrix[x][y];
+        for(int i = height - 1; i > 0 && !found; i--)
+        {
+            for(int j = 0; j < width && !found; j++)
+            {
+                if(mapData.getTileAt(i, j) == Placeable.Tile.FLOOR)
+                {
+                    floorTiles++;
+
+                    floorTiles += mapData.getTileAt(i, j - 1) == Placeable.Tile.FLOOR ? 1 : 0;
+                    floorTiles += mapData.getTileAt(i, j + 1) == Placeable.Tile.FLOOR ? 1 : 0;
+                    floorTiles += mapData.getTileAt(i - 1, j) == Placeable.Tile.FLOOR ? 1 : 0;
+                    floorTiles += mapData.getTileAt(i + 1, j) == Placeable.Tile.FLOOR ? 1 : 0;
+
+                    if(floorTiles > 3)
+                    {
+                        mapData.setTileAt(i, j, Placeable.Tile.EXIT);
+                        found = true;
+                    }
+
+                }
+            }
+        }
     }
 
     public void setPlayer(Actor player)
     {
         this.player = player;
 
-        player.setPosition(getPlayerRandomposition());
+        player.setPosition(getPlayerRandomPosition());
+        mapData.setTileAt((int)player.getPosition().getX(), (int)player.getPosition().getY(), Placeable.Tile.PLAYER);
     }
 
 

@@ -13,6 +13,7 @@ public class Placeable {
         FLOOR('.', Ansi.Color.WHITE),
         ACTOR('A', Ansi.Color.YELLOW),
         PLAYER('P', Ansi.Color.BLUE),
+        EXIT('E', Ansi.Color.GREEN),
         NPC('N', Ansi.Color.RED);
 
         private char glyph;
@@ -38,6 +39,11 @@ public class Placeable {
 
         public Ansi.Color getColor() {
             return color;
+        }
+
+        @Override
+        public String toString() {
+            return ""+glyph;
         }
     }
 

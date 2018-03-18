@@ -13,28 +13,29 @@ public class MapGenerator
     static private int height;
     static private int width;
     
-    static private char [][] charMatrix;
+    static private MapData mapData;
 
-    static public char[][] getMap(int height, int width)
+    static public MapData getMap(int height, int width)
     {
-        charMatrix = new char[height][width];
+        mapData = new MapData(height, width);
 
         MapGenerator.height = height;
         MapGenerator.width = width;
 
         generateWalls();
 
-        iterateOnMap(5);
+        activeAutomaton(5);
 
-        return charMatrix;
+        return mapData;
     }
 
-    static private void iterateOnMap( int iterations)
+
+    static private void activeAutomaton( int iterations)
     {
         int wallCount;
         //used to store the matrix when is being modified
         //so that the algorithm modify generation by generation the map
-        char [][] charMatrixCopy = charMatrix.clone();
+        Placeable.Tile[][] mapDataCopy = mapData.getmapMatrix().clone();
 
         for(int iter = 0; iter < iterations; iter++)
         {
@@ -47,49 +48,49 @@ public class MapGenerator
                     {
                         //we count surrounding walls
                         // applying 4-5 rule
-                        if(charMatrix[i - 1][j] == Placeable.Tile.WALL.getGlyph())
+                        if(mapData.getTileAt(i - 1,j).getGlyph() == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
-                        if(charMatrix[i + 1][j] == Placeable.Tile.WALL.getGlyph())
+                        if(mapData.getTileAt(i + 1,j).getGlyph() == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
-                        if(charMatrix[i - 2][j] == Placeable.Tile.WALL.getGlyph())
+                        if(mapData.getTileAt(i - 2,j).getGlyph() == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
-                        if(charMatrix[i + 2][j] == Placeable.Tile.WALL.getGlyph())
+                        if(mapData.getTileAt(i + 2,j).getGlyph() == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
-                        if(charMatrix[i][j + 1] == Placeable.Tile.WALL.getGlyph())
+                        if(mapData.getTileAt(i,j + 1).getGlyph() == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
-                        if(charMatrix[i][j - 1] == Placeable.Tile.WALL.getGlyph())
+                        if(mapData.getTileAt(i,j - 1).getGlyph() == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
-                        if(charMatrix[i][j + 2] == Placeable.Tile.WALL.getGlyph())
+                        if(mapData.getTileAt(i,j + 2).getGlyph() == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
-                        if(charMatrix[i][j - 2] == Placeable.Tile.WALL.getGlyph())
+                        if(mapData.getTileAt(i,j - 2).getGlyph() == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
 
-                        if(charMatrix[i][j] == Placeable.Tile.WALL.getGlyph())
+                        if(mapData.getTileAt(i,j).getGlyph() == Placeable.Tile.WALL.getGlyph())
                         {
                             //we check according to the rule
                             if(wallCount >= 5 || wallCount <= 1)
                             {
-                                charMatrixCopy[i][j] = Placeable.Tile.WALL.getGlyph();
+                                mapDataCopy[i][j] = Placeable.Tile.WALL;
                             }
                             else
                             {
-                                charMatrixCopy[i][j] = Placeable.Tile.FLOOR.getGlyph();
+                                mapDataCopy[i][j] = Placeable.Tile.FLOOR;
                             }
                         }
-                        else if (charMatrix[i][j] == Placeable.Tile.FLOOR.getGlyph())
+                        else if (mapData.getTileAt(i,j).getGlyph() == Placeable.Tile.FLOOR.getGlyph())
                         {
                             if(wallCount > 5)
-                                charMatrixCopy[i][j] = Placeable.Tile.WALL.getGlyph();
+                                mapDataCopy[i][j] = Placeable.Tile.WALL;
                         }
 
 
                     } //make the edges walls
                     else if (i  == 0 || i + 1 == height || j == 0 || j + 1 == width)
-                        charMatrixCopy[i][j] = Placeable.Tile.WALL.getGlyph();
+                        mapDataCopy[i][j] = Placeable.Tile.WALL;
                 }
             }
 
-            charMatrix = charMatrixCopy;
+            mapData.setmapMatrix(mapDataCopy);
         }
 
     }
@@ -100,9 +101,9 @@ public class MapGenerator
         {
             for (int j = 0; j < width; j++) {
                 if(Math.random()  <= .45)
-                    charMatrix[i][j] = Placeable.Tile.WALL.getGlyph();
+                    mapData.setTileAt(i, j, Placeable.Tile.WALL);
                 else
-                    charMatrix[i][j] = Placeable.Tile.FLOOR.getGlyph();
+                    mapData.setTileAt(i, j, Placeable.Tile.FLOOR);
             }
         }
     }
