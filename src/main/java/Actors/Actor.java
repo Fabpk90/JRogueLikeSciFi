@@ -6,9 +6,9 @@ import org.fusesource.jansi.Ansi;
 
 public class Actor extends Placeable{
 
-    private int health;
-    private int atk;
-    private int def;
+    protected int health;
+    protected int atk;
+    protected int def;
 
     public Actor()
     {
@@ -16,6 +16,16 @@ public class Actor extends Placeable{
 
         this.health = 5;
         this.atk = this.def = 0;
+    }
+
+    public Actor(Tile tile, int health, int atk, int def)
+    {
+        super(tile, new Vector2D());
+
+        this.health = health;
+        this.atk = atk;
+        this.def =  def;
+
     }
 
     public Actor(char glyph, Ansi.Color color, int health, int atk, int def)
@@ -28,6 +38,15 @@ public class Actor extends Placeable{
 
     }
 
+    public Actor(Tile tile, int health, int atk, int def, Vector2D position)
+    {
+        super(tile, position);
+
+        this.health = health;
+        this.atk = atk;
+        this.def =  def;
+    }
+
     public Actor(char glyph, Ansi.Color color, int health, int atk, int def, Vector2D position)
     {
         super(glyph, color, position);
@@ -36,7 +55,33 @@ public class Actor extends Placeable{
         this.atk = atk;
         this.def =  def;
     }
+    
+    public boolean Attack(Actor actorAttacked)
+    {
+       return actorAttacked.takeDamage(atk);
+    }
+    
+    /*
+        @returns if the actor is dead
+     */
+    public boolean takeDamage(int damage)
+    {
+        if(health - damage > 0)
+        {
+            health -= damage;
+            return false;
+        }
+        
+        onDie();
+        
+        return true;
+    }
 
+    public void onDie()
+    {
+        //onDie Arrghh
+    }
+    
     public int getAtk() {
         return atk;
     }

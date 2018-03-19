@@ -1,8 +1,10 @@
 package Utils;
 
 import Actors.Actor;
+import Actors.Monster;
 import Actors.Placeable;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import static org.fusesource.jansi.Ansi.ansi;
@@ -15,7 +17,7 @@ public class Terrain {
     private MapData mapData;
 
     private Actor player;
-    //private ArrayList monsters;
+    private ArrayList<Monster> monsters;
 
     public Terrain(int height, int width)
     {
@@ -23,6 +25,8 @@ public class Terrain {
         this.width = width;
 
         mapData = new MapData(height, width);
+
+        monsters = new ArrayList<Monster>();
 
         generateMap();
         generateExit();
@@ -34,10 +38,7 @@ public class Terrain {
     }
 
 
-    //generates a string based on the char matrix and other placeable in the map
-    //goes trough the entire matrix and check whether an object is at the position
-    //not very good, but works. Handles the case where monsters die, because it generates the entire map each time
-    //TODO: Store the actors in the char matrix, remember that if something is on a position, it is a floor
+    //goes trough the entire matrix and
     public void printMap()
     {
         for(int i=0;i<height;i++)
@@ -50,6 +51,7 @@ public class Terrain {
         }
     }
 
+    //Randomly place the player in the map
     private Vector2D getPlayerRandomPosition()
     {
         int floorTiles = 0;
@@ -116,6 +118,4 @@ public class Terrain {
         player.setPosition(getPlayerRandomPosition());
         mapData.setTileAt((int)player.getPosition().getX(), (int)player.getPosition().getY(), Placeable.Tile.PLAYER);
     }
-
-
 }

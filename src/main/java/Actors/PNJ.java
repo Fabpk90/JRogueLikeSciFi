@@ -6,8 +6,11 @@ import org.fusesource.jansi.Ansi;
 
 public class PNJ extends Actor {
 
-    //int exp;
-    //items drop;
+
+    public PNJ(Tile tile, int health, int atk, int def, Vector2D position)
+    {
+        super(tile, health, atk, def, position);
+    }
 
     //Si on sait quel glyph utiliser
     public PNJ(char glyph, Ansi.Color color, int health, int atk, int def, Vector2D position)
@@ -20,11 +23,4 @@ public class PNJ extends Actor {
     {
         super(Tile.NPC.getGlyph(), color, health, atk, def, position);
     }
-
-    //Par défaut absolu
-    public PNJ()
-    {
-        super();
-    }
-
 }
