@@ -22,10 +22,10 @@ public class GameManager implements Serializable {
         terrain = new Terrain(height, width);
 
         player = new Actor();
-        player.setPosition(Vector2D.getVector2DOne());
+
         terrain.setPlayer(player);
 
-
+        log = "";
     }
 
     public void render()
@@ -35,7 +35,9 @@ public class GameManager implements Serializable {
 
         do {
             terrain.printMap();
-           terrain.movePlayer(Vector2D.getVector2DUp());
+           terrain.movePlayer(Vector2D.getVector2DRight());
+
+           System.out.println(log);
 
             input = sc.nextLine();
 
