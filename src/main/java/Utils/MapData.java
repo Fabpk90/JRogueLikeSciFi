@@ -34,9 +34,23 @@ public class MapData
 
         return mapMatrix[x][y];
     }
+    public Placeable.Tile getTileAt(Vector2D vec)
+    {
+        if(vec.getX() < 0 || vec.getX() > width
+                || vec.getY() < 0 || vec.getY() > height)
+            return Placeable.Tile.WALL;
+
+        return mapMatrix[(int)vec.getX()][(int)vec.getY()];
+    }
+
     
     public void setTileAt(int x, int y, Placeable.Tile placeable)
     {
         mapMatrix[x][y] = placeable;
+    }
+
+    public void setTileAt(Vector2D vec, Placeable.Tile placeable)
+    {
+        mapMatrix[(int)vec.getX()][(int)vec.getY()] = placeable;
     }
 }

@@ -116,6 +116,19 @@ public class Terrain {
         this.player = player;
 
         player.setPosition(getPlayerRandomPosition());
-        mapData.setTileAt((int)player.getPosition().getX(), (int)player.getPosition().getY(), Placeable.Tile.PLAYER);
+        mapData.setTileAt(player.getPosition(), Placeable.Tile.PLAYER);
+    }
+
+    public void movePlayer(Vector2D vec)
+    {
+        Vector2D vector = new Vector2D(vec.getX(), vec.getY());
+        vector.add(player.getPosition());
+
+        if(mapData.getTileAt(vector) != Placeable.Tile.WALL)
+        {
+            mapData.setTileAt(player.getPosition(), Placeable.Tile.FLOOR);
+            player.move(vec);
+            mapData.setTileAt(player.getPosition(), Placeable.Tile.PLAYER);
+        }
     }
 }

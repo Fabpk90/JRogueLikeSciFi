@@ -1,14 +1,36 @@
 package Actors;
 
 import Utils.Constants;
+import Utils.Terrain;
 import Utils.Vector2D;
 import org.fusesource.jansi.Ansi;
 
 public class Actor extends Placeable{
 
-    protected int health;
-    protected int atk;
-    protected int def;
+    public enum Direction
+    {
+        UP(0),
+        RIGHT(1),
+        DOWN(2),
+        LEFT(3);
+
+        private int direction;
+
+        Direction(int direction)
+        {
+            this.direction = direction;
+        }
+
+        public int getDirection() {
+            return direction;
+        }
+    }
+
+    private int health;
+    private int atk;
+    private int def;
+
+    private Direction direction;
 
     public Actor()
     {
@@ -16,6 +38,8 @@ public class Actor extends Placeable{
 
         this.health = 5;
         this.atk = this.def = 0;
+
+        direction = Direction.UP;
     }
 
     public Actor(Tile tile, int health, int atk, int def)
@@ -26,6 +50,7 @@ public class Actor extends Placeable{
         this.atk = atk;
         this.def =  def;
 
+        direction = Direction.UP;
     }
 
     public Actor(char glyph, Ansi.Color color, int health, int atk, int def)
@@ -36,6 +61,8 @@ public class Actor extends Placeable{
         this.atk = atk;
         this.def =  def;
 
+        direction = Direction.UP;
+
     }
 
     public Actor(Tile tile, int health, int atk, int def, Vector2D position)
@@ -45,6 +72,8 @@ public class Actor extends Placeable{
         this.health = health;
         this.atk = atk;
         this.def =  def;
+
+        direction = Direction.UP;
     }
 
     public Actor(char glyph, Ansi.Color color, int health, int atk, int def, Vector2D position)
@@ -54,6 +83,30 @@ public class Actor extends Placeable{
         this.health = health;
         this.atk = atk;
         this.def =  def;
+
+        direction = Direction.UP;
+    }
+
+    public Actor(Tile tile, int health, int atk, int def, Vector2D position, Direction direction)
+    {
+        super(tile, position);
+
+        this.health = health;
+        this.atk = atk;
+        this.def =  def;
+
+        this.direction = direction;
+    }
+
+    public Actor(char glyph, Ansi.Color color, int health, int atk, int def, Vector2D position, Direction direction)
+    {
+        super(glyph, color, position);
+
+        this.health = health;
+        this.atk = atk;
+        this.def =  def;
+
+        this.direction = direction;
     }
     
     public boolean Attack(Actor actorAttacked)
@@ -80,6 +133,21 @@ public class Actor extends Placeable{
     public void onDie()
     {
         //onDie Arrghh
+    }
+
+    //moves the player and set his direction according to the movement
+    public void move(Vector2D vec)
+    {
+        getPosition().add(vec);
+
+        if(vec.getX() > 0)
+            direction = Direction.RIGHT;
+        else if(vec.getX() < 0)
+            direction = Direction.LEFT;
+        else if(vec.getY() > 0)
+            direction = Direction.UP;
+        else if(vec.getY() < 0)
+            direction = Direction.DOWN;
     }
     
     public int getAtk() {
