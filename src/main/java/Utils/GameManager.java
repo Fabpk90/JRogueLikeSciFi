@@ -15,6 +15,8 @@ public class GameManager implements Serializable {
 
     private String log; // used for logging actions in the terminal such as combat log
 
+    private boolean exitGame;
+
     public GameManager(int height, int width)
     {
         //player = new Player();
@@ -31,16 +33,47 @@ public class GameManager implements Serializable {
     public void render()
     {
         Scanner sc = new Scanner(System.in);
-        String input;
 
         do {
             terrain.printMap();
-           terrain.movePlayer(Vector2D.getVector2DRight());
+            parseCMD(sc.nextLine());
+            System.out.println(log);
+        }while(!exitGame);
+    }
 
-           System.out.println(log);
+    private void parseCMD(String input)
+    {
+        String[] commands = input.split(" ");
 
-            input = sc.nextLine();
-
-        }while(!input.equals("exit"));
+        if(commands.length >= 2)
+        {
+            if(commands[0].equals("move"))
+            {
+               if(commands[1].equals("right"))
+               {
+                   System.out.println("paf droite");
+                   terrain.movePlayer(Vector2D.getVector2DRight());
+               }
+               else if (commands[1].equals("down"))
+               {
+                   System.out.println("paf bas");
+                   terrain.movePlayer(Vector2D.getVector2DDown());
+               }
+               else if(commands[1].equals("left"))
+               {
+                   System.out.println("paf gauche");
+                   terrain.movePlayer(Vector2D.getVector2DLeft());
+               }
+               else if(commands[1].equals("up"))
+               {
+                   System.out.println("paf haut");
+                   terrain.movePlayer(Vector2D.getVector2DUp());
+               }
+            }
+        }
+        else if (input.equals("exit"))
+        {
+            exitGame = true;
+        }
     }
 }

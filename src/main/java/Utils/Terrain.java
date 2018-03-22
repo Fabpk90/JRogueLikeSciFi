@@ -124,6 +124,8 @@ public class Terrain {
         Vector2D vector = new Vector2D(vec.getX(), vec.getY());
         vector.add(player.getPosition());
 
+        System.out.println(vector);
+
         if(mapData.getTileAt(vector) != Placeable.Tile.WALL)
         {
             mapData.setTileAt(player.getPosition(), Placeable.Tile.FLOOR);
