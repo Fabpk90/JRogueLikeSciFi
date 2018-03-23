@@ -1,6 +1,7 @@
-version '1.0-SNAPSHOT'
+version '0.1'
 
 apply plugin: 'java'
+apply plugin: 'idea'
 
 sourceCompatibility = 1.8
 
@@ -11,8 +12,25 @@ repositories {
 dependencies {
 
     // https://mvnrepository.com/artifact/org.fusesource.jansi/jansi
-	compile group: 'org.fusesource.jansi', name: 'jansi', version: '1.17'
+    compile group: 'org.fusesource.jansi', name: 'jansi', version: '1.17'
 
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+
+    from("Libs/jansi-1.17.jar")
+}
+
+task customFatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+    baseName = 'RogueLikeFat'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
