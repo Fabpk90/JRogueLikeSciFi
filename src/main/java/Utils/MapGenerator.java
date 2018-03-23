@@ -8,25 +8,53 @@ import Actors.Placeable;/*
 
  */
 
+import java.util.Random;
+
 public class MapGenerator
 {
     static private int height;
     static private int width;
+
+    static  private int level;
     
     static private MapData mapData;
 
-    static public MapData getMap(int height, int width)
+    static public MapData getMap(int height, int width, int level)
     {
         mapData = new MapData(height, width);
 
         MapGenerator.height = height;
         MapGenerator.width = width;
+        MapGenerator.level = level;
 
         generateWalls();
+        generateMonsters();
 
         activeAutomaton(5);
 
         return mapData;
+    }
+
+    private static void generateMonsters()
+    {
+        Random r = new Random();
+
+        int placed = 0;
+        int toPlace = r.nextInt(level + 1);
+
+        int x,y;
+
+        while (placed != toPlace)
+        {
+            x = r.nextInt(height);
+            y = r.nextInt(width);
+
+            if(mapData.getTileAt(x,y) == Placeable.Tile.FLOOR)
+            {
+                placed++;
+                mapData.setTileAt(x,y, Placeable.Tile.MONSTER);
+            }
+        }
     }
 
 

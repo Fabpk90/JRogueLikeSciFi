@@ -4,6 +4,8 @@ import Actors.Placeable;
 
 public class MapData
 {
+    private int level;
+
     private Placeable.Tile [][] mapMatrix;
 
     private int height;
@@ -15,6 +17,8 @@ public class MapData
 
         this.height = height;
         this.width = width;
+
+        level = 0;
     }
 
     public Placeable.Tile [][] getmapMatrix()
@@ -43,7 +47,10 @@ public class MapData
         return mapMatrix[(int)vec.getX()][(int)vec.getY()];
     }
 
-    
+    public int getLevel() {
+        return level;
+    }
+
     public void setTileAt(int x, int y, Placeable.Tile placeable)
     {
         mapMatrix[x][y] = placeable;
@@ -52,5 +59,9 @@ public class MapData
     public void setTileAt(Vector2D vec, Placeable.Tile placeable)
     {
         mapMatrix[(int)vec.getX()][(int)vec.getY()] = placeable;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }

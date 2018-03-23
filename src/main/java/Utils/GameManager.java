@@ -36,8 +36,11 @@ public class GameManager implements Serializable {
 
         do {
             terrain.printMap();
-            parseCMD(sc.nextLine());
             System.out.println(log);
+            parseCMD(sc.nextLine());
+
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
         }while(!exitGame);
     }
 

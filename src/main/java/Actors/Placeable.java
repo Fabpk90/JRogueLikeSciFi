@@ -14,7 +14,8 @@ public class Placeable {
         ACTOR('A', Ansi.Color.YELLOW),
         PLAYER('P', Ansi.Color.BLUE),
         EXIT('E', Ansi.Color.GREEN),
-        NPC('N', Ansi.Color.RED);
+        MONSTER('M', Ansi.Color.RED),
+        NPC('N', Ansi.Color.YELLOW);
 
         private char glyph;
         private Ansi.Color color;

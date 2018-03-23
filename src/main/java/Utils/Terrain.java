@@ -34,7 +34,8 @@ public class Terrain {
 
     private void generateMap()
     {
-        mapData = MapGenerator.getMap(height, width);
+        mapData = MapGenerator.getMap(height, width, mapData.getLevel());
+        mapData.setLevel(mapData.getLevel() + 1);
     }
 
 
@@ -115,8 +116,7 @@ public class Terrain {
     {
         this.player = player;
 
-        player.setPosition(getPlayerRandomPosition());
-        mapData.setTileAt(player.getPosition(), Placeable.Tile.PLAYER);
+        resetPlayerPosition();
     }
 
     public void movePlayer(Vector2D vec)
@@ -133,11 +133,16 @@ public class Terrain {
                 generateMap();
                 generateExit();
 
-                player.setPosition(getPlayerRandomPosition());
-                mapData.setTileAt(player.getPosition(), Placeable.Tile.PLAYER);
+                resetPlayerPosition();
             }
             else
                 mapData.setTileAt(player.getPosition(), Placeable.Tile.PLAYER);
         }
+    }
+
+    private void resetPlayerPosition()
+    {
+        player.setPosition(getPlayerRandomPosition());
+        mapData.setTileAt(player.getPosition(), Placeable.Tile.PLAYER);
     }
 }
