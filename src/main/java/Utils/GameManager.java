@@ -51,22 +51,18 @@ public class GameManager implements Serializable {
             {
                if(commands[1].equals("right"))
                {
-                   System.out.println("paf droite");
                    terrain.movePlayer(Vector2D.getVector2DRight());
                }
                else if (commands[1].equals("down"))
                {
-                   System.out.println("paf bas");
                    terrain.movePlayer(Vector2D.getVector2DDown());
                }
                else if(commands[1].equals("left"))
                {
-                   System.out.println("paf gauche");
                    terrain.movePlayer(Vector2D.getVector2DLeft());
                }
                else if(commands[1].equals("up"))
                {
-                   System.out.println("paf haut");
                    terrain.movePlayer(Vector2D.getVector2DUp());
                }
             }

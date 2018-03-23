@@ -124,13 +124,20 @@ public class Terrain {
         Vector2D vector = new Vector2D(vec.getX(), vec.getY());
         vector.add(player.getPosition());
 
-        System.out.println(vector);
-
         if(mapData.getTileAt(vector) != Placeable.Tile.WALL)
         {
             mapData.setTileAt(player.getPosition(), Placeable.Tile.FLOOR);
             player.move(vec);
-            mapData.setTileAt(player.getPosition(), Placeable.Tile.PLAYER);
+            if(mapData.getTileAt(player.getPosition()) == Placeable.Tile.EXIT)
+            {
+                generateMap();
+                generateExit();
+
+                player.setPosition(getPlayerRandomPosition());
+                mapData.setTileAt(player.getPosition(), Placeable.Tile.PLAYER);
+            }
+            else
+                mapData.setTileAt(player.getPosition(), Placeable.Tile.PLAYER);
         }
     }
 }
