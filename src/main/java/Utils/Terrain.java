@@ -140,6 +140,49 @@ public class Terrain {
         }
     }
 
+    public void wander(Monster mon) //Absolute Rip-off
+    {
+        Random r = new Random();
+        int dir = r.nextInt(4);      //no fucking idea if it's actually equiprobable
+
+        Vector2D vector = new Vector2D();   //The Vector used to check if a wall is already there
+        Vector2D vec = new Vector2D();      //The vector used to move the monster's skinny ass
+
+        if(dir == 0)                        //As beautiful as it can get
+        {
+            vector.add(0,1);
+            vec.add(0,1);
+        }
+
+        if(dir == 1)
+        {
+            vector.add(1,0);
+            vec.add(1,0);
+        }
+
+        if(dir == 2)
+        {
+            vector.add(0,-1);
+            vec.add(0,-1);
+        }
+
+        if(dir == 3)
+        {
+            vector.add(-1,0);
+            vec.add(-1,0);
+        }
+
+        vector.add(mon.getPosition());
+
+        if(mapData.getTileAt(vector) != Placeable.Tile.WALL)
+        {
+            mapData.setTileAt(mon.getPosition(), Placeable.Tile.FLOOR);
+            mon.move(vec);
+
+            mapData.setTileAt(mon.getPosition(), Placeable.Tile.MONSTER);
+        }
+    }
+
     private void resetPlayerPosition()
     {
         player.setPosition(getPlayerRandomPosition());
