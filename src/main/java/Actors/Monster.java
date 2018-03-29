@@ -17,4 +17,9 @@ public class Monster extends PNJ
     {
         super(glyph, color, health, atk, def, position);
     }
+
+    @Override
+    void onDie() {
+
+    }
 }

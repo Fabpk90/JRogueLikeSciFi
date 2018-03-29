@@ -5,7 +5,7 @@ import Utils.Terrain;
 import Utils.Vector2D;
 import org.fusesource.jansi.Ansi;
 
-public class Actor extends Placeable{
+public abstract class Actor extends Placeable{
 
     public enum Direction
     {
@@ -130,10 +130,7 @@ public class Actor extends Placeable{
         return true;
     }
 
-    public void onDie()
-    {
-        //onDie Arrghh
-    }
+    abstract void onDie();
 
     //moves the player and set his direction according to the movement
     public void move(Vector2D vec)

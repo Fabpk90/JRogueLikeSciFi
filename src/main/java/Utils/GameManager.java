@@ -1,6 +1,7 @@
 package Utils;
 
 import Actors.Actor;
+import Actors.PJ;
 
 import java.io.Serializable;
 import java.util.Scanner;
@@ -23,7 +24,7 @@ public class GameManager implements Serializable {
         //ajouter le player au terrain
         terrain = new Terrain(height, width);
 
-        player = new Actor();
+        player = new PJ(10, 10, 10);
 
         terrain.setPlayer(player);
 
@@ -39,7 +40,7 @@ public class GameManager implements Serializable {
             System.out.println(log);
             parseCMD(sc.nextLine());
 
-            System.out.print("\033[H\033[2J");
+            System.out.print("\033[H\033[2J"); //clear the console
             System.out.flush();
         }while(!exitGame);
     }

@@ -21,4 +21,21 @@ public class PJ extends Actor {
         super(Tile.PLAYER.getGlyph(), color, health, atk, def, position);
         //inv = new ArrayList <items>();
     }
+
+    public PJ( int health, int atk, int def, Vector2D position)
+    {
+        super(Tile.PLAYER, health, atk, def, position);
+        //inv = new ArrayList <items>();
+    }
+
+    public PJ( int health, int atk, int def)
+    {
+        super(Tile.PLAYER, health, atk, def, Vector2D.getVector2DZero());
+        //inv = new ArrayList <items>();
+    }
+
+    @Override
+    void onDie() {
+
+    }
 }

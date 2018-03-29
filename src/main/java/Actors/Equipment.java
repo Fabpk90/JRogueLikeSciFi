@@ -13,4 +13,9 @@ public class Equipment extends Items{
     {
         super(glyph, color, position, name);
     }
+
+    public Equipment(String name)
+    {
+        super(' ', null, Vector2D.getVector2DZero(), name);
+    }
 }
