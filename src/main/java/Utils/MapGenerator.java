@@ -3,6 +3,8 @@ package Utils;
 import Actors.Monster;
 import Actors.Placeable;/*
 
+/*
+
     Uses cellular automata to generate the cave, using the 4-5 rule
 
     Ver 0.1: Working, but creating orphaned isle
@@ -34,6 +36,8 @@ public class MapGenerator
 
         activeAutomaton(5);
 
+        generateMonsters(monsters);
+
         return mapData;
     }
 
@@ -54,6 +58,10 @@ public class MapGenerator
             if(mapData.getTileAt(x,y) == Placeable.Tile.FLOOR)
             {
                 placed++;
+
+                monsters.add(new Monster(Placeable.Tile.MONSTER, 10, 10, 10
+                        , new Vector2D(x, y)));
+
                 mapData.setTileAt(x,y, Placeable.Tile.MONSTER);
                 monsters.add(new Monster(Placeable.Tile.MONSTER, 10 , 10, 10,  new Vector2D(x, y), mapData));
             }
@@ -131,7 +139,7 @@ public class MapGenerator
         for(int i = 0; i < height; i++)
         {
             for (int j = 0; j < width; j++) {
-                if(Math.random()  <= .45)
+                if(Math.random()  <= .4)
                     mapData.setTileAt(i, j, Placeable.Tile.WALL);
                 else
                     mapData.setTileAt(i, j, Placeable.Tile.FLOOR);
