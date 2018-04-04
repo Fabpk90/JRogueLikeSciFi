@@ -24,7 +24,7 @@ public class GameManager implements Serializable {
         //ajouter le player au terrain
         terrain = new Terrain(height, width);
 
-        player = new PJ(10, 10, 10);
+        player = new PJ(20, 10, 10);
 
         terrain.setPlayer(player);
 

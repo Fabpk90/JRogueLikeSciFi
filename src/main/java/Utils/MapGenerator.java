@@ -32,7 +32,6 @@ public class MapGenerator
         MapGenerator.level = level;
 
         generateWalls();
-        generateMonsters(monsters);
 
         activeAutomaton(5);
 
@@ -58,9 +57,6 @@ public class MapGenerator
             if(mapData.getTileAt(x,y) == Placeable.Tile.FLOOR)
             {
                 placed++;
-
-                monsters.add(new Monster(Placeable.Tile.MONSTER, 10, 10, 10
-                        , new Vector2D(x, y)));
 
                 mapData.setTileAt(x,y, Placeable.Tile.MONSTER);
                 monsters.add(new Monster(Placeable.Tile.MONSTER, 10 , 10, 10,  new Vector2D(x, y), mapData));

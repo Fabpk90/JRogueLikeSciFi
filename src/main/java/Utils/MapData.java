@@ -39,11 +39,7 @@ public class MapData
     }
     public Placeable.Tile getTileAt(Vector2D vec)
     {
-        if(vec.getX() < 0 || vec.getX() > width
-                || vec.getY() < 0 || vec.getY() > height)
-            return Placeable.Tile.WALL;
-
-        return mapMatrix[(int)vec.getX()][(int)vec.getY()];
+        return getTileAt((int)vec.getX(),(int)vec.getY());
     }
 
     public Placeable.Tile getTileAt(float x, float y)
