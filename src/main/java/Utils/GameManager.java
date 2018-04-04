@@ -38,42 +38,58 @@ public class GameManager implements Serializable {
         do {
             terrain.printMap();
             System.out.println(log);
-            parseCMD(sc.nextLine());
+            parseCMD(sc);
+
+            terrain.updateTerrain();
 
             System.out.print("\033[H\033[2J"); //clear the console
             System.out.flush();
         }while(!exitGame);
     }
 
-    private void parseCMD(String input)
+    private void parseCMD(Scanner sc)
     {
-        String[] commands = input.split(" ");
 
-        if(commands.length >= 2)
+        boolean isCorrectCMD = false;
+        String input;
+
+        while(!isCorrectCMD)
         {
-            if(commands[0].equals("move"))
+            input = sc.nextLine();
+            String[] commands = input.split(" "); //divide the input string in pieces
+
+            if(commands.length >= 2) //min of 2 consecutive cmds
             {
-               if(commands[1].equals("right"))
-               {
-                   terrain.movePlayer(Vector2D.getVector2DRight());
-               }
-               else if (commands[1].equals("down"))
-               {
-                   terrain.movePlayer(Vector2D.getVector2DDown());
-               }
-               else if(commands[1].equals("left"))
-               {
-                   terrain.movePlayer(Vector2D.getVector2DLeft());
-               }
-               else if(commands[1].equals("up"))
-               {
-                   terrain.movePlayer(Vector2D.getVector2DUp());
-               }
+                if(commands[0].equals("move"))
+                {
+                    if(commands[1].equals("right"))
+                    {
+                        isCorrectCMD = true;
+                        terrain.movePlayer(Vector2D.getVector2DRight());
+                    }
+                    else if (commands[1].equals("down"))
+                    {
+                        isCorrectCMD = true;
+                        terrain.movePlayer(Vector2D.getVector2DDown());
+                    }
+                    else if(commands[1].equals("left"))
+                    {
+                        isCorrectCMD = true;
+                        terrain.movePlayer(Vector2D.getVector2DLeft());
+                    }
+                    else if(commands[1].equals("up"))
+                    {
+                        isCorrectCMD = true;
+                        terrain.movePlayer(Vector2D.getVector2DUp());
+                    }
+                }
+            }
+            else if (input.equals("exit")) //TODO: handle the case where the player wants to quit but it is trap in a gangbang, resulting in his death
+            {
+                isCorrectCMD = true;
+                exitGame = true;
             }
         }
-        else if (input.equals("exit"))
-        {
-            exitGame = true;
-        }
+
     }
 }

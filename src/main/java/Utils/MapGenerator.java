@@ -1,5 +1,6 @@
 package Utils;
 
+import Actors.Monster;
 import Actors.Placeable;/*
 
     Uses cellular automata to generate the cave, using the 4-5 rule
@@ -8,6 +9,7 @@ import Actors.Placeable;/*
 
  */
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MapGenerator
@@ -19,7 +21,7 @@ public class MapGenerator
     
     static private MapData mapData;
 
-    static public MapData getMap(int height, int width, int level)
+    static public MapData getMap(int height, int width, int level, ArrayList<Monster> monsters)
     {
         mapData = new MapData(height, width);
 
@@ -28,19 +30,19 @@ public class MapGenerator
         MapGenerator.level = level;
 
         generateWalls();
-        generateMonsters();
+        generateMonsters(monsters);
 
         activeAutomaton(5);
 
         return mapData;
     }
 
-    private static void generateMonsters()
+    private static void generateMonsters(ArrayList<Monster> monsters)
     {
         Random r = new Random();
 
         int placed = 0;
-        int toPlace = r.nextInt(level + 1);
+        int toPlace = r.nextInt(level+1 )+1;
 
         int x,y;
 
@@ -53,6 +55,7 @@ public class MapGenerator
             {
                 placed++;
                 mapData.setTileAt(x,y, Placeable.Tile.MONSTER);
+                monsters.add(new Monster(Placeable.Tile.MONSTER, 10 , 10, 10,  new Vector2D(x, y), mapData));
             }
         }
     }

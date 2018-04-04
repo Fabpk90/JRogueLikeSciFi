@@ -32,8 +32,7 @@ public class MapData
 
     public Placeable.Tile getTileAt(int x, int y)
     {
-        if(x < 0 || x > width
-                || y < 0 || y > height)
+        if(x < 0 || x >= width || y < 0 || y >= height)
             return Placeable.Tile.WALL;
 
         return mapMatrix[x][y];
@@ -45,6 +44,11 @@ public class MapData
             return Placeable.Tile.WALL;
 
         return mapMatrix[(int)vec.getX()][(int)vec.getY()];
+    }
+
+    public Placeable.Tile getTileAt(float x, float y)
+    {
+        return getTileAt((int) x, (int)y);
     }
 
     public int getLevel() {
