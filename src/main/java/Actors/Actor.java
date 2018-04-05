@@ -1,6 +1,7 @@
 package Actors;
 
 import Utils.Constants;
+import Utils.GameManager;
 import Utils.Terrain;
 import Utils.Vector2D;
 import org.fusesource.jansi.Ansi;
@@ -26,6 +27,8 @@ public abstract class Actor extends Placeable{
         }
     }
 
+    private String name;
+
     private int health;
     private int atk;
     private int def;
@@ -35,6 +38,8 @@ public abstract class Actor extends Placeable{
     public Actor()
     {
         super(Tile.ACTOR, new Vector2D());
+
+        this.name = "Actor test";
 
         this.health = 5;
         this.atk = this.def = 0;
@@ -53,32 +58,10 @@ public abstract class Actor extends Placeable{
         direction = Direction.UP;
     }
 
-    public Actor(char glyph, Ansi.Color color, int health, int atk, int def)
-    {
-        super(glyph, color, new Vector2D());
-
-        this.health = health;
-        this.atk = atk;
-        this.def =  def;
-
-        direction = Direction.UP;
-
-    }
 
     public Actor(Tile tile, int health, int atk, int def, Vector2D position)
     {
         super(tile, position);
-
-        this.health = health;
-        this.atk = atk;
-        this.def =  def;
-
-        direction = Direction.UP;
-    }
-
-    public Actor(char glyph, Ansi.Color color, int health, int atk, int def, Vector2D position)
-    {
-        super(glyph, color, position);
 
         this.health = health;
         this.atk = atk;
@@ -97,21 +80,17 @@ public abstract class Actor extends Placeable{
 
         this.direction = direction;
     }
-
-    public Actor(char glyph, Ansi.Color color, int health, int atk, int def, Vector2D position, Direction direction)
-    {
-        super(glyph, color, position);
-
-        this.health = health;
-        this.atk = atk;
-        this.def =  def;
-
-        this.direction = direction;
-    }
     
     public boolean Attack(Actor actorAttacked)
     {
-       return actorAttacked.takeDamage(atk);
+        int trueDamage = atk - actorAttacked.getDef();
+        if(trueDamage > 0)
+        {
+            GameManager.addLog(name+" attacks "+actorAttacked.getName() +" doing " +trueDamage+" damages");
+            return actorAttacked.takeDamage(atk);
+        }
+
+        return false;
     }
     
     /*
@@ -157,6 +136,10 @@ public abstract class Actor extends Placeable{
 
     public int getDef() {
         return def;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setAtk(int atk) {

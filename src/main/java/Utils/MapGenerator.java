@@ -31,6 +31,8 @@ public class MapGenerator
         MapGenerator.width = width;
         MapGenerator.level = level;
 
+        monsters.clear();
+
         generateWalls();
 
         activeAutomaton(5);

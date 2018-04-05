@@ -133,10 +133,11 @@ public class Terrain {
 
     public void movePlayer(Vector2D vec)
     {
-        Vector2D vector = new Vector2D(vec.getX(), vec.getY());
-        vector.add(player.getPosition());
+        Vector2D vecPosition = new Vector2D(vec.getX(), vec.getY());
+        vecPosition.add(player.getPosition());
 
-        if(mapData.getTileAt(vector) != Placeable.Tile.WALL)
+        if(mapData.getTileAt(vecPosition) == Placeable.Tile.FLOOR
+                || mapData.getTileAt(vecPosition) == Placeable.Tile.EXIT)
         {
             mapData.setTileAt(player.getPosition(), Placeable.Tile.FLOOR);
             player.move(vec);

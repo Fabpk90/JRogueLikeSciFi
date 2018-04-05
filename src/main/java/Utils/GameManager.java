@@ -14,7 +14,7 @@ public class GameManager implements Serializable {
 
     private Actor player;
 
-    private String log; // used for logging actions in the terminal such as combat log
+    static private String log; // used for logging actions in the terminal such as combat log
 
     private boolean exitGame;
 
@@ -91,5 +91,18 @@ public class GameManager implements Serializable {
             }
         }
 
+    }
+
+    public static void addLog(String log)
+    {
+        GameManager.log += log;
+    }
+
+    public static void setLog(String log) {
+        GameManager.log = log;
+    }
+
+    public static String getLog() {
+        return log;
     }
 }
