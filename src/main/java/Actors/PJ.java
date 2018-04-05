@@ -20,10 +20,16 @@ public class PJ extends Actor {
     {
         super(Tile.PLAYER, health, atk, def, Vector2D.getVector2DZero());
         //inv = new ArrayList <items>();
+        setName("Player");
     }
 
     @Override
     void onDie() {
 
+    }
+
+    @Override
+    public boolean Attack(Actor actorAttacked) {
+        return super.Attack(actorAttacked);
     }
 }

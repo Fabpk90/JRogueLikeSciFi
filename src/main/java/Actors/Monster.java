@@ -18,6 +18,8 @@ public class Monster extends PNJ
     {
         super(tile, health, atk, def, position);
 
+        setName("Monster"); //testing
+
         this.mapData = mapData;
     }
 
@@ -61,9 +63,10 @@ public class Monster extends PNJ
 
         vector.add(getPosition());
 
-        if(mapData.getTileAt(vector) != Placeable.Tile.WALL)
+        if(mapData.getTileAt(vector) != Placeable.Tile.WALL && mapData.getTileAt(vector) != Tile.MONSTER)
         {
             mapData.setTileAt(getPosition(), Placeable.Tile.FLOOR);
+
             move(vec);
 
             mapData.setTileAt(getPosition(), Placeable.Tile.MONSTER);

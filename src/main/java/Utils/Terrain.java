@@ -165,4 +165,48 @@ public class Terrain {
     public MapData getMapData() {
         return mapData;
     }
+
+    public boolean attackMonsterAt(Actor.Direction playerAttackDirection) 
+    {
+        Vector2D dir = null;
+        switch (playerAttackDirection)
+        {
+            case UP:
+                dir = Vector2D.getVector2DUp();
+                break;
+                
+            case DOWN:
+                dir = Vector2D.getVector2DDown();
+                break;
+                
+            case LEFT:
+                dir = Vector2D.getVector2DLeft();
+                break;
+                
+            case RIGHT:
+                dir = Vector2D.getVector2DRight();
+                break;
+        }
+        
+        dir.add(player.getPosition());
+        
+        if(mapData.getTileAt(dir) == Placeable.Tile.MONSTER)
+        {
+            player.Attack(getMonsterAt(dir));
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public Monster getMonsterAt(Vector2D positionToSearch)
+    {
+        for(Monster m : monsters)
+        {
+            if(m.getPosition().equals(positionToSearch))
+                return m;
+        }
+        
+        return null;
+    }
 }

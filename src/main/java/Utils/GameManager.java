@@ -14,7 +14,7 @@ public class GameManager implements Serializable {
 
     private Actor player;
 
-    static private String log; // used for logging actions in the terminal such as combat log
+    static private StringBuilder log; // used for logging actions in the terminal such as combat log
 
     private boolean exitGame;
 
@@ -28,7 +28,7 @@ public class GameManager implements Serializable {
 
         terrain.setPlayer(player);
 
-        log = "";
+        log = new StringBuilder();
     }
 
     public void render()
@@ -37,7 +37,7 @@ public class GameManager implements Serializable {
 
         do {
             terrain.printMap();
-            System.out.println(log);
+            printLog();
             parseCMD(sc);
 
             terrain.updateTerrain();
@@ -45,6 +45,12 @@ public class GameManager implements Serializable {
             System.out.print("\033[H\033[2J"); //clear the console
             System.out.flush();
         }while(!exitGame);
+    }
+
+    private void printLog()
+    {
+        System.out.println(log);
+        log = new StringBuilder();
     }
 
     private void parseCMD(Scanner sc)
@@ -83,6 +89,49 @@ public class GameManager implements Serializable {
                         terrain.movePlayer(Vector2D.getVector2DUp());
                     }
                 }
+                else if(commands[0].equals("attack"))
+                {
+                    boolean attackGoneWrong = true;
+                    if(commands[1].equals("right"))
+                    {
+                        isCorrectCMD = true;
+                        if(terrain.attackMonsterAt(Actor.Direction.RIGHT))
+                        {
+                            addLog("Player attacking an enemy on his right");
+                            attackGoneWrong = false;
+                        }
+                    }
+                    else if (commands[1].equals("down"))
+                    {
+                        isCorrectCMD = true;
+                        if(terrain.attackMonsterAt(Actor.Direction.DOWN))
+                        {
+                            addLog("Player attacking an enemy on his bottom");
+                            attackGoneWrong = false;
+                        }
+                    }
+                    else if(commands[1].equals("left"))
+                    {
+                        isCorrectCMD = true;
+                        if(terrain.attackMonsterAt(Actor.Direction.LEFT))
+                        {
+                            addLog("Player attacking an enemy on his left");
+                            attackGoneWrong = false;
+                        }
+                    }
+                    else if(commands[1].equals("up"))
+                    {
+                        isCorrectCMD = true;
+                        if(terrain.attackMonsterAt(Actor.Direction.UP))
+                        {
+                            addLog("Player attacking an enemy on his top");
+                            attackGoneWrong = false;
+                        }
+                    }
+
+                    if(attackGoneWrong)
+                        addLog("The player attacks the void..");
+                }
             }
             else if (input.equals("exit")) //TODO: handle the case where the player wants to quit but it is trap in a gangbang, resulting in his death
             {
@@ -95,14 +144,10 @@ public class GameManager implements Serializable {
 
     public static void addLog(String log)
     {
-        GameManager.log += log;
+        GameManager.log.append(log+"\n");
     }
 
-    public static void setLog(String log) {
-        GameManager.log = log;
-    }
-
-    public static String getLog() {
+    public static StringBuilder getLog() {
         return log;
     }
 }

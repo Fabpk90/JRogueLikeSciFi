@@ -84,9 +84,9 @@ public abstract class Actor extends Placeable{
     public boolean Attack(Actor actorAttacked)
     {
         int trueDamage = atk - actorAttacked.getDef();
+        GameManager.addLog(name+" attacks "+actorAttacked.getName() +" doing " +trueDamage+" damages");
         if(trueDamage > 0)
         {
-            GameManager.addLog(name+" attacks "+actorAttacked.getName() +" doing " +trueDamage+" damages");
             return actorAttacked.takeDamage(atk);
         }
 
@@ -152,5 +152,9 @@ public abstract class Actor extends Placeable{
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

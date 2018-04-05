@@ -8,6 +8,8 @@ Ver 0.1: basic class, classic square root for distance
  */
 
 
+import java.util.Vector;
+
 public class Vector2D {
 
     private float x;
@@ -108,5 +110,17 @@ public class Vector2D {
     @Override
     public String toString() {
         return "x: "+x+" y:"+y;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        Vector2D vecToCompare = (Vector2D) obj;
+        if(vecToCompare != null)
+        {
+            return (getX() == vecToCompare.getX() && getY() == vecToCompare.getY());
+        }
+
+        return false;
     }
 }
