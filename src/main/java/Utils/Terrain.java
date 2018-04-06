@@ -54,14 +54,17 @@ public class Terrain {
     //goes trough the entire matrix and
     public void printMap()
     {
+        StringBuilder str = new StringBuilder();
         for(int i=0;i<height;i++)
         {
             for(int j=0;j<width;j++)
             {
-                System.out.print(ansi().fg(mapData.getTileAt(i,j).getColor()).a(mapData.getTileAt(i,j)));
+                str.append(ansi().fg(mapData.getTileAt(i,j).getColor()).a(mapData.getTileAt(i,j)));
             }
-            System.out.print("\n");
+            str.append("\n");
         }
+
+        System.out.print(str);
     }
 
     //Randomly place the player in the map

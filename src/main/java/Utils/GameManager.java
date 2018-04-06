@@ -8,7 +8,8 @@ import java.util.Scanner;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-public class GameManager implements Serializable {
+public class GameManager implements Serializable
+{
 
     private Terrain terrain;
 
@@ -40,7 +41,8 @@ public class GameManager implements Serializable {
             printLog();
             parseCMD(sc);
 
-            terrain.updateTerrain();
+            if(!exitGame)
+                terrain.updateTerrain();
 
             System.out.print("\033[H\033[2J"); //clear the console
             System.out.flush();
