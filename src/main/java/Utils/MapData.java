@@ -8,15 +8,13 @@ public class MapData
 
     private Placeable.Tile [][] mapMatrix;
 
-    private int height;
-    private int width;
+    private int size;
 
-    public MapData(int height, int width)
+    public MapData(int size)
     {
-        mapMatrix = new Placeable.Tile[height][width];
+        mapMatrix = new Placeable.Tile[size][size];
 
-        this.height = height;
-        this.width = width;
+        this.size = size;
 
         level = 0;
     }
@@ -32,7 +30,7 @@ public class MapData
 
     public Placeable.Tile getTileAt(int x, int y)
     {
-        if(x < 0 || x >= width || y < 0 || y >= height)
+        if(x < 0 || x >= size || y < 0 || y >= size)
             return Placeable.Tile.WALL;
 
         return mapMatrix[x][y];

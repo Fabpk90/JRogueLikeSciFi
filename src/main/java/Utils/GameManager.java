@@ -19,11 +19,11 @@ public class GameManager implements Serializable
 
     private boolean exitGame;
 
-    public GameManager(int height, int width)
+    public GameManager(int size)
     {
         //player = new Player();
         //ajouter le player au terrain
-        terrain = new Terrain(height, width);
+        terrain = new Terrain(size);
 
         player = new PJ(20, 10, 10);
 

@@ -10,7 +10,7 @@ public class Main {
 
    static public void  main(String [] args)
     {
-        GameManager gm = new GameManager(10, 10);
+        GameManager gm = new GameManager(15);
         gm.render();
     }
 

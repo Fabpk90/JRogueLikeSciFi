@@ -16,19 +16,17 @@ import java.util.Random;
 
 public class MapGenerator
 {
-    static private int height;
-    static private int width;
+    static private int size;
 
     static  private int level;
     
     static private MapData mapData;
 
-    static public MapData getMap(int height, int width, int level, ArrayList<Monster> monsters)
+    static public MapData getMap(int size, int level, ArrayList<Monster> monsters)
     {
-        mapData = new MapData(height, width);
+        mapData = new MapData(size);
 
-        MapGenerator.height = height;
-        MapGenerator.width = width;
+        MapGenerator.size = size;
         MapGenerator.level = level;
 
         monsters.clear();
@@ -53,8 +51,8 @@ public class MapGenerator
 
         while (placed != toPlace)
         {
-            x = r.nextInt(height);
-            y = r.nextInt(width);
+            x = r.nextInt(size);
+            y = r.nextInt(size);
 
             if(mapData.getTileAt(x,y) == Placeable.Tile.FLOOR)
             {
@@ -76,12 +74,12 @@ public class MapGenerator
 
         for(int iter = 0; iter < iterations; iter++)
         {
-            for (int i = 0; i < height; i++)
+            for (int i = 0; i < size; i++)
             {
-                for (int j = 0; j < width; j++)
+                for (int j = 0; j < size; j++)
                 {
                     wallCount = 0;
-                    if(i - 2 >= 0 && i + 2 <= height - 1 && j - 2 >= 0 && j + 2 <= width - 1) // check for array boundaries
+                    if(i - 2 >= 0 && i + 2 <= size - 1 && j - 2 >= 0 && j + 2 <= size - 1) // check for array boundaries
                     {
                         //we count surrounding walls
                         // applying 4-5 rule
@@ -122,7 +120,7 @@ public class MapGenerator
 
 
                     } //make the edges walls
-                    else if (i  == 0 || i + 1 == height || j == 0 || j + 1 == width)
+                    else if (i  == 0 || i + 1 == size || j == 0 || j + 1 == size)
                         mapDataCopy[i][j] = Placeable.Tile.WALL;
                 }
             }
@@ -134,10 +132,10 @@ public class MapGenerator
 
     static private void generateWalls()
     {
-        for(int i = 0; i < height; i++)
+        for(int i = 0; i < size; i++)
         {
-            for (int j = 0; j < width; j++) {
-                if(Math.random()  <= .4)
+            for (int j = 0; j < size; j++) {
+                if(Math.random()  <= .45)
                     mapData.setTileAt(i, j, Placeable.Tile.WALL);
                 else
                     mapData.setTileAt(i, j, Placeable.Tile.FLOOR);
