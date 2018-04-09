@@ -47,6 +47,8 @@ public class GameManager implements Serializable
             System.out.print("\033[H\033[2J"); //clear the console
             System.out.flush();
         }while(!exitGame);
+
+        sc.close();
     }
 
     private void printLog()
