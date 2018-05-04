@@ -2,7 +2,9 @@ package Utils;
 
 import Actors.Placeable;
 
-public class MapData
+import java.io.Serializable;
+
+public class MapData implements Serializable
 {
     private int level;
 

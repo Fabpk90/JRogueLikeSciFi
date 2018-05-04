@@ -8,9 +8,10 @@ Ver 0.1: basic class, classic square root for distance
  */
 
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class Vector2D {
+public class Vector2D implements Serializable {
 
     private float x;
     private float y;

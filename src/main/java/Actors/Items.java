@@ -3,7 +3,9 @@ package Actors;
 import Utils.Vector2D;
 import org.fusesource.jansi.Ansi;
 
-public class Items extends Placeable{
+import java.io.Serializable;
+
+public class Items extends Placeable implements Serializable {
 
     private String name;
 

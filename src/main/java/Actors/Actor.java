@@ -1,12 +1,11 @@
 package Actors;
 
-import Utils.Constants;
 import Utils.GameManager;
-import Utils.Terrain;
 import Utils.Vector2D;
-import org.fusesource.jansi.Ansi;
 
-public abstract class Actor extends Placeable{
+import java.io.Serializable;
+
+public abstract class Actor extends Placeable implements Serializable {
 
     public enum Direction
     {

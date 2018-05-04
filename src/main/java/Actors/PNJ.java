@@ -1,8 +1,6 @@
 package Actors;
 
-import Utils.Constants;
 import Utils.Vector2D;
-import org.fusesource.jansi.Ansi;
 
 public abstract class PNJ extends Actor {
 

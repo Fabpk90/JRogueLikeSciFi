@@ -142,6 +142,11 @@ public class GameManager implements Serializable
                 isCorrectCMD = true;
                 exitGame = true;
             }
+            else if(input.equals("save"))
+            {
+                SaveManager.saveInstance(this);
+                System.out.println("Saved");
+            }
         }
 
     }

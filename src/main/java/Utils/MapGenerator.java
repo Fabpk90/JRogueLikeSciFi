@@ -22,7 +22,7 @@ public class MapGenerator
     
     static private MapData mapData;
 
-    static public MapData getMap(int size, int level, ArrayList<Monster> monsters)
+    static public MapData getMap(int size, int level, ArrayList<Monster> monsters, Terrain terrain)
     {
         mapData = new MapData(size);
 
@@ -35,12 +35,12 @@ public class MapGenerator
 
         activeAutomaton(5);
 
-        generateMonsters(monsters);
+        generateMonsters(monsters, terrain);
 
         return mapData;
     }
 
-    private static void generateMonsters(ArrayList<Monster> monsters)
+    private static void generateMonsters(ArrayList<Monster> monsters, Terrain terrain)
     {
         Random r = new Random();
 
@@ -59,7 +59,7 @@ public class MapGenerator
                 placed++;
 
                 mapData.setTileAt(x,y, Placeable.Tile.MONSTER);
-                monsters.add(new Monster(Placeable.Tile.MONSTER, 10 , 10, 10,  new Vector2D(x, y), mapData));
+                monsters.add(new Monster(Placeable.Tile.MONSTER, 10 , 10, 10,  new Vector2D(x, y), terrain));
             }
         }
     }

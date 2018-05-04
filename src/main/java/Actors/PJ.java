@@ -1,10 +1,6 @@
 package Actors;
 
-import Utils.Constants;
 import Utils.Vector2D;
-import org.fusesource.jansi.Ansi;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PJ extends Actor {
 

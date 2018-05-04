@@ -1,5 +1,6 @@
 package Actors;
 
+import Utils.GameManager;
 import Utils.MapData;
 import Utils.Terrain;
 import Utils.Vector2D;
@@ -12,21 +13,22 @@ public class Monster extends PNJ
     //int exp;
     //items drop;
 
-    private MapData mapData;
+    private Terrain terrain;
 
-    public Monster(Tile tile, int health, int atk, int def, Vector2D position, MapData mapData)
+    public Monster(Tile tile, int health, int atk, int def, Vector2D position, Terrain terrain)
     {
         super(tile, health, atk, def, position);
 
         setName("Monster"); //testing
 
-        this.mapData = mapData;
+        this.terrain = terrain;
     }
 
     @Override
     void onDie()
     {
-
+       terrain.getMapData().setTileAt(getPosition(), Placeable.Tile.FLOOR);
+       terrain.removeMonster(this);
     }
 
     public void wander() //Absolute Rip-off
@@ -63,29 +65,29 @@ public class Monster extends PNJ
 
         vector.add(getPosition());
 
-        if(mapData.getTileAt(vector) != Placeable.Tile.WALL && mapData.getTileAt(vector) != Tile.MONSTER)
+        if(terrain.getMapData().getTileAt(vector) != Placeable.Tile.WALL && terrain.getMapData().getTileAt(vector) != Tile.MONSTER)
         {
-            mapData.setTileAt(getPosition(), Placeable.Tile.FLOOR);
+            terrain.getMapData().setTileAt(getPosition(), Placeable.Tile.FLOOR);
 
             move(vec);
 
-            mapData.setTileAt(getPosition(), Placeable.Tile.MONSTER);
+            terrain.getMapData().setTileAt(getPosition(), Placeable.Tile.MONSTER);
         }
     }
 
-    /*
-        @return false if the player is not around (2 axes check)
-     */
+    //
+    //@return false if the player is not around (2 axes check)
+    //
     public boolean checkForPlayer()
     {
         int playerFound = 0;
 
         Vector2D monsterPos = getPosition();
 
-        playerFound += mapData.getTileAt(monsterPos.getX() + 1, monsterPos.getY()) == Tile.PLAYER ? 1 : 0;
-        playerFound += mapData.getTileAt(monsterPos.getX() - 1, monsterPos.getY()) == Tile.PLAYER ? 1 : 0;
-        playerFound += mapData.getTileAt(monsterPos.getX(), monsterPos.getY() + 1) == Tile.PLAYER ? 1 : 0;
-        playerFound += mapData.getTileAt(monsterPos.getX(), monsterPos.getY() - 1) == Tile.PLAYER ? 1 : 0;
+        playerFound += terrain.getMapData().getTileAt(monsterPos.getX() + 1, monsterPos.getY()) == Tile.PLAYER ? 1 : 0;
+        playerFound += terrain.getMapData().getTileAt(monsterPos.getX() - 1, monsterPos.getY()) == Tile.PLAYER ? 1 : 0;
+        playerFound += terrain.getMapData().getTileAt(monsterPos.getX(), monsterPos.getY() + 1) == Tile.PLAYER ? 1 : 0;
+        playerFound += terrain.getMapData().getTileAt(monsterPos.getX(), monsterPos.getY() - 1) == Tile.PLAYER ? 1 : 0;
 
         System.out.println("player found "+ (playerFound != 0));
 

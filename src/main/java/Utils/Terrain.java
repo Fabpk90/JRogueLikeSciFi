@@ -4,12 +4,13 @@ import Actors.Actor;
 import Actors.Monster;
 import Actors.Placeable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-public class Terrain {
+public class Terrain implements Serializable {
 
     private int size;
     private MapData mapData;
@@ -43,7 +44,7 @@ public class Terrain {
 
     private void generateMap()
     {
-        mapData = MapGenerator.getMap(size, mapData.getLevel(), monsters);
+        mapData = MapGenerator.getMap(size, mapData.getLevel(), monsters, this);
         mapData.setLevel(mapData.getLevel() + 1);
     }
 
@@ -208,5 +209,10 @@ public class Terrain {
         }
         
         return null;
+    }
+
+    public void removeMonster(Monster monster)
+    {
+        monsters.remove(monster);
     }
 }

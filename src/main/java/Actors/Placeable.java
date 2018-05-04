@@ -3,9 +3,11 @@ package Actors;
 import Utils.Vector2D;
 import org.fusesource.jansi.Ansi;
 
+import java.io.Serializable;
+
 import static org.fusesource.jansi.Ansi.ansi;
 
-public class Placeable {
+public class Placeable implements Serializable {
 
     public enum Tile
     {

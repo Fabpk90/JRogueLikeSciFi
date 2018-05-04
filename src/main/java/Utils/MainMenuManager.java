@@ -1,9 +1,6 @@
 package Utils;
 
-
 import java.util.Scanner;
-
-import static Utils.SaveManager.loadSave;
 
 public class MainMenuManager
 {
@@ -26,8 +23,11 @@ public class MainMenuManager
         }
         else if(commands[0].equals("load"))
         {
-            gm=loadSave();
-            gm.render();
+            gm=SaveManager.loadSave();
+            if(gm != null)
+                gm.render();
+            else
+                System.out.println("paf");
         }
     }
 }
