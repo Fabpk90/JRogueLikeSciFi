@@ -37,7 +37,10 @@ public class GameManager implements Serializable
 
         do {
             terrain.printMap();
+
             printLog();
+            printStats();
+
             parseCMD(sc);
 
             if(!exitGame)
@@ -48,6 +51,11 @@ public class GameManager implements Serializable
         }while(!exitGame);
 
         sc.close();
+    }
+
+    private void printStats()
+    {
+        System.out.println("Health "+player.getHealth());
     }
 
     private void printLog()

@@ -31,6 +31,7 @@ public abstract class Actor extends Placeable implements Serializable {
     private int health;
     private int atk;
     private int def;
+    private int level;
 
     private Direction direction;
 
@@ -124,7 +125,14 @@ public abstract class Actor extends Placeable implements Serializable {
         else if(vec.getY() < 0)
             direction = Direction.DOWN;
     }
-    
+
+
+    public void addHealth(int amount)
+    {
+        health += amount;
+    }
+
+
     public int getAtk() {
         return atk;
     }

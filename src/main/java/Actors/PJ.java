@@ -4,6 +4,7 @@ import Utils.Vector2D;
 
 public class PJ extends Actor {
 
+    private int exp;
     //public List<items> inv; Liste chainé représentant l'inventaire, je laisse en com le temps de faire les items
 
     public PJ( int health, int atk, int def, Vector2D position)
@@ -20,8 +21,9 @@ public class PJ extends Actor {
     }
 
     @Override
-    void onDie() {
-
+    void onDie()
+    {
+        //end Game
     }
 
     @Override

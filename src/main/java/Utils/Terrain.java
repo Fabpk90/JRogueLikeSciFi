@@ -119,7 +119,7 @@ public class Terrain implements Serializable {
                         mapData.setTileAt(i, j, Placeable.Tile.EXIT);
                         found = true;
                     }
- 
+
                 }
             }
         }
