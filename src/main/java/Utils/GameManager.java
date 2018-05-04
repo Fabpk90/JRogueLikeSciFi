@@ -17,7 +17,7 @@ public class GameManager implements Serializable
 
     static private StringBuilder log; // used for logging actions in the terminal such as combat log
 
-    private boolean exitGame;
+    static public boolean exitGame;
 
     public GameManager(int size)
     {

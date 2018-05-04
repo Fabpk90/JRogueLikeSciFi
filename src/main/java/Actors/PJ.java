@@ -1,5 +1,6 @@
 package Actors;
 
+import Utils.GameManager;
 import Utils.Vector2D;
 
 public class PJ extends Actor {
@@ -23,7 +24,8 @@ public class PJ extends Actor {
     @Override
     void onDie()
     {
-        //end Game
+        System.out.println("You die");
+        GameManager.exitGame = true;
     }
 
     @Override
