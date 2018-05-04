@@ -11,20 +11,17 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 public class Terrain {
 
-    private int height;
-    private int width;
-
+    private int size;
     private MapData mapData;
 
     private Actor player;
     private ArrayList<Monster> monsters;
 
-    public Terrain(int height, int width)
+    public Terrain(int size)
     {
-        this.height = height;
-        this.width = width;
+        this.size = size;
 
-        mapData = new MapData(height, width);
+        mapData = new MapData(size);
 
         monsters = new ArrayList<Monster>();
 
@@ -46,7 +43,7 @@ public class Terrain {
 
     private void generateMap()
     {
-        mapData = MapGenerator.getMap(height, width, mapData.getLevel(), monsters);
+        mapData = MapGenerator.getMap(size, mapData.getLevel(), monsters);
         mapData.setLevel(mapData.getLevel() + 1);
     }
 
@@ -55,9 +52,9 @@ public class Terrain {
     public void printMap()
     {
         StringBuilder str = new StringBuilder();
-        for(int i=0;i<height;i++)
+        for(int i=0;i<size;i++)
         {
-            for(int j=0;j<width;j++)
+            for(int j=0;j<size;j++)
             {
                 str.append(ansi().fg(mapData.getTileAt(i,j).getColor()).a(mapData.getTileAt(i,j)));
             }
@@ -77,8 +74,8 @@ public class Terrain {
 
         while (true)
         {
-            i = r.nextInt(height);
-            j = r.nextInt(width);
+            i = r.nextInt(size);
+            j = r.nextInt(size);
 
             //if the selected tile is a wall, do no consider it
             if(mapData.getTileAt(i, j) == Placeable.Tile.FLOOR)
@@ -103,9 +100,9 @@ public class Terrain {
         int floorTiles = 0;
         boolean found = false;
 
-        for(int i = height - 1; i > 0 && !found; i--)
+        for(int i = size - 1; i > 0 && !found; i--)
         {
-            for(int j = 0; j < width && !found; j++)
+            for(int j = 0; j < size && !found; j++)
             {
                 if(mapData.getTileAt(i, j) == Placeable.Tile.FLOOR)
                 {
