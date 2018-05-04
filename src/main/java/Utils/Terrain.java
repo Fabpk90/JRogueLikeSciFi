@@ -49,7 +49,7 @@ public class Terrain implements Serializable {
     }
 
 
-    //goes trough the entire matrix and
+    //goes trough the entire matrix and prints the map
     public void printMap()
     {
         StringBuilder str = new StringBuilder();
@@ -119,7 +119,7 @@ public class Terrain implements Serializable {
                         mapData.setTileAt(i, j, Placeable.Tile.EXIT);
                         found = true;
                     }
-
+ 
                 }
             }
         }

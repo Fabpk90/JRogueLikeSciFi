@@ -21,7 +21,6 @@ public class GameManager implements Serializable
 
     public GameManager(int size)
     {
-        //player = new Player();
         //ajouter le player au terrain
         terrain = new Terrain(size);
 
@@ -137,15 +136,17 @@ public class GameManager implements Serializable
                         addLog("The player attacks the void..");
                 }
             }
-            else if (input.equals("exit")) //TODO: handle the case where the player wants to quit but it is trap in a gangbang, resulting in his death
+            else if (input.equals("exit"))
             {
                 isCorrectCMD = true;
                 exitGame = true;
             }
             else if(input.equals("save"))
             {
-                SaveManager.saveInstance(this);
-                System.out.println("Saved");
+                if(SaveManager.saveInstance(this))
+                    System.out.println("Saved successful");
+                else
+                    System.out.println("Error during saving");
             }
         }
 
