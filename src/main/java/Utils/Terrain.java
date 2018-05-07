@@ -185,10 +185,11 @@ public class Terrain implements Serializable {
 
         if(mapData.getTileAt(vecPosition) == Placeable.Tile.ITEM)   //Si on rajoute le champ ITEM dans l'enum
         {                                                           //Et qu'on change son glyph plus tard, il sera
-                                                                    //toujours considéré comme un ITEM ?
+                                                                    //toujours considéré comme un ITEM ? OUI! c'est ça qu'il fallait faire ;)
 
             player.inv.add(getItemAt);  //J'ai voulu m'inspirer de getMonsterAt mais je sais pas comment sont
-                                        //stocké les items en mémoire donc pour les trouver c'est tendu
+                                        //stocké les items en mémoire donc pour les trouver c'est tendu    Pour ça il faut où savoir l'index ou avoir l'objet, du coup la il faudrait une fonction qui dit
+                                        // à cette endroit il y a X objet tiens sa référence
         }
 
     }*/

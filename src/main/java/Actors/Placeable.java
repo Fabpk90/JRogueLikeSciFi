@@ -17,6 +17,7 @@ public class Placeable implements Serializable {
         PLAYER('P', Ansi.Color.BLUE),
         EXIT('E', Ansi.Color.GREEN),
         MONSTER('M', Ansi.Color.RED),
+        ITEM('I', Ansi.Color.BLUE),
         NPC('N', Ansi.Color.YELLOW);
 
         private char glyph;

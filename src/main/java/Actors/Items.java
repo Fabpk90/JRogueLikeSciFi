@@ -5,7 +5,7 @@ import org.fusesource.jansi.Ansi;
 
 import java.io.Serializable;
 
-public class Items extends Placeable implements Serializable {
+public abstract class Items extends Placeable implements Serializable {
 
     private String name;
 
@@ -16,8 +16,6 @@ public class Items extends Placeable implements Serializable {
     }
 
     public String getName() {return name;}
-
-    public void setName(String name) {this.name = name;}
 
     @Override
     public String toString()
