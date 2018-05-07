@@ -22,20 +22,20 @@ public class MapGenerator
     
     static private MapData mapData;
 
-    static public MapData getMap(int size, int level, ArrayList<Monster> monsters, Terrain terrain)
+    static public MapData getMap(int size, int level, Terrain terrain)
     {
         mapData = new MapData(size);
 
         MapGenerator.size = size;
         MapGenerator.level = level;
 
-        monsters.clear();
-
         generateWalls();
-
         activeAutomaton(5);
+        generateExit();
 
-        generateMonsters(monsters, terrain);
+        generateMonsters(terrain.getMonsters(), terrain);
+
+        mapData.setLevel(mapData.getLevel() + 1);
 
         return mapData;
     }
@@ -128,6 +128,37 @@ public class MapGenerator
             mapData.setmapMatrix(mapDataCopy);
         }
 
+    }
+
+    //generate an exit by searching a "free" Tile from the bottom
+    //It starts searching from the bottom
+    static private void generateExit()
+    {
+        int floorTiles = 0;
+        boolean found = false;
+
+        for(int i = size - 1; i > 0 && !found; i--)
+        {
+            for(int j = 0; j < size && !found; j++)
+            {
+                if(mapData.getTileAt(i, j) == Placeable.Tile.FLOOR)
+                {
+                    floorTiles++;
+
+                    floorTiles += mapData.getTileAt(i, j - 1) == Placeable.Tile.FLOOR ? 1 : 0;
+                    floorTiles += mapData.getTileAt(i, j + 1) == Placeable.Tile.FLOOR ? 1 : 0;
+                    floorTiles += mapData.getTileAt(i - 1, j) == Placeable.Tile.FLOOR ? 1 : 0;
+                    floorTiles += mapData.getTileAt(i + 1, j) == Placeable.Tile.FLOOR ? 1 : 0;
+
+                    if(floorTiles > 3)
+                    {
+                        mapData.setTileAt(i, j, Placeable.Tile.EXIT);
+                        found = true;
+                    }
+
+                }
+            }
+        }
     }
 
     static private void generateWalls()

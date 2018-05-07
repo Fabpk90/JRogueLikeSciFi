@@ -21,12 +21,10 @@ public class GameManager implements Serializable
 
     public GameManager(int size)
     {
-        //ajouter le player au terrain
-        terrain = new Terrain(size);
-
         player = new PJ(20, 10, 10);
 
-        terrain.setPlayer(player);
+        terrain = new Terrain(size, player);
+
 
         log = new StringBuilder();
     }

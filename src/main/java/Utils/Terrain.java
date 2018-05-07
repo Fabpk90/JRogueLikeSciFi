@@ -19,16 +19,16 @@ public class Terrain implements Serializable {
     private PJ player;                  //Changé de Actor à PJ
     private ArrayList<Monster> monsters;
 
-    public Terrain(int size)
+    public Terrain(int size, PJ player)
     {
         this.size = size;
+        this.player = player;
 
         mapData = new MapData(size);
 
         monsters = new ArrayList<Monster>();
 
         generateMap();
-        generateExit();
     }
 
     public void updateTerrain()
@@ -45,8 +45,8 @@ public class Terrain implements Serializable {
 
     private void generateMap()
     {
-        mapData = MapGenerator.getMap(size, mapData.getLevel(), monsters, this);
-        mapData.setLevel(mapData.getLevel() + 1);
+        mapData = MapGenerator.getMap(size, mapData.getLevel(), this);
+        resetPlayerPosition();
     }
 
 
@@ -67,7 +67,7 @@ public class Terrain implements Serializable {
     }
 
     //Randomly place the player in the map
-    private Vector2D getPlayerRandomPosition()
+    private Vector2D getGeneratedPlayerRandomPos()
     {
         int floorTiles = 0;
         int i,j;
@@ -95,37 +95,6 @@ public class Terrain implements Serializable {
         }
     }
 
-    //generate an exit by searching a "free" Tile from the bottom
-    //It starts searching from the opposite position of the player -> the bottom
-    private void generateExit()
-    {
-        int floorTiles = 0;
-        boolean found = false;
-
-        for(int i = size - 1; i > 0 && !found; i--)
-        {
-            for(int j = 0; j < size && !found; j++)
-            {
-                if(mapData.getTileAt(i, j) == Placeable.Tile.FLOOR)
-                {
-                    floorTiles++;
-
-                    floorTiles += mapData.getTileAt(i, j - 1) == Placeable.Tile.FLOOR ? 1 : 0;
-                    floorTiles += mapData.getTileAt(i, j + 1) == Placeable.Tile.FLOOR ? 1 : 0;
-                    floorTiles += mapData.getTileAt(i - 1, j) == Placeable.Tile.FLOOR ? 1 : 0;
-                    floorTiles += mapData.getTileAt(i + 1, j) == Placeable.Tile.FLOOR ? 1 : 0;
-
-                    if(floorTiles > 3)
-                    {
-                        mapData.setTileAt(i, j, Placeable.Tile.EXIT);
-                        found = true;
-                    }
-
-                }
-            }
-        }
-    }
-
     public void setPlayer(PJ player)
     {
         this.player = player;
@@ -146,9 +115,6 @@ public class Terrain implements Serializable {
             if(mapData.getTileAt(player.getPosition()) == Placeable.Tile.EXIT)
             {
                 generateMap();
-                generateExit();
-
-                resetPlayerPosition();
             }
             else
                 mapData.setTileAt(player.getPosition(), Placeable.Tile.PLAYER);
@@ -159,7 +125,7 @@ public class Terrain implements Serializable {
 
     private void resetPlayerPosition()
     {
-        player.setPosition(getPlayerRandomPosition());
+        player.setPosition(getGeneratedPlayerRandomPos());
         mapData.setTileAt(player.getPosition(), Placeable.Tile.PLAYER);
     }
 
@@ -230,5 +196,9 @@ public class Terrain implements Serializable {
     public void removeMonster(Monster monster)
     {
         monsters.remove(monster);
+    }
+
+    public ArrayList<Monster> getMonsters() {
+        return monsters;
     }
 }
