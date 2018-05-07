@@ -19,4 +19,10 @@ public class Weapon extends Equipment {
     public void setAtk(int atk) {
         this.atk = atk;
     }
+
+    @Override
+    public String toString()
+    {
+        return getName() + " Atk Power: " + atk;
+    }
 }

@@ -15,7 +15,13 @@ public class Helmet extends Equipment {
 
     public int getDef() {return def;}
 
-    public void setDef(int atk) {
+    public void setDef(int def) {
         this.def = def;
+    }
+
+    @Override
+    public String toString()
+    {
+        return getName() + " Def Power: " + def;
     }
 }
