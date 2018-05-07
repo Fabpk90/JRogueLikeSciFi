@@ -19,4 +19,10 @@ public class Potion extends Items implements Usable
     {
         user.addHealth(amount);
     }
+
+    @Override
+    public String toString()
+    {
+        return getName() + ": " + amount;
+    }
 }

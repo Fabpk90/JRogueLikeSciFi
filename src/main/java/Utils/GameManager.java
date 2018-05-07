@@ -13,7 +13,7 @@ public class GameManager implements Serializable
 
     private Terrain terrain;
 
-    private Actor player;
+    private PJ player;  //From Actor to PJ
 
     static private StringBuilder log; // used for logging actions in the terminal such as combat log
 
@@ -143,6 +143,23 @@ public class GameManager implements Serializable
                     if(attackGoneWrong)
                         addLog("The player attacks the void..");
                 }
+               else if(commands[0].equals("open"))
+                {
+                    if(commands[1].equals("inventory"))
+                    {
+                        //isCorrectCMD = true; activer si on veut qu'ouvrir l'inventaire face passer un tour.
+                        addLog("Opening Inventory");
+                        player.openInventory();
+                    }
+                }
+                /*else if(commands[0].equals("pick"))
+                {
+                    if(commands[1].equals("up"))
+                    {
+                        addLog("pickin' up da muney");
+                        terrain.take(Vector2D.getVector2DUp());
+                    }
+                }*/
             }
             else if (input.equals("exit"))
             {

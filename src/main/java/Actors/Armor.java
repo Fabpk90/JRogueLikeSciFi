@@ -18,4 +18,10 @@ public class Armor extends Equipment {
     public void setDef(int def) {
         this.def = def;
     }
+
+    @Override
+    public String toString()
+    {
+        return getName() + " Def Power: " + def;
+    }
 }

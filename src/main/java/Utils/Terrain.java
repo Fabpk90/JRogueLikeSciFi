@@ -3,6 +3,7 @@ package Utils;
 import Actors.Actor;
 import Actors.Monster;
 import Actors.Placeable;
+import Actors.PJ;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class Terrain implements Serializable {
     private int size;
     private MapData mapData;
 
-    private Actor player;
+    private PJ player;                  //Changé de Actor à PJ
     private ArrayList<Monster> monsters;
 
     public Terrain(int size)
@@ -125,7 +126,7 @@ public class Terrain implements Serializable {
         }
     }
 
-    public void setPlayer(Actor player)
+    public void setPlayer(PJ player)
     {
         this.player = player;
 
@@ -210,6 +211,21 @@ public class Terrain implements Serializable {
         
         return null;
     }
+
+    /*public void take(Vector2D vec)
+    {
+        Vector2D vecPosition = new Vector2D(vec.getX(), vec.getY());
+        vecPosition.add(player.getPosition());
+
+        if(mapData.getTileAt(vecPosition) == Placeable.Tile.ITEM)   //Si on rajoute le champ ITEM dans l'enum
+        {                                                           //Et qu'on change son glyph plus tard, il sera
+                                                                    //toujours considéré comme un ITEM ?
+
+            player.inv.add(getItemAt);  //J'ai voulu m'inspirer de getMonsterAt mais je sais pas comment sont
+                                        //stocké les items en mémoire donc pour les trouver c'est tendu
+        }
+
+    }*/
 
     public void removeMonster(Monster monster)
     {
