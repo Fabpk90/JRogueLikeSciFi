@@ -3,11 +3,11 @@ package Actors;
 import Utils.Vector2D;
 import org.fusesource.jansi.Ansi;
 
-public class Helmet extends Equipment {
+public class Armor extends Equipment {
 
     private int def;
 
-    public Helmet (char glyph, Ansi.Color color, Vector2D position, String name, int def)
+    public Armor (char glyph, Ansi.Color color, Vector2D position, String name, int def)
     {
         super(glyph, color, position, name);
         this.def = def;
@@ -15,7 +15,7 @@ public class Helmet extends Equipment {
 
     public int getDef() {return def;}
 
-    public void setDef(int atk) {
+    public void setDef(int def) {
         this.def = def;
     }
 }

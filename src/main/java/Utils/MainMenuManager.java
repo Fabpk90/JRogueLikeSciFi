@@ -2,6 +2,8 @@ package Utils;
 
 import java.util.Scanner;
 
+import static org.fusesource.jansi.Ansi.ansi;
+
 public class MainMenuManager
 {
     static public void Menu()
@@ -9,25 +11,34 @@ public class MainMenuManager
         GameManager gm = new GameManager(15);
         String input;
         Scanner sc = new Scanner(System.in);
-        String[] commands;
+        boolean isSaveAvaible = SaveManager.saveExists();
+
+
+        System.out.println(ansi().fgBrightGreen().a("Hello adventurer!"));
 
         do {
-            System.out.println("Start or load ?");
-            input = sc.nextLine();
-            commands = input.split(" ");
-        }while(!(commands[0].equals("start")) && !(commands[0].equals("load")));
+            System.out.println("Start");
+            if(isSaveAvaible)
+                System.out.println("Load");
 
-        if(commands[0].equals("start"))
+            System.out.println("Exit");
+            input = sc.nextLine();
+            input = input.toLowerCase();
+        }while(!(input.equals("start"))
+                && !(input.equals("load")) &&
+                !(input.equals("exit")));
+
+        if(input.equals("start"))
         {
             gm.render();
         }
-        else if(commands[0].equals("load"))
+        else if(isSaveAvaible && input.equals("load"))
         {
             gm=SaveManager.loadSave();
             if(gm != null)
                 gm.render();
             else
-                System.out.println("paf");
+                System.out.println("Error in loading the save!");
         }
     }
 }

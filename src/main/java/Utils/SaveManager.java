@@ -1,13 +1,18 @@
 package Utils;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class SaveManager {
+
+    final static public  String saveName = "save.yaya";
+
 
     static public boolean saveInstance(GameManager gm)
     {
         try {
-            FileOutputStream fileOut = new FileOutputStream("save.yaya");
+            FileOutputStream fileOut = new FileOutputStream(saveName);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(gm);
             out.close();
@@ -25,19 +30,32 @@ public class SaveManager {
         GameManager gm;
 
         try {
-            FileInputStream fileIn = new FileInputStream("save.yaya");
+            FileInputStream fileIn = new FileInputStream(saveName);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             gm = (GameManager) in.readObject();
             in.close();
             fileIn.close();
-        } catch (IOException i) {
-            i.printStackTrace();
+        }catch (FileNotFoundException e) {
+            e.printStackTrace();
             return null;
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e)
+        {
             e.printStackTrace();
             return null;
         }
+         catch (IOException i)
+         {
+            i.printStackTrace();
+            return null;
+        }
+
+
 
         return gm;
+    }
+
+    static public boolean saveExists()
+    {
+        return Files.exists(Paths.get(saveName));
     }
 }
