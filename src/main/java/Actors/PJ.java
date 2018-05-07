@@ -27,20 +27,22 @@ public class PJ extends Actor {
 
     public void openInventory()
     {
-        if(inv.isEmpty()) System.out.print("Your inventory is empty. Sad Face");
-
-        for(Items i : inv)
+        if(inv.isEmpty())
+            System.out.print("Your inventory is empty. Sad Face");
+        else
         {
-            System.out.print(i.toString() + " ");
+            for(Items i : inv)
+            {
+                System.out.print(i.toString() + " ");
+            }
+            System.out.println();
         }
-        System.out.println();
-
     }
 
     public void addHelmet() //Fonction test d'affichage (j'avais une cible "open gift" dans le GameManager
     {                       // qui appelait cette fonction, le truc c'est qu'après tous les espaces vides étaient des H jaunes
                             //Gros concept. Probablement parceque j'ai fait de la chiasse
-        inv.add(new Helmet('H', Ansi.Color.YELLOW, new Vector2D(6,6),"Test", 10));
+        inv.add(new Armor('H', Ansi.Color.YELLOW, new Vector2D(6,6),"Test", 10));
     }
 
     @Override
