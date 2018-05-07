@@ -15,11 +15,9 @@ public class Monster extends PNJ
 
     private Terrain terrain;
 
-    public Monster(Tile tile, int health, int atk, int def, Vector2D position, Terrain terrain)
+    public Monster(Tile tile, int health, int atk, int def, String name, Vector2D position, Terrain terrain)
     {
-        super(tile, health, atk, def, position);
-
-        setName("Monster"); //testing
+        super(tile, health, atk, def, position, name);
 
         this.terrain = terrain;
     }

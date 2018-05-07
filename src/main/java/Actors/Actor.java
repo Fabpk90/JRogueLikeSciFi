@@ -35,31 +35,9 @@ public abstract class Actor extends Placeable implements Serializable {
 
     private Direction direction;
 
-    public Actor()
-    {
-        super(Tile.ACTOR, new Vector2D());
-
-        this.name = "Actor test";
-
-        this.health = 5;
-        this.atk = this.def = 0;
-
-        direction = Direction.UP;
-    }
-
-    public Actor(Tile tile, int health, int atk, int def)
-    {
-        super(tile, new Vector2D());
-
-        this.health = health;
-        this.atk = atk;
-        this.def =  def;
-
-        direction = Direction.UP;
-    }
 
 
-    public Actor(Tile tile, int health, int atk, int def, Vector2D position)
+    public Actor(Tile tile, int health, int atk, int def, Vector2D position, String name)
     {
         super(tile, position);
 
@@ -68,23 +46,14 @@ public abstract class Actor extends Placeable implements Serializable {
         this.def =  def;
 
         direction = Direction.UP;
-    }
-
-    public Actor(Tile tile, int health, int atk, int def, Vector2D position, Direction direction)
-    {
-        super(tile, position);
-
-        this.health = health;
-        this.atk = atk;
-        this.def =  def;
-
-        this.direction = direction;
     }
     
     public boolean Attack(Actor actorAttacked)
     {
         int trueDamage = atk - actorAttacked.getDef();
+
         GameManager.addLog(name+" attacks "+actorAttacked.getName() +" doing " +trueDamage+" damages");
+
         if(trueDamage > 0)
         {
             return actorAttacked.takeDamage(atk);

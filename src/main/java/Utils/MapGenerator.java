@@ -59,7 +59,7 @@ public class MapGenerator
                 placed++;
 
                 mapData.setTileAt(x,y, Placeable.Tile.MONSTER);
-                monsters.add(new Monster(Placeable.Tile.MONSTER, 10 , 10, 10,  new Vector2D(x, y), terrain));
+                monsters.add(new Monster(Placeable.Tile.MONSTER, 10 , 10, 10, "MONSTA",  new Vector2D(x, y), terrain));
             }
         }
     }
