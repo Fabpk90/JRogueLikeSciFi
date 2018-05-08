@@ -13,6 +13,7 @@ public class Placeable implements Serializable {
     {
         WALL('X', Ansi.Color.WHITE),
         FLOOR('.', Ansi.Color.WHITE),
+        TRAP('.', Ansi.Color.RED),
         ACTOR('A', Ansi.Color.YELLOW),
         PLAYER('P', Ansi.Color.BLUE),
         EXIT('E', Ansi.Color.GREEN),
@@ -57,16 +58,6 @@ public class Placeable implements Serializable {
     public Placeable(Tile tile, Vector2D position)
     {
         this.tile = tile;
-        this.position = position;
-    }
-
-    public Placeable(char glyph, Ansi.Color color, Vector2D position)
-    {
-        //set a fake tile, just to have it set
-        tile = Tile.FLOOR;
-        tile.setGlyph(glyph);
-        tile.setColor(color);
-
         this.position = position;
     }
 

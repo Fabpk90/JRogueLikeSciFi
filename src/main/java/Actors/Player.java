@@ -36,7 +36,7 @@ public class Player extends Actor {
     public void addHelmet() //Fonction test d'affichage (j'avais une cible "open gift" dans le GameManager
     {                       // qui appelait cette fonction, le truc c'est qu'après tous les espaces vides étaient des H jaunes
                             //Gros concept. Probablement parceque j'ai fait de la chiasse
-        inv.add(new Armor('H', Ansi.Color.YELLOW, new Vector2D(6,6),"Test", 10));
+        inv.add(new Armor(Tile.ITEM, new Vector2D(6,6),"Test", 10));
     }
 
     @Override

@@ -33,11 +33,31 @@ public class MapGenerator
         activeAutomaton(5);
         generateExit();
 
+        generateTraps();
+
         generateMonsters(terrain.getMonsters(), terrain);
 
         mapData.setLevel(mapData.getLevel() + 1);
 
         return mapData;
+    }
+
+    private static void generateTraps()
+    {
+        Random r = new Random();
+
+        int placed = 0;
+        int toPlace = r.nextInt(level+1 )+1;
+
+        int x,y;
+
+        while (placed != toPlace)
+        {
+            x = r.nextInt(size);
+            y = r.nextInt(size);
+
+        }
+
     }
 
     private static void generateMonsters(ArrayList<Monster> monsters, Terrain terrain)

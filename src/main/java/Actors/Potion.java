@@ -8,9 +8,9 @@ public class Potion extends Item implements Usable
 {
     private int amount;
 
-    public Potion(char glyph, Ansi.Color color, Vector2D position, String name, int amount)
+    public Potion(Tile tile, Vector2D position, String name, int amount)
     {
-        super(glyph, color, position, name);
+        super(tile, position, name);
         this.amount = amount;
     }
 

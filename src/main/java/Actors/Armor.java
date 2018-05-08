@@ -7,9 +7,9 @@ public class Armor extends Equipment {
 
     private int def;
 
-    public Armor (char glyph, Ansi.Color color, Vector2D position, String name, int def)
+    public Armor (Tile tile, Vector2D position, String name, int def)
     {
-        super(glyph, color, position, name);
+        super(tile, position, name);
         this.def = def;
     }
 

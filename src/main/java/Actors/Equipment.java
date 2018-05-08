@@ -10,8 +10,8 @@ import org.fusesource.jansi.Ansi;
 public abstract class Equipment extends Item
 {
 
-    public Equipment(char glyph, Ansi.Color color, Vector2D position, String name)
+    public Equipment(Tile tile, Vector2D position, String name)
     {
-        super(glyph, color, position, name);
+        super(tile, position, name);
     }
 }

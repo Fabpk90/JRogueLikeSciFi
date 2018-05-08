@@ -9,9 +9,9 @@ public abstract class Item extends Placeable implements Serializable {
 
     private String name;
 
-    public Item(char glyph, Ansi.Color color, Vector2D position, String name)
+    public Item(Tile tile, Vector2D position, String name)
     {
-        super(glyph, color, position);
+        super(tile, position);
         this.name = name;
     }
 
