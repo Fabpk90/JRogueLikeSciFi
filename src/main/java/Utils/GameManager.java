@@ -17,7 +17,10 @@ public class GameManager implements Serializable
 
     static private StringBuilder log; // used for logging actions in the terminal such as combat log
 
-    static public boolean exitGame;
+    static public boolean exitGame = false;
+
+    static public boolean winGame = false;
+    final static  public  int levelMax = 3;
 
     public GameManager(int size, Player player)
     {
@@ -45,7 +48,17 @@ public class GameManager implements Serializable
 
             System.out.print("\033[H\033[2J"); //clear the console
             System.out.flush();
-        }while(!exitGame);
+        }while(!exitGame || !winGame);
+
+        if(exitGame)
+        {
+            System.out.println("See you adventurer");
+        }
+        else if(winGame)
+        {
+            System.out.println("You arrived at the center of the ship!");
+            System.out.println("You quickly initiate the auto-destruction protocol, and blow yourself up!");
+        }
 
         sc.close();
     }
@@ -74,80 +87,70 @@ public class GameManager implements Serializable
 
             if(commands.length >= 2) //min of 2 consecutive cmds
             {
-                if(commands[0].equals("move"))
-                {
-                    if(commands[1].equals("right"))
-                    {
-                        isCorrectCMD = true;
-                        terrain.movePlayer(Vector2D.getVector2DRight());
-                    }
-                    else if (commands[1].equals("down"))
-                    {
-                        isCorrectCMD = true;
-                        terrain.movePlayer(Vector2D.getVector2DDown());
-                    }
-                    else if(commands[1].equals("left"))
-                    {
-                        isCorrectCMD = true;
-                        terrain.movePlayer(Vector2D.getVector2DLeft());
-                    }
-                    else if(commands[1].equals("up"))
-                    {
-                        isCorrectCMD = true;
-                        terrain.movePlayer(Vector2D.getVector2DUp());
-                    }
-                }
-                else if(commands[0].equals("attack"))
-                {
-                    boolean attackGoneWrong = true;
-                    if(commands[1].equals("right"))
-                    {
-                        isCorrectCMD = true;
-                        if(terrain.attackMonsterAt(Actor.Direction.RIGHT))
-                        {
-                            addLog("Player attacking an enemy on his right");
-                            attackGoneWrong = false;
+                switch (commands[0]) {
+                    case "move":
+                        switch (commands[1]) {
+                            case "right":
+                                isCorrectCMD = true;
+                                terrain.movePlayer(Vector2D.getVector2DRight());
+                                break;
+                            case "down":
+                                isCorrectCMD = true;
+                                terrain.movePlayer(Vector2D.getVector2DDown());
+                                break;
+                            case "left":
+                                isCorrectCMD = true;
+                                terrain.movePlayer(Vector2D.getVector2DLeft());
+                                break;
+                            case "up":
+                                isCorrectCMD = true;
+                                terrain.movePlayer(Vector2D.getVector2DUp());
+                                break;
                         }
-                    }
-                    else if (commands[1].equals("down"))
-                    {
-                        isCorrectCMD = true;
-                        if(terrain.attackMonsterAt(Actor.Direction.DOWN))
-                        {
-                            addLog("Player attacking an enemy on his bottom");
-                            attackGoneWrong = false;
+                        break;
+                    case "attack":
+                        boolean attackGoneWrong = true;
+                        switch (commands[1]) {
+                            case "right":
+                                isCorrectCMD = true;
+                                if (terrain.attackMonsterAt(Actor.Direction.RIGHT)) {
+                                    addLog("Player attacking an enemy on his right");
+                                    attackGoneWrong = false;
+                                }
+                                break;
+                            case "down":
+                                isCorrectCMD = true;
+                                if (terrain.attackMonsterAt(Actor.Direction.DOWN)) {
+                                    addLog("Player attacking an enemy on his bottom");
+                                    attackGoneWrong = false;
+                                }
+                                break;
+                            case "left":
+                                isCorrectCMD = true;
+                                if (terrain.attackMonsterAt(Actor.Direction.LEFT)) {
+                                    addLog("Player attacking an enemy on his left");
+                                    attackGoneWrong = false;
+                                }
+                                break;
+                            case "up":
+                                isCorrectCMD = true;
+                                if (terrain.attackMonsterAt(Actor.Direction.UP)) {
+                                    addLog("Player attacking an enemy on his top");
+                                    attackGoneWrong = false;
+                                }
+                                break;
                         }
-                    }
-                    else if(commands[1].equals("left"))
-                    {
-                        isCorrectCMD = true;
-                        if(terrain.attackMonsterAt(Actor.Direction.LEFT))
-                        {
-                            addLog("Player attacking an enemy on his left");
-                            attackGoneWrong = false;
-                        }
-                    }
-                    else if(commands[1].equals("up"))
-                    {
-                        isCorrectCMD = true;
-                        if(terrain.attackMonsterAt(Actor.Direction.UP))
-                        {
-                            addLog("Player attacking an enemy on his top");
-                            attackGoneWrong = false;
-                        }
-                    }
 
-                    if(attackGoneWrong)
-                        addLog("The player attacks the void..");
-                }
-               else if(commands[0].equals("open"))
-                {
-                    if(commands[1].equals("inventory"))
-                    {
-                        //isCorrectCMD = true; activer si on veut qu'ouvrir l'inventaire face passer un tour.
-                        addLog("Opening Inventory");
-                        player.openInventory();
-                    }
+                        if (attackGoneWrong)
+                            addLog("The player attacks the void..");
+                        break;
+                    case "open":
+                        if (commands[1].equals("inventory")) {
+                            //isCorrectCMD = true; activer si on veut qu'ouvrir l'inventaire face passer un tour.
+                            addLog("Opening Inventory");
+                            player.openInventory();
+                        }
+                        break;
                 }
                 /*else if(commands[0].equals("pick"))
                 {
