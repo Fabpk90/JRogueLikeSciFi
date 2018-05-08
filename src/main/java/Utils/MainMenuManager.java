@@ -42,4 +42,9 @@ public class MainMenuManager
                 System.out.println("Error in loading the save!");
         }
     }
+
+    static private void createPlayer()
+    {
+
+    }
 }

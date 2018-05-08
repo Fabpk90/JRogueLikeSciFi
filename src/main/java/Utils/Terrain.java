@@ -13,12 +13,12 @@ public class Terrain implements Serializable {
     private int size;
     private MapData mapData;
 
-    private PJ player;                  //Changé de Actor à PJ
+    private Player player;                  //Changé de Actor à Player
 
     private ArrayList<Monster> monsters;
     private ArrayList<Item> itemOnTheGround;
 
-    public Terrain(int size, PJ player)
+    public Terrain(int size, Player player)
     {
         this.size = size;
         this.player = player;

@@ -7,13 +7,13 @@ import org.fusesource.jansi.Ansi;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PJ extends Actor {
+public class Player extends Actor {
 
     private int exp;
     public List<Item> inv; //Liste chainé représentant l'inventaire, je laisse en com le temps de faire les items
 
 
-    public PJ( int health, int atk, int def)
+    public Player(int health, int atk, int def)
     {
         super(Tile.PLAYER, health, atk, def, Vector2D.getVector2DZero(), "Player");
         inv = new ArrayList <>();

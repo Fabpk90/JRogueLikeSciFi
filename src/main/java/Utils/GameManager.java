@@ -1,7 +1,7 @@
 package Utils;
 
 import Actors.Actor;
-import Actors.PJ;
+import Actors.Player;
 
 import java.io.Serializable;
 import java.util.Scanner;
@@ -13,7 +13,7 @@ public class GameManager implements Serializable
 
     private Terrain terrain;
 
-    private PJ player;  //From Actor to PJ
+    private Player player;  //From Actor to Player
 
     static private StringBuilder log; // used for logging actions in the terminal such as combat log
 
@@ -21,7 +21,7 @@ public class GameManager implements Serializable
 
     public GameManager(int size)
     {
-        player = new PJ(20, 10, 10);
+        player = new Player(20, 10, 10);
 
         terrain = new Terrain(size, player);
 
