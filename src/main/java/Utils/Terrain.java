@@ -1,9 +1,6 @@
 package Utils;
 
-import Actors.Actor;
-import Actors.Monster;
-import Actors.Placeable;
-import Actors.PJ;
+import Actors.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,7 +14,9 @@ public class Terrain implements Serializable {
     private MapData mapData;
 
     private PJ player;                  //Changé de Actor à PJ
+
     private ArrayList<Monster> monsters;
+    private ArrayList<Item> itemOnTheGround;
 
     public Terrain(int size, PJ player)
     {
@@ -27,6 +26,7 @@ public class Terrain implements Serializable {
         mapData = new MapData(size);
 
         monsters = new ArrayList<Monster>();
+        itemOnTheGround = new ArrayList<>();
 
         generateMap();
     }
@@ -51,6 +51,7 @@ public class Terrain implements Serializable {
 
 
     //goes trough the entire matrix and prints the map
+    //the printing is executed in a batch
     public void printMap()
     {
         StringBuilder str = new StringBuilder();
@@ -93,13 +94,6 @@ public class Terrain implements Serializable {
                     return new Vector2D(i, j);
             }
         }
-    }
-
-    public void setPlayer(PJ player)
-    {
-        this.player = player;
-
-        resetPlayerPosition();
     }
 
     public void movePlayer(Vector2D vec)
@@ -174,7 +168,18 @@ public class Terrain implements Serializable {
             if(m.getPosition().equals(positionToSearch))
                 return m;
         }
-        
+
+        return null;
+    }
+
+    public Item getItemAt(Vector2D positionToSearchFor)
+    {
+        for(Item i : itemOnTheGround)
+        {
+            if(i.getPosition().equals(positionToSearchFor))
+                return i;
+        }
+
         return null;
     }
 

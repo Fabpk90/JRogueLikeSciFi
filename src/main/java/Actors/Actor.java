@@ -44,6 +44,7 @@ public abstract class Actor extends Placeable implements Serializable {
         this.health = health;
         this.atk = atk;
         this.def =  def;
+        this.name = name;
 
         direction = Direction.UP;
     }

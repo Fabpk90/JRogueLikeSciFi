@@ -1,9 +1,6 @@
 package Actors;
 
-import Utils.GameManager;
-import Utils.MapData;
-import Utils.Terrain;
-import Utils.Vector2D;
+import Utils.*;
 import org.fusesource.jansi.Ansi;
 
 import java.util.Random;
@@ -15,10 +12,9 @@ public class Monster extends PNJ
 
     private Terrain terrain;
 
-    public Monster(Tile tile, int health, int atk, int def, String name, Vector2D position, Terrain terrain)
+    public Monster(Tile tile, int health, int atk, int def, Vector2D position, Terrain terrain)
     {
-        super(tile, health, atk, def, position, name);
-
+        super(tile, health, atk, def, position, NameGenerator.getRandomMonsterName());
         this.terrain = terrain;
     }
 

@@ -8,7 +8,7 @@ public class MainMenuManager
 {
     static public void Menu()
     {
-        GameManager gm = new GameManager(15);
+        GameManager gm;
         String input;
         Scanner sc = new Scanner(System.in);
         boolean isSaveAvaible = SaveManager.saveExists();
@@ -30,6 +30,7 @@ public class MainMenuManager
 
         if(input.equals("start"))
         {
+            gm =  new GameManager(10);
             gm.render();
         }
         else if(isSaveAvaible && input.equals("load"))

@@ -25,7 +25,6 @@ public class GameManager implements Serializable
 
         terrain = new Terrain(size, player);
 
-
         log = new StringBuilder();
     }
 

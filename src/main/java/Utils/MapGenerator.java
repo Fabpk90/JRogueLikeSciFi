@@ -54,12 +54,13 @@ public class MapGenerator
             x = r.nextInt(size);
             y = r.nextInt(size);
 
-            if(mapData.getTileAt(x,y) == Placeable.Tile.FLOOR)
+            //see if adjacent tiles are free
+            if(getNbFreeAdjacentTiles(mapData, x , y) > 3)
             {
                 placed++;
 
                 mapData.setTileAt(x,y, Placeable.Tile.MONSTER);
-                monsters.add(new Monster(Placeable.Tile.MONSTER, 10 , 10, 10, "MONSTA",  new Vector2D(x, y), terrain));
+                monsters.add(new Monster(Placeable.Tile.MONSTER, 10 , 10, 10,  new Vector2D(x, y), terrain));
             }
         }
     }
@@ -141,24 +142,33 @@ public class MapGenerator
         {
             for(int j = 0; j < size && !found; j++)
             {
-                if(mapData.getTileAt(i, j) == Placeable.Tile.FLOOR)
+
+                floorTiles = getNbFreeAdjacentTiles(mapData, i, j);
+
+                if(floorTiles > 3)
                 {
-                    floorTiles++;
-
-                    floorTiles += mapData.getTileAt(i, j - 1) == Placeable.Tile.FLOOR ? 1 : 0;
-                    floorTiles += mapData.getTileAt(i, j + 1) == Placeable.Tile.FLOOR ? 1 : 0;
-                    floorTiles += mapData.getTileAt(i - 1, j) == Placeable.Tile.FLOOR ? 1 : 0;
-                    floorTiles += mapData.getTileAt(i + 1, j) == Placeable.Tile.FLOOR ? 1 : 0;
-
-                    if(floorTiles > 3)
-                    {
-                        mapData.setTileAt(i, j, Placeable.Tile.EXIT);
-                        found = true;
-                    }
-
+                    mapData.setTileAt(i, j, Placeable.Tile.EXIT);
+                    found = true;
                 }
             }
         }
+    }
+
+    // @return -1 if no tiles, 0 if the center tiles is not free, X free tiles otherwise
+    static private int getNbFreeAdjacentTiles(MapData mapData, int x, int y)
+    {
+        int floorTiles = -1;
+        if(mapData.getTileAt(x, y) == Placeable.Tile.FLOOR)
+        {
+            floorTiles++;
+
+            floorTiles += mapData.getTileAt(x, y - 1) == Placeable.Tile.FLOOR ? 1 : 0;
+            floorTiles += mapData.getTileAt(x, y + 1) == Placeable.Tile.FLOOR ? 1 : 0;
+            floorTiles += mapData.getTileAt(x - 1, y) == Placeable.Tile.FLOOR ? 1 : 0;
+            floorTiles += mapData.getTileAt(x + 1, y) == Placeable.Tile.FLOOR ? 1 : 0;
+        }
+
+        return floorTiles;
     }
 
     static private void generateWalls()

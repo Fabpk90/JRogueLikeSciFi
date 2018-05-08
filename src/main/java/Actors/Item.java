@@ -5,11 +5,11 @@ import org.fusesource.jansi.Ansi;
 
 import java.io.Serializable;
 
-public abstract class Items extends Placeable implements Serializable {
+public abstract class Item extends Placeable implements Serializable {
 
     private String name;
 
-    public Items(char glyph, Ansi.Color color, Vector2D position, String name)
+    public Item(char glyph, Ansi.Color color, Vector2D position, String name)
     {
         super(glyph, color, position);
         this.name = name;

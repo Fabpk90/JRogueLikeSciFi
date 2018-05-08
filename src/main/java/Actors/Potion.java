@@ -4,7 +4,7 @@ import Utils.Usable;
 import Utils.Vector2D;
 import org.fusesource.jansi.Ansi;
 
-public class Potion extends Items implements Usable
+public class Potion extends Item implements Usable
 {
     private int amount;
 

@@ -10,7 +10,7 @@ import java.util.List;
 public class PJ extends Actor {
 
     private int exp;
-    public List<Items> inv; //Liste chainé représentant l'inventaire, je laisse en com le temps de faire les items
+    public List<Item> inv; //Liste chainé représentant l'inventaire, je laisse en com le temps de faire les items
 
 
     public PJ( int health, int atk, int def)
@@ -25,7 +25,7 @@ public class PJ extends Actor {
             System.out.print("Your inventory is empty. Sad Face");
         else
         {
-            for(Items i : inv)
+            for(Item i : inv)
             {
                 System.out.print(i.toString() + " ");
             }
@@ -51,7 +51,7 @@ public class PJ extends Actor {
         return super.Attack(actorAttacked);
     }
 
-    public List<Items> getInv()
+    public List<Item> getInv()
     {
         return inv;
     }
