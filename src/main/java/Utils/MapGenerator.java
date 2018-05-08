@@ -51,12 +51,12 @@ public class MapGenerator
 
         int x,y;
 
-        while (placed != toPlace)
+       /* while (placed != toPlace)
         {
             x = r.nextInt(size);
             y = r.nextInt(size);
 
-        }
+        }*/
 
     }
 

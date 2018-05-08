@@ -45,8 +45,14 @@ public class Terrain implements Serializable {
 
     private void generateMap()
     {
-        mapData = MapGenerator.getMap(size, mapData.getLevel(), this);
-        resetPlayerPosition();
+        if(mapData.getLevel() == GameManager.levelMax)
+            GameManager.winGame = true;
+        else
+        {
+            mapData = MapGenerator.getMap(size, mapData.getLevel(), this);
+            resetPlayerPosition();
+        }
+
     }
 
 

@@ -32,7 +32,7 @@ public class MainMenuManager
 
         if(input.equals("start"))
         {
-            gm =  new GameManager(10, createPlayer());
+            gm = new GameManager(10, createPlayer());
             gm.render();
         }
         else if(isSaveAvaible && input.equals("load"))
@@ -59,8 +59,6 @@ public class MainMenuManager
         //TODO: check the input
 
         p.setName(sc.nextLine());
-
-
         return p;
     }
 }
