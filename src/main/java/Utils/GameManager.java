@@ -19,11 +19,11 @@ public class GameManager implements Serializable
 
     static public boolean exitGame;
 
-    public GameManager(int size)
+    public GameManager(int size, Player player)
     {
-        player = new Player(20, 10, 10);
+        this.player = player;
 
-        terrain = new Terrain(size, player);
+        terrain = new Terrain(size, this.player);
 
         log = new StringBuilder();
     }
@@ -181,5 +181,11 @@ public class GameManager implements Serializable
 
     public static StringBuilder getLog() {
         return log;
+    }
+
+    //used to reinitialize object not serialized
+    public void loaded()
+    {
+        log = new StringBuilder();
     }
 }
