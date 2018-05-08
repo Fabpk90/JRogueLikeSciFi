@@ -14,4 +14,9 @@ public abstract class Equipment extends Item
     {
         super(tile, position, name);
     }
+
+    @Override
+    public void equip(Player p) {
+        //hahalol overrifde
+    }
 }
