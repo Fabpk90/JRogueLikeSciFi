@@ -65,7 +65,7 @@ public class GameManager implements Serializable
 
     private void printStats()
     {
-        System.out.println("Health "+player.getHealth());
+        System.out.println(player.getName()+"'s Health "+player.getHealth());
     }
 
     private void printLog()
