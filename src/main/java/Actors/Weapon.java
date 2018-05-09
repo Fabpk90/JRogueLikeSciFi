@@ -14,11 +14,21 @@ public class Weapon extends Equipment {
         this.atk = atk;
     }
 
+    //Cloning builder for the equipment system
+    public Weapon(Weapon W)
+    {
+        super(W.getTile(), W.getPosition(), W.getName());
+        this.atk = W.getAtk();
+    }
+
     public int getAtk() {return atk;}
 
     public void setAtk(int atk) {
         this.atk = atk;
     }
+
+    @Override
+    public void equip(Player p){ p.equipWeapon(this);}
 
     @Override
     public String toString()

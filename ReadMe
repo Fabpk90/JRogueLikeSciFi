@@ -1,0 +1,30 @@
+CABOUAT Charlotte
+LEBRET Lucas
+SANTORO Fabrizio
+
+RogueLike Science Fiction
+
+./gradlew build
+cd build/libs/
+java -jar xxxx
+
+Scenario: Rejoindre la sortie dans chaque salle en tentant de survivre aux monstres.
+
+Retrouver le vaisseau !
+
+Commencer: start
+
+Bouger: move down/left/right/up
+
+Attaquer le monstre à côté: attack down/left/right/up
+
+Sortir du jeu: exit
+
+Enregistrer ou charger une partie: load/save
+
+Ouvrir l'inventaire: open inventory
+Jeter un item: drop down/left/right/up NomItem
+Ramasser un item: take down/left/right/up
+Equiper l'item: equip NomItem
+
+

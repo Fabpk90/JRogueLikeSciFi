@@ -38,17 +38,21 @@ public class Terrain implements Serializable {
             if(!m.checkForPlayer())
                 m.wander();
             else
-                if(m.Attack(player))
-                    System.out.println("Player dead");
+            if(m.Attack(player))
+                System.out.println("Player dead");
         }
     }
 
     private void generateMap()
     {
-        if(mapData.getLevel() == GameManager.levelMax)
+        if(mapData.getLevel() + 1 >= GameManager.levelMax)
             GameManager.winGame = true;
         else
         {
+            monsters = new ArrayList<>();
+            itemOnTheGround = new ArrayList<>();
+
+            System.out.println(mapData.getLevel() - 1 >= GameManager.levelMax);
             mapData = MapGenerator.getMap(size, mapData.getLevel(), this);
             resetPlayerPosition();
         }
@@ -86,7 +90,7 @@ public class Terrain implements Serializable {
             i = r.nextInt(size);
             j = r.nextInt(size);
 
-            //if the selected tile is a wall, do no consider it
+
             if(mapData.getTileAt(i, j) == Placeable.Tile.FLOOR)
             {
                 floorTiles++;
@@ -134,7 +138,7 @@ public class Terrain implements Serializable {
         return mapData;
     }
 
-    public boolean attackMonsterAt(Actor.Direction playerAttackDirection) 
+    public boolean attackMonsterAt(Actor.Direction playerAttackDirection)
     {
         Vector2D dir = null;
         switch (playerAttackDirection)
@@ -142,31 +146,31 @@ public class Terrain implements Serializable {
             case UP:
                 dir = Vector2D.getVector2DUp();
                 break;
-                
+
             case DOWN:
                 dir = Vector2D.getVector2DDown();
                 break;
-                
+
             case LEFT:
                 dir = Vector2D.getVector2DLeft();
                 break;
-                
+
             case RIGHT:
                 dir = Vector2D.getVector2DRight();
                 break;
         }
-        
+
         dir.add(player.getPosition());
-        
+
         if(mapData.getTileAt(dir) == Placeable.Tile.MONSTER)
         {
             player.Attack(getMonsterAt(dir));
             return true;
         }
-        
+
         return false;
     }
-    
+
     public Monster getMonsterAt(Vector2D positionToSearch)
     {
         for(Monster m : monsters)
@@ -189,7 +193,7 @@ public class Terrain implements Serializable {
         return null;
     }
 
-    /*public void take(Vector2D vec)
+    public void take(Vector2D vec)
     {
         Vector2D vecPosition = new Vector2D(vec.getX(), vec.getY());
         vecPosition.add(player.getPosition());
@@ -198,12 +202,37 @@ public class Terrain implements Serializable {
         {                                                           //Et qu'on change son glyph plus tard, il sera
                                                                     //toujours considéré comme un ITEM ? OUI! c'est ça qu'il fallait faire ;)
 
-            player.inv.add(getItemAt);  //J'ai voulu m'inspirer de getMonsterAt mais je sais pas comment sont
-                                        //stocké les items en mémoire donc pour les trouver c'est tendu    Pour ça il faut où savoir l'index ou avoir l'objet, du coup la il faudrait une fonction qui dit
+            player.addInventory(getItemAt(vecPosition));  //J'ai voulu m'inspirer de getMonsterAt mais je sais pas comment sont
+            mapData.setTileAt(vecPosition, Placeable.Tile.FLOOR);                            //stocké les items en mémoire donc pour les trouver c'est tendu    Pour ça il faut où savoir l'index ou avoir l'objet, du coup la il faudrait une fonction qui dit
                                         // à cette endroit il y a X objet tiens sa référence
         }
 
-    }*/
+    }
+
+    //Test function, spawn an item on square 6,6 regardless of what was there
+    public void spawnItem()
+    {
+        mapData.setTileAt(6,6, Placeable.Tile.ITEM);
+        itemOnTheGround.add(new Armor(Placeable.Tile.ITEM, new Vector2D(6,6), "FurSuit", -10 ));
+    }
+
+    //Drop an item from the player's inventory
+    public void dropItem(String name, Vector2D vec)
+    {
+        Vector2D vecPosition = new Vector2D(vec.getX(), vec.getY());
+        vecPosition.add(player.getPosition());
+
+        Item tmp = player.searchInventory(name);
+
+        if(tmp != null)
+        {
+            if(mapData.getTileAt(vecPosition) == Placeable.Tile.FLOOR)  //Make sure the target is an empty space
+            tmp.setPosition(vecPosition);
+            mapData.setTileAt(tmp.getPosition(), Placeable.Tile.ITEM);  //Update the map
+            itemOnTheGround.add(tmp);
+            player.removeInventory(tmp);
+        }
+    }
 
     public void removeMonster(Monster monster)
     {

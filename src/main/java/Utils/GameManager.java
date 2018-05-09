@@ -1,7 +1,10 @@
 package Utils;
 
 import Actors.Actor;
+import Actors.Placeable;
 import Actors.Player;
+import Actors.Weapon;   //Only needed for a test command
+//import org.fusesource.jansi.Ansi;
 
 import java.io.Serializable;
 import java.util.Scanner;
@@ -48,7 +51,7 @@ public class GameManager implements Serializable
 
             System.out.print("\033[H\033[2J"); //clear the console
             System.out.flush();
-        }while(!exitGame || !winGame);
+        }while(!exitGame && !winGame);
 
         if(exitGame)
         {
@@ -76,20 +79,20 @@ public class GameManager implements Serializable
 
     private void parseCMD(Scanner sc)
     {
-
         boolean isCorrectCMD = false;
         String input;
 
-        while(!isCorrectCMD)
-        {
+        while(!isCorrectCMD) {
             input = sc.nextLine();
             String[] commands = input.split(" "); //divide the input string in pieces
 
-            if(commands.length >= 2) //min of 2 consecutive cmds
+            if (commands.length >= 2) //min of 2 consecutive cmds
             {
-                switch (commands[0]) {
+                switch (commands[0])
+                {
                     case "move":
-                        switch (commands[1]) {
+                        switch (commands[1])
+                        {
                             case "right":
                                 isCorrectCMD = true;
                                 terrain.movePlayer(Vector2D.getVector2DRight());
@@ -145,22 +148,77 @@ public class GameManager implements Serializable
                             addLog("The player attacks the void..");
                         break;
                     case "open":
-                        if (commands[1].equals("inventory")) {
-                            //isCorrectCMD = true; activer si on veut qu'ouvrir l'inventaire face passer un tour.
-                            addLog("Opening Inventory");
-                            player.openInventory();
+                        switch (commands[1]) {
+                            case "inventory":
+                                //isCorrectCMD = true; activer si on veut qu'ouvrir l'inventaire face passer un tour.
+                                addLog("Opening Inventory");
+                                player.openInventory();
+                                break;
                         }
                         break;
-                }
-                /*else if(commands[0].equals("pick"))
-                {
-                    if(commands[1].equals("up"))
-                    {
-                        addLog("pickin' up da muney");
-                        terrain.take(Vector2D.getVector2DUp());
+
+                    case "equip":
+                        isCorrectCMD = true;
+                        player.equipItem(commands[1]);
+                        break;
+
+                    case "take":
+                        switch (commands[1]) {
+                            case "off": //for testing purpose, let you add an item to test the equip command
+                                player.addInventory(new Weapon(Placeable.Tile.ITEM, null, "BigFist", 5));
+                                break;
+
+                            case "on": //for testing purpose, let you spawn a FurSuit on case 6,6 to test take command
+                                terrain.spawnItem();
+                                break;
+
+                            case "up":
+                                addLog("pickin' up da muney");
+                                terrain.take(Vector2D.getVector2DUp());
+                                break;
+                            case "down":
+                                addLog("pickin' up da muney");
+                                terrain.take(Vector2D.getVector2DDown());
+                                break;
+                            case "left":
+                                addLog("pickin' up da muney");
+                                terrain.take(Vector2D.getVector2DLeft());
+                                break;
+                            case "right":
+                                addLog("pickin' up da muney");
+                                terrain.take(Vector2D.getVector2DRight());
+                                break;
+                        }
+                        break;
+                    case "drop":
+                        if (commands.length == 3) //Cause i don't know how to change a signature to take a variable amount of args
+                        {
+                            switch (commands[1]) {
+                                case "up":
+                                    isCorrectCMD = true;
+                                    addLog("dropping item");
+                                    terrain.dropItem(commands[2], Vector2D.getVector2DUp());
+                                    break;
+                                case "down":
+                                    addLog("dropping item");
+                                    isCorrectCMD = true;
+                                    terrain.dropItem(commands[2], Vector2D.getVector2DDown());
+                                    break;
+                                case "left":
+                                    addLog("dropping item");
+                                    isCorrectCMD = true;
+                                    terrain.dropItem(commands[2], Vector2D.getVector2DLeft());
+                                    break;
+                                case "right":
+                                    addLog("dropping item");
+                                    isCorrectCMD = true;
+                                    terrain.dropItem(commands[2], Vector2D.getVector2DRight());
+                                    break;
+                            }
+                        }
+
                     }
-                }*/
-            }
+                }
             else if (input.equals("exit"))
             {
                 isCorrectCMD = true;

@@ -37,7 +37,7 @@ public class MapGenerator
 
         generateMonsters(terrain.getMonsters(), terrain);
 
-        mapData.setLevel(mapData.getLevel() + 1);
+        mapData.setLevel(level + 1);
 
         return mapData;
     }

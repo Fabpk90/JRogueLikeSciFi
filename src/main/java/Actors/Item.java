@@ -17,6 +17,8 @@ public abstract class Item extends Placeable implements Serializable {
 
     public String getName() {return name;}
 
+    public void equip(Player p) {System.out.println("You can't equip that item");}
+
     @Override
     public String toString()
     {

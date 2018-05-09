@@ -13,11 +13,21 @@ public class Armor extends Equipment {
         this.def = def;
     }
 
+    //Cloning builder for the equip system
+    public Armor(Armor A)
+    {
+        super(A.getTile(), A.getPosition(), A.getName());
+        this.def = A.getDef();
+    }
+
     public int getDef() {return def;}
 
     public void setDef(int def) {
         this.def = def;
     }
+
+    @Override
+    public void equip(Player p){ p.equipArmor(this);}
 
     @Override
     public String toString()

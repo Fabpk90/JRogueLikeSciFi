@@ -59,7 +59,7 @@ public class Monster extends PNJ
 
         vector.add(getPosition());
 
-        if(terrain.getMapData().getTileAt(vector) != Placeable.Tile.WALL && terrain.getMapData().getTileAt(vector) != Tile.MONSTER)
+        if(terrain.getMapData().getTileAt(vector) == Placeable.Tile.FLOOR)
         {
             terrain.getMapData().setTileAt(getPosition(), Placeable.Tile.FLOOR);
 
@@ -82,8 +82,6 @@ public class Monster extends PNJ
         playerFound += terrain.getMapData().getTileAt(monsterPos.getX() - 1, monsterPos.getY()) == Tile.PLAYER ? 1 : 0;
         playerFound += terrain.getMapData().getTileAt(monsterPos.getX(), monsterPos.getY() + 1) == Tile.PLAYER ? 1 : 0;
         playerFound += terrain.getMapData().getTileAt(monsterPos.getX(), monsterPos.getY() - 1) == Tile.PLAYER ? 1 : 0;
-
-        System.out.println("player found "+ (playerFound != 0));
 
         return playerFound != 0;
     }

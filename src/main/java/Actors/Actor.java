@@ -36,7 +36,6 @@ public abstract class Actor extends Placeable implements Serializable {
     private Direction direction;
 
 
-
     public Actor(Tile tile, int health, int atk, int def, Vector2D position, String name)
     {
         super(tile, position);
@@ -57,7 +56,7 @@ public abstract class Actor extends Placeable implements Serializable {
 
         if(trueDamage > 0)
         {
-            return actorAttacked.takeDamage(atk);
+            return actorAttacked.takeDamage(trueDamage);
         }
 
         return false;
