@@ -45,10 +45,14 @@ public class Terrain implements Serializable {
 
     private void generateMap()
     {
-        if(mapData.getLevel() == GameManager.levelMax)
+        if(mapData.getLevel() + 1 >= GameManager.levelMax)
             GameManager.winGame = true;
         else
         {
+            monsters = new ArrayList<>();
+            itemOnTheGround = new ArrayList<>();
+
+            System.out.println(mapData.getLevel() - 1 >= GameManager.levelMax);
             mapData = MapGenerator.getMap(size, mapData.getLevel(), this);
             resetPlayerPosition();
         }
@@ -86,7 +90,7 @@ public class Terrain implements Serializable {
             i = r.nextInt(size);
             j = r.nextInt(size);
 
-            //if the selected tile is a wall, do no consider it
+
             if(mapData.getTileAt(i, j) == Placeable.Tile.FLOOR)
             {
                 floorTiles++;

@@ -79,7 +79,6 @@ public class GameManager implements Serializable
 
     private void parseCMD(Scanner sc)
     {
-
         boolean isCorrectCMD = false;
         String input;
 
