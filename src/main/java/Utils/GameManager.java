@@ -51,7 +51,7 @@ public class GameManager implements Serializable
 
             System.out.print("\033[H\033[2J"); //clear the console
             System.out.flush();
-        }while(!exitGame || !winGame); //Shouldn't it be && ?
+        }while(!exitGame && !winGame);
 
         if(exitGame)
         {
@@ -89,9 +89,11 @@ public class GameManager implements Serializable
 
             if (commands.length >= 2) //min of 2 consecutive cmds
             {
-                switch (commands[0]) {
+                switch (commands[0])
+                {
                     case "move":
-                        switch (commands[1]) {
+                        switch (commands[1])
+                        {
                             case "right":
                                 isCorrectCMD = true;
                                 terrain.movePlayer(Vector2D.getVector2DRight());
