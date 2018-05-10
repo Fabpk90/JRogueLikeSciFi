@@ -19,6 +19,7 @@ public class Terrain implements Serializable {
 
     private ArrayList<Monster> monsters;
     private ArrayList<Item> itemsOnTheGround;
+    private ArrayList<Trap> traps;
 
     public Terrain(int size, Player player)
     {
@@ -29,6 +30,7 @@ public class Terrain implements Serializable {
 
         monsters = new ArrayList<Monster>();
         itemsOnTheGround = new ArrayList<>();
+        traps = new ArrayList<>();
 
         generateMap();
     }
@@ -104,6 +106,8 @@ public class Terrain implements Serializable {
 
                 if(floorTiles > 3)
                     return new Vector2D(i, j);
+
+                floorTiles = 0;
             }
         }
     }
@@ -113,8 +117,8 @@ public class Terrain implements Serializable {
         Vector2D vecPosition = new Vector2D(vec.getX(), vec.getY());
         vecPosition.add(player.getPosition());
 
-        if(mapData.getTileAt(vecPosition) == Placeable.Tile.FLOOR
-                || mapData.getTileAt(vecPosition) == Placeable.Tile.EXIT)
+        if(mapData.getTileAt(vecPosition) != Placeable.Tile.MONSTER
+                && mapData.getTileAt(vecPosition) != Placeable.Tile.WALL)
         {
             mapData.setTileAt(player.getPosition(), Placeable.Tile.FLOOR);
             player.move(vec);
@@ -122,12 +126,32 @@ public class Terrain implements Serializable {
             {
                 generateMap();
             }
+            else if(mapData.getTileAt(player.getPosition()) == Placeable.Tile.TRAP)
+            {
+               Trap trap = getTrapAt(player.getPosition());
+
+               player.takeDamage(trap.getDamageAmount() * 10);
+               GameManager.addLog(player.getName()+" stepped on a trap, inflicting "+trap.getDamageAmount() * 10 + " damages");
+               getTraps().remove(trap);
+
+               mapData.setTileAt(player.getPosition(), Placeable.Tile.PLAYER);
+            }
             else
                 mapData.setTileAt(player.getPosition(), Placeable.Tile.PLAYER);
         }
     }
 
 
+    public Trap getTrapAt(Vector2D position)
+    {
+        for (Trap trap : traps)
+        {
+            if(trap.getPosition().equals(position))
+                return  trap;
+        }
+
+        return null;
+    }
 
     private void resetPlayerPosition()
     {
@@ -248,5 +272,9 @@ public class Terrain implements Serializable {
 
     public ArrayList<Monster> getMonsters() {
         return monsters;
+    }
+
+    public ArrayList<Trap> getTraps() {
+        return traps;
     }
 }
