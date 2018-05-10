@@ -51,14 +51,13 @@ public class GameManager implements Serializable
 
             System.out.print("\033[H\033[2J"); //clear the console
             System.out.flush();
-        }while(!exitGame && !winGame);
+        }while(!exitGame && !winGame );
 
         //printing in the case where the play dies because of traps
         printLog();
 
         if(exitGame)
         {
-
             System.out.println("See you adventurer");
         }
         else if(winGame)
@@ -66,6 +65,7 @@ public class GameManager implements Serializable
             System.out.println("You arrived at the center of the ship!");
             System.out.println("You quickly initiate the auto-destruction protocol, and blow yourself up!");
         }
+
 
         sc.close();
     }
@@ -234,6 +234,21 @@ public class GameManager implements Serializable
                     System.out.println("Saved successful");
                 else
                     System.out.println("Error during saving");
+            }
+            else if(input.equals("load"))
+            {
+                isCorrectCMD = true;
+
+                if(SaveManager.saveExists())
+                {
+                    GameManager gm = SaveManager.loadSave();
+                    terrain = gm.terrain;
+                    player = gm.player;
+                }
+                else
+                {
+                    System.out.println("No save available!");
+                }
             }
         }
 

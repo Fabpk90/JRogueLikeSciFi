@@ -104,8 +104,6 @@ public class Terrain implements Serializable {
                 floorTiles += mapData.getTileAt(i - 1, j) == Placeable.Tile.FLOOR ? 1 : 0;
                 floorTiles += mapData.getTileAt(i + 1, j) == Placeable.Tile.FLOOR ? 1 : 0;
 
-                System.out.println(floorTiles+" free tiles");
-
                 if(floorTiles > 3)
                     return new Vector2D(i, j);
 
