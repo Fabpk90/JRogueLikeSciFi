@@ -21,10 +21,14 @@ public class Terrain implements Serializable {
     private ArrayList<Item> itemsOnTheGround;
     private ArrayList<Trap> traps;
 
+    private Random random;
+
     public Terrain(int size, Player player)
     {
         this.size = size;
         this.player = player;
+
+        random = new Random();
 
         mapData = new MapData(size);
 
@@ -56,7 +60,10 @@ public class Terrain implements Serializable {
             monsters = new ArrayList<>();
             itemsOnTheGround = new ArrayList<>();
 
-            System.out.println(mapData.getLevel() - 1 >= GameManager.levelMax);
+            size += 2;
+
+            System.out.println(size);
+
             mapData = MapGenerator.getMap(size, mapData.getLevel(), this);
             resetPlayerPosition();
         }
@@ -87,12 +94,10 @@ public class Terrain implements Serializable {
         int floorTiles = 0;
         int i,j;
 
-        Random r = new Random();
-
         while (true)
         {
-            i = r.nextInt(size);
-            j = r.nextInt(size);
+            i = random.nextInt(size);
+            j = random.nextInt(size);
 
 
             if(mapData.getTileAt(i, j) == Placeable.Tile.FLOOR)

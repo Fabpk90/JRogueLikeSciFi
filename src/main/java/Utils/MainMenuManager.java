@@ -44,7 +44,7 @@ public class MainMenuManager
 
         if(input.equals("start"))
         {
-            gm = new GameManager(10, createPlayer());
+            gm = new GameManager(createPlayer());
             gm.render();
         }
         else if(isSaveAvaible && input.equals("load"))
@@ -68,7 +68,7 @@ public class MainMenuManager
 
         String str = sc.nextLine();
 
-        while (str.length() < 2)
+        while (str.length() < 3)
         {
             System.out.println("You need to type 3 characters at least");
             str = sc.nextLine();

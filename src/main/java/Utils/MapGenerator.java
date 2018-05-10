@@ -17,15 +17,19 @@ import java.util.Random;
 
 public class MapGenerator
 {
-    static private int size;
+    static public int size;
 
-    static  private int level;
+    static private int level;
     
     static private MapData mapData;
+
+    static private Random random;
 
     static public MapData getMap(int size, int level, Terrain terrain)
     {
         mapData = new MapData(size);
+
+        random = new Random();
 
         MapGenerator.size = size;
         MapGenerator.level = level;
@@ -45,17 +49,16 @@ public class MapGenerator
 
     private static void generateTraps(ArrayList<Trap> traps)
     {
-        Random r = new Random();
 
         int placed = 0;
-        int toPlace = r.nextInt(2 );
+        int toPlace = random.nextInt(2 );
 
         int x,y;
 
         while (placed != toPlace)
         {
-            x = r.nextInt(size);
-            y = r.nextInt(size);
+            x = random.nextInt(size);
+            y = random.nextInt(size);
 
             if(getNbFreeAdjacentTiles(mapData, x, y) > 3)
             {
@@ -73,17 +76,15 @@ public class MapGenerator
 
     private static void generateMonsters(ArrayList<Monster> monsters, Terrain terrain)
     {
-        Random r = new Random();
-
         int placed = 0;
-        int toPlace = r.nextInt(level+1 )+1;
+        int toPlace = random.nextInt(level+1 )+1;
 
         int x,y;
 
         while (placed != toPlace)
         {
-            x = r.nextInt(size);
-            y = r.nextInt(size);
+            x = random.nextInt(size);
+            y = random.nextInt(size);
 
             //see if adjacent tiles are free
             if(getNbFreeAdjacentTiles(mapData, x , y) > 3)

@@ -24,9 +24,12 @@ public class GameManager implements Serializable
     static public boolean exitGame = false;
 
     static public boolean winGame = false;
-    final static  public  int levelMax = 3;
+    final static  public  int levelMax = 5;
 
-    public GameManager(int size, Player player)
+    //size of the map, + 2 each floor
+    final static private int size = 8;
+
+    public GameManager( Player player)
     {
         this.player = player;
 
