@@ -23,11 +23,11 @@ public class MenuManager {
     private void displayMenu()
     {
         System.out.println("");
-        System.out.println("stats");
-        System.out.println("inventory");
+        System.out.print("stats - ");
+        System.out.print("inventory - ");
         System.out.println("save");
-        System.out.println("exit menu");
-        System.out.println("exit game");
+        System.out.print("exit menu - ");
+        System.out.print("exit game");
         System.out.println("");
     }
 
@@ -37,18 +37,18 @@ public class MenuManager {
         System.out.print("up - ");
         System.out.print("down - ");
         System.out.print("left - ");
-        System.out.print("right - ");
-        System.out.println("cancel");
+        System.out.println("right - ");
+        System.out.print("cancel");
         System.out.println("");
     }
 
     private void displayInventoryMenu()
     {
         System.out.println("");
-        System.out.println("equip");
-        System.out.println("use");
+        System.out.print("equip - ");
+        System.out.print("use - ");
         System.out.println("drop");
-        System.out.println("cancel");
+        System.out.print("cancel");
         System.out.println("");
     }
 

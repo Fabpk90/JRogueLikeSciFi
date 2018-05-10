@@ -22,6 +22,7 @@ public class Monster extends PNJ
     void onDie()
     {
        terrain.getMapData().setTileAt(getPosition(), Placeable.Tile.FLOOR);
+       terrain.monsterDrop(this.getPosition());
        terrain.removeMonster(this);
     }
 

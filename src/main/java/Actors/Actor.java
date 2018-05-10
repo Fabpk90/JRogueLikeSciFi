@@ -50,7 +50,7 @@ public abstract class Actor extends Placeable implements Serializable {
     
     public boolean Attack(Actor actorAttacked)
     {
-        int trueDamage = atk - actorAttacked.getDef();
+        int trueDamage = getAtk() - actorAttacked.getDef();
 
         GameManager.addLog(name+" attacks "+actorAttacked.getName() +" doing " +trueDamage+" damages");
 

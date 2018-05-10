@@ -57,8 +57,7 @@ public class Player extends Actor {
     {
         System.out.println("Health: " + getHealth());
 
-        if(weap == null)    System.out.println("Atk: " + getAtk());
-        else System.out.println("Atk: " + (getAtk() + weap.getAtk()));
+        System.out.println("Atk: " + (getAtk()));
 
         if(arm == null)    System.out.println("Def: " + getDef());
         else System.out.println("Def: " + (getDef() + arm.getDef()));
@@ -86,20 +85,25 @@ public class Player extends Actor {
                         arm = Armor.class.cast(e);
                     }catch(ClassCastException exc)
                     {
-                        System.out.println("Dunno what happened but you can't do that");
+                        System.out.println("Cast exception, you can't equip that item");
                     }
+
+                    break;
                 }
                 case 1:{
                     try {
                         weap = Weapon.class.cast(e);
                     }catch(ClassCastException exc)
                     {
-                        System.out.println("Dunno what happened but you can't do that");
+                        System.out.println("Cast exception, you can't equip that item");
                     }
+
+                    break;
                 }
 
             }
 
+        System.out.println(this.getName() + " successfully equipped " + i.getName());
     }
 
     public void addInventory(Item i)
@@ -122,6 +126,14 @@ public class Player extends Actor {
     public Weapon getWeap() {return weap;}
     public void unequipArm() { this.arm = null;}
     public void unequipWeap() {this.weap = null;}
+
+
+    @Override
+    public int getAtk()
+    {
+        if(weap != null) return super.getAtk() + weap.getAtk();
+        else return super.getAtk();
+    }
 
     @Override
     void onDie()

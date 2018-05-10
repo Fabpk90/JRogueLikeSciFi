@@ -3,6 +3,8 @@ package Utils;
 import Actors.*;
 import Items.Armor;
 import Items.Item;
+import Items.Potion;
+import Items.Weapon;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -227,6 +229,7 @@ public class Terrain implements Serializable {
         if(mapData.getTileAt(vecPosition) == Placeable.Tile.ITEM)
         {
             player.addInventory(getItemAt(vecPosition));
+            System.out.println(player.getName() + " found a" + getItemAt(vecPosition).getName());
             mapData.setTileAt(vecPosition, Placeable.Tile.FLOOR);
         }
 
@@ -259,6 +262,27 @@ public class Terrain implements Serializable {
             itemsOnTheGround.add(player.getItemAt(id));
 
             player.removeInventory(player.getItemAt(id));
+        }
+    }
+
+    public void monsterDrop(Vector2D vec)
+    {
+        Random r = new Random();
+
+        if(r.nextInt(2) == 1) {
+            switch (r.nextInt(3)) {
+                case 0:
+                    itemsOnTheGround.add(new Armor(Placeable.Tile.ITEM, new Vector2D(vec.getX(), vec.getY()), r.nextInt(20)));
+                    break;
+                case 1:
+                    itemsOnTheGround.add(new Weapon(Placeable.Tile.ITEM, new Vector2D(vec.getX(), vec.getY()), r.nextInt(18)));
+                    break;
+                case 2:
+                    itemsOnTheGround.add(new Potion(Placeable.Tile.ITEM, new Vector2D(vec.getX(), vec.getY()), r.nextInt(15)));
+                    break;
+            }
+
+            mapData.setTileAt((int) vec.getX(), (int) vec.getY(), Placeable.Tile.ITEM);
         }
     }
 
