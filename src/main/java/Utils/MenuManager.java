@@ -1,6 +1,5 @@
 package Utils;
 
-import java.awt.*;
 import java.util.Scanner;
 import Actors.Player;
 import Items.Usable;
@@ -65,19 +64,19 @@ public class MenuManager {
             {
                 case "up":
                     isCorrectCMD = true;
-                    terrain.dropItem(id, Vector2D.getVector2DUp());
+                    terrain.dropItemAt(id, Vector2D.getVector2DUp());
                     break;
                 case "down":
                     isCorrectCMD = true;
-                    terrain.dropItem(id, Vector2D.getVector2DDown());
+                    terrain.dropItemAt(id, Vector2D.getVector2DDown());
                     break;
                 case "left":
                     isCorrectCMD = true;
-                    terrain.dropItem(id, Vector2D.getVector2DLeft());
+                    terrain.dropItemAt(id, Vector2D.getVector2DLeft());
                     break;
                 case "right":
                     isCorrectCMD = true;
-                    terrain.dropItem(id, Vector2D.getVector2DRight());
+                    terrain.dropItemAt(id, Vector2D.getVector2DRight());
                     break;
                 case "cancel":
                     isCorrectCMD = true;
