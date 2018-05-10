@@ -103,10 +103,10 @@ public class MapGenerator
                 switch(type)
                 {
                     case 0:
-                        itemsOnTheGround.add(new Armor(Placeable.Tile.ITEM,new Vector2D(x,y) ,r.nextInt(20)));
+                        itemsOnTheGround.add(new Armor(Placeable.Tile.ITEM,new Vector2D(x,y) ,r.nextInt(5)));
                         break;
                     case 1:
-                        itemsOnTheGround.add(new Weapon(Placeable.Tile.ITEM,new Vector2D(x,y) ,r.nextInt(18)));
+                        itemsOnTheGround.add(new Weapon(Placeable.Tile.ITEM,new Vector2D(x,y) ,r.nextInt(5)));
                         break;
                     case 2:
                         itemsOnTheGround.add(new Potion(Placeable.Tile.ITEM,new Vector2D(x,y) ,r.nextInt(15)));
@@ -137,7 +137,7 @@ public class MapGenerator
                 placed++;
 
                 mapData.setTileAt(x,y, Placeable.Tile.MONSTER);
-                monsters.add(new Monster(Placeable.Tile.MONSTER, 10 , 10, 10,  new Vector2D(x, y), terrain));
+                monsters.add(new Monster(Placeable.Tile.MONSTER, 10 , 13, 10,  new Vector2D(x, y), terrain));
             }
         }
     }

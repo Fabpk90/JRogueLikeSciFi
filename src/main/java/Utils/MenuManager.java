@@ -114,6 +114,7 @@ public class MenuManager {
                         break;
                     }
                     U.Use(player);
+                    player.removeInventory(player.getItemAt(id));
                     break;
 
                 }case "drop":

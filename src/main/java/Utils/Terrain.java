@@ -283,13 +283,13 @@ public class Terrain implements Serializable {
         if(r.nextInt(2) == 1) {
             switch (r.nextInt(3)) {
                 case 0:
-                    itemsOnTheGround.add(new Armor(Placeable.Tile.ITEM, new Vector2D(vec.getX(), vec.getY()), r.nextInt(20)));
+                    itemsOnTheGround.add(new Armor(Placeable.Tile.ITEM, new Vector2D(vec.getX(), vec.getY()), r.nextInt(8)));
                     break;
                 case 1:
-                    itemsOnTheGround.add(new Weapon(Placeable.Tile.ITEM, new Vector2D(vec.getX(), vec.getY()), r.nextInt(18)));
+                    itemsOnTheGround.add(new Weapon(Placeable.Tile.ITEM, new Vector2D(vec.getX(), vec.getY()), r.nextInt(8)));
                     break;
                 case 2:
-                    itemsOnTheGround.add(new Potion(Placeable.Tile.ITEM, new Vector2D(vec.getX(), vec.getY()), r.nextInt(15)));
+                    itemsOnTheGround.add(new Potion(Placeable.Tile.ITEM, new Vector2D(vec.getX(), vec.getY()), r.nextInt(20)));
                     break;
             }
 

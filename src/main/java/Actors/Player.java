@@ -116,12 +116,6 @@ public class Player extends Actor {
         inv.remove(i);
     }
 
-    public void addHelmet() //Fonction test d'affichage (j'avais une cible "open gift" dans le GameManager
-    {                       // qui appelait cette fonction, le truc c'est qu'après tous les espaces vides étaient des H jaunes
-                            //Gros concept. Probablement parceque j'ai fait de la chiasse
-        inv.add(new Armor(Tile.ITEM, new Vector2D(6,6),"Test", 10));
-    }
-
     public Armor getArm() {return arm;}
     public Weapon getWeap() {return weap;}
     public void unequipArm() { this.arm = null;}
@@ -133,6 +127,12 @@ public class Player extends Actor {
     {
         if(weap != null) return super.getAtk() + weap.getAtk();
         else return super.getAtk();
+    }
+
+    public int getDef()
+    {
+        if(arm != null) return super.getDef() + arm.getDef();
+        else return super.getDef();
     }
 
     @Override

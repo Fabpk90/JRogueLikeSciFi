@@ -6,11 +6,11 @@ import java.util.Random;
 
 public class NameGenerator
 {
-    static private String[] nameSuffix = {"Robot", "Sentinel", "Automated Turret", "Computer", "Mech"};
-    static private String[] namePrefix = {"Haywire", "Angry", "Forsaken", "Dangerous", "HAL-like", "Mecha"};
+    static private String[] nameSuffix = {"Robot", "Sentinel", "Automated Turret", "Computer", "Mech", "Mechanical Squirrel", "Kanako", "Kappa"};
+    static private String[] namePrefix = {"Haywire", "Angry", "Forsaken", "Dangerous", "HAL-like", "Mecha", "broken"};
 
     static private String[] armorSuffix = {"Suit", "Protection", "Exo-suit", "Cloths"};
-    static private String[] weaponSuffix = {"Energy sword", "Plasma Claws", "Metal Pipe", "Orbs"};
+    static private String[] weaponSuffix = {"Energy sword", "Plasma Claws", "Metal Pipe", "Orbs", "Purification Rod"};
     static private String[] equipmentPrefix = {"Dirty", "Old", "Godly", "Superior", "Damaged", "Prototype", "Annoying", "Unpleasant", "Red & White", "Celestial"};
 
     static private String[] potionSuffix = {"medkit", "Bandages", "Sanitizer", "Painkiller", "first-aid kit", "pizza"};

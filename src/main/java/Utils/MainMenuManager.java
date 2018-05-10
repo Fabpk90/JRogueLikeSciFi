@@ -74,6 +74,6 @@ public class MainMenuManager
             str = sc.nextLine();
         }
 
-        return new Player(15, 12, 10, str);
+        return new Player(30, 12, 10, str);
     }
 }
