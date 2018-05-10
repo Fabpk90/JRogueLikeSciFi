@@ -229,13 +229,10 @@ public class Terrain implements Serializable {
         Vector2D vecPosition = new Vector2D(vec.getX(), vec.getY());
         vecPosition.add(player.getPosition());
 
-        if(mapData.getTileAt(vecPosition) == Placeable.Tile.ITEM)   //Si on rajoute le champ ITEM dans l'enum
-        {                                                           //Et qu'on change son glyph plus tard, il sera
-                                                                    //toujours considéré comme un ITEM ? OUI! c'est ça qu'il fallait faire ;)
-
-            player.addInventory(getItemAt(vecPosition));  //J'ai voulu m'inspirer de getMonsterAt mais je sais pas comment sont
-            mapData.setTileAt(vecPosition, Placeable.Tile.FLOOR);                            //stocké les items en mémoire donc pour les trouver c'est tendu    Pour ça il faut où savoir l'index ou avoir l'objet, du coup la il faudrait une fonction qui dit
-                                        // à cette endroit il y a X objet tiens sa référence
+        if(mapData.getTileAt(vecPosition) == Placeable.Tile.ITEM)
+        {
+            player.addInventory(getItemAt(vecPosition));
+            mapData.setTileAt(vecPosition, Placeable.Tile.FLOOR);
         }
 
     }
@@ -281,5 +278,9 @@ public class Terrain implements Serializable {
 
     public ArrayList<Trap> getTraps() {
         return traps;
+    }
+
+    public ArrayList<Item> getItemList() {
+        return itemsOnTheGround;
     }
 }

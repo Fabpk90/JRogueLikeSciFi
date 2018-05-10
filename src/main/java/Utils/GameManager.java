@@ -183,49 +183,27 @@ public class GameManager implements Serializable
                                 break;
 
                             case "up":
-                                addLog("pickin' up da muney");
+                                addLog("Picking up an item");
+                                isCorrectCMD = true;
                                 terrain.take(Vector2D.getVector2DUp());
                                 break;
                             case "down":
-                                addLog("pickin' up da muney");
+                                addLog("Picking up an item");
+                                isCorrectCMD = true;
                                 terrain.take(Vector2D.getVector2DDown());
                                 break;
                             case "left":
-                                addLog("pickin' up da muney");
+                                addLog("Picking up an item");
+                                isCorrectCMD = true;
                                 terrain.take(Vector2D.getVector2DLeft());
                                 break;
                             case "right":
-                                addLog("pickin' up da muney");
+                                addLog("Picking up an item");
+                                isCorrectCMD = true;
                                 terrain.take(Vector2D.getVector2DRight());
                                 break;
                         }
-                        break;/*
-                    case "drop":
-                        if (commands.length == 3) //Cause i don't know how to change a signature to take a variable amount of args
-                        {
-                            switch (commands[1]) {
-                                case "up":
-                                    isCorrectCMD = true;
-                                    addLog("dropping item");
-                                    terrain.dropItem(commands[2], Vector2D.getVector2DUp());
-                                    break;
-                                case "down":
-                                    addLog("dropping item");
-                                    isCorrectCMD = true;
-                                    terrain.dropItem(commands[2], Vector2D.getVector2DDown());
-                                    break;
-                                case "left":
-                                    addLog("dropping item");
-                                    isCorrectCMD = true;
-                                    terrain.dropItem(commands[2], Vector2D.getVector2DLeft());
-                                    break;
-                                case "right":
-                                    addLog("dropping item");
-                                    isCorrectCMD = true;
-                                    terrain.dropItem(commands[2], Vector2D.getVector2DRight());
-                                    break;
-                            }
-                        }*/
+                        break;
 
                     }
                 }
@@ -257,7 +235,6 @@ public class GameManager implements Serializable
                 }
             }
             else if(input.equals("menu")) {
-                isCorrectCMD = true;
                 menuMan.menuManaging(player);
             }
         }

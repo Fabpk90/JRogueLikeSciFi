@@ -1,12 +1,20 @@
 package Items;
 
 import Actors.Player;
+import Utils.NameGenerator;
 import Utils.Vector2D;
 
 public class Weapon extends Equipment {
 
     private int atk;
     //public int range; Si on poursuit l'idée des armes à distance on aura besoin de ça
+
+    public Weapon (Tile tile, Vector2D position, int atk)
+    {
+        super(tile, position, NameGenerator.getRandomWeaponName(), 1);
+        this.atk = atk;
+
+    }
 
     public Weapon (Tile tile, Vector2D position, String name, int atk)
     {
@@ -15,21 +23,11 @@ public class Weapon extends Equipment {
 
     }
 
-    //Cloning builder for the equipment system
-    public Weapon(Weapon W)
-    {
-        super(W.getTile(), W.getPosition(), W.getName(), 1);
-        this.atk = W.getAtk();
-    }
-
     public int getAtk() {return atk;}
 
     public void setAtk(int atk) {
         this.atk = atk;
     }
-
-    //@Override
-    //public void equip(Player p){ p.equipWeapon(this);}
 
     @Override
     public String toString()

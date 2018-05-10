@@ -1,7 +1,11 @@
 package Utils;
 
 import Actors.Monster;
-import Actors.Placeable;/*
+import Actors.Placeable;
+import Items.Armor;
+import Items.Item;
+import Items.Potion;
+/*
 
 /*
 
@@ -11,6 +15,7 @@ import Actors.Placeable;/*
 
  */
 import Actors.Trap;
+import Items.Weapon;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -40,6 +45,8 @@ public class MapGenerator
 
         generateTraps(terrain.getTraps());
 
+        generateItem(terrain.getItemList());
+
         generateMonsters(terrain.getMonsters(), terrain);
 
         mapData.setLevel(level + 1);
@@ -68,6 +75,44 @@ public class MapGenerator
 
                 mapData.setTileAt(x, y, trap.getTile());
                 traps.add(trap);
+            }
+
+        }
+
+    }
+
+    private static void generateItem(ArrayList<Item>  itemsOnTheGround)
+    {
+        Random r = new Random();
+
+        int placed = 0;
+        int toPlace = 1;
+
+        int x,y,type;
+
+        while (placed != toPlace)
+        {
+            x = r.nextInt(size);
+            y = r.nextInt(size);
+
+            if(getNbFreeAdjacentTiles(mapData, x, y) > 3)
+            {
+                placed++;
+
+                type = r.nextInt(3);
+                switch(type)
+                {
+                    case 0:
+                        itemsOnTheGround.add(new Armor(Placeable.Tile.ITEM,new Vector2D(x,y) ,r.nextInt(20)));
+                        break;
+                    case 1:
+                        itemsOnTheGround.add(new Weapon(Placeable.Tile.ITEM,new Vector2D(x,y) ,r.nextInt(18)));
+                        break;
+                    case 2:
+                        itemsOnTheGround.add(new Potion(Placeable.Tile.ITEM,new Vector2D(x,y) ,r.nextInt(15)));
+                        break;
+                }
+                mapData.setTileAt(x, y, Placeable.Tile.ITEM);
             }
 
         }
