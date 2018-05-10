@@ -4,27 +4,40 @@ SANTORO Fabrizio
 
 RogueLike Science Fiction
 
-./gradlew build
-cd build/libs/
-java -jar xxxx
+Manuel Technique:
+
+    Instruction de compilation et exécution:
+
+    ./gradlew build
+    cd build/libs/
+    java -jar JRogueLike-1.jar
+
+
+Manuel Utilisateur:
 
 Scenario: Rejoindre la sortie dans chaque salle en tentant de survivre aux monstres.
 
 Retrouver le vaisseau !
 
-Commencer: start
+    Au lancement de l'application il est possible de: commencer une nouvelle partie (start), charger une partie, si elle existe, avec load ou fermer (exit).
 
-Bouger: move down/left/right/up
+    Lors d'une nouvelle partie, la création du personnage nécessite un nom pour celui-ci, de minimum 3 charactères.
 
-Attaquer le monstre à côté: attack down/left/right/up
 
-Sortir du jeu: exit
+    Une fois la partie lancée, plusieurs commandes sont disponibles:
 
-Enregistrer ou charger une partie: load/save
+        - Mouvement: "move down/left/right/up"
 
-Ouvrir l'inventaire: open inventory
-Jeter un item: drop down/left/right/up NomItem
-Ramasser un item: take down/left/right/up
-Equiper l'item: equip NomItem
+        - Attaquer : "attack down/left/right/up"
 
+        - Sortir du jeu: "exit"
+
+        - Enregistrer ou charger une partie: "load/save"
+
+        - Jeter un item: "drop down/left/right/up NomItem"
+
+        - Ramasser un item: "take down/left/right/up"
+
+    Le personnage dispose aussi d'un inventaire, pour y accéder, utiliser la commande open inventory.
+    Une fois l'inventaire ouvert, il est possible d'équiper certains objets, comme une arme ou une armure, avec "equip NomItem".
 

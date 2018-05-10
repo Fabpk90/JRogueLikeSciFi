@@ -62,7 +62,7 @@ public class MainMenuManager
 
     static private Player createPlayer()
     {
-        
+
         System.out.println("Welcome to the creation menu");
         System.out.println("Please insert your name adventurer (min 3 characters)");
 
@@ -74,6 +74,6 @@ public class MainMenuManager
             str = sc.nextLine();
         }
 
-        return new Player(15, 12, 0, str);
+        return new Player(15, 12, 10, str);
     }
 }
