@@ -23,10 +23,14 @@ public class Terrain implements Serializable {
     private ArrayList<Item> itemsOnTheGround;
     private ArrayList<Trap> traps;
 
+    private Random random;
+
     public Terrain(int size, Player player)
     {
         this.size = size;
         this.player = player;
+
+        random = new Random();
 
         mapData = new MapData(size);
 
@@ -58,7 +62,9 @@ public class Terrain implements Serializable {
             monsters = new ArrayList<>();
             itemsOnTheGround = new ArrayList<>();
 
-            System.out.println(mapData.getLevel() - 1 >= GameManager.levelMax);
+            //increase the size of the map 
+            size += 2;
+
             mapData = MapGenerator.getMap(size, mapData.getLevel(), this);
             resetPlayerPosition();
         }
@@ -89,12 +95,10 @@ public class Terrain implements Serializable {
         int floorTiles = 0;
         int i,j;
 
-        Random r = new Random();
-
         while (true)
         {
-            i = r.nextInt(size);
-            j = r.nextInt(size);
+            i = random.nextInt(size);
+            j = random.nextInt(size);
 
 
             if(mapData.getTileAt(i, j) == Placeable.Tile.FLOOR)
@@ -114,6 +118,8 @@ public class Terrain implements Serializable {
         }
     }
 
+    //move the player if possible
+    //checks fot traps and exit
     public void movePlayer(Vector2D vec)
     {
         Vector2D vecPosition = new Vector2D(vec.getX(), vec.getY());
@@ -155,6 +161,7 @@ public class Terrain implements Serializable {
         return null;
     }
 
+    //reset randomly the player position
     private void resetPlayerPosition()
     {
         player.setPosition(getGeneratedPlayerRandomPos());
@@ -199,6 +206,7 @@ public class Terrain implements Serializable {
         return false;
     }
 
+    // @return The monster at the position given
     public Monster getMonsterAt(Vector2D positionToSearch)
     {
         for(Monster m : monsters)
@@ -210,6 +218,7 @@ public class Terrain implements Serializable {
         return null;
     }
 
+    // @return The item at the position given
     public Item getItemAt(Vector2D positionToSearchFor)
     {
         for(Item i : itemsOnTheGround)
@@ -221,7 +230,8 @@ public class Terrain implements Serializable {
         return null;
     }
 
-    public void take(Vector2D vec)
+    //try to pickup the item at the position given
+    public void takeAt(Vector2D vec)
     {
         Vector2D vecPosition = new Vector2D(vec.getX(), vec.getY());
         vecPosition.add(player.getPosition());
@@ -243,7 +253,7 @@ public class Terrain implements Serializable {
     }
 
     //Drop an item from the player's inventory
-    public void dropItem(int id, Vector2D vec)
+    public void dropItemAt(int id, Vector2D vec)
     {
         Vector2D vecPosition = new Vector2D(vec.getX(), vec.getY());
         vecPosition.add(player.getPosition());

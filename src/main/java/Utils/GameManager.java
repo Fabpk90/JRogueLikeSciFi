@@ -24,9 +24,12 @@ public class GameManager implements Serializable
     static public boolean exitGame = false;
 
     static public boolean winGame = false;
-    final static  public  int levelMax = 3;
+    final static  public  int levelMax = 5;
 
-    public GameManager(int size, Player player)
+    //size of the map, + 2 each floor
+    final static private int size = 8;
+
+    public GameManager( Player player)
     {
         this.player = player;
 
@@ -167,7 +170,7 @@ public class GameManager implements Serializable
                         isCorrectCMD = true;
                         //player.equipItem(commands[1]);
                         break;
-                    case "take":
+                    case "takeAt":
                         switch (commands[1]) {
                             case "off": //for testing purpose, let you add an item to test the equip command
                                 player.addInventory(new Weapon(Placeable.Tile.ITEM, null, "BigFist", 5));
@@ -175,29 +178,29 @@ public class GameManager implements Serializable
                                 player.addInventory(new Potion(Placeable.Tile.ITEM, null, "Herbe verte de resident evil", 3));
                                 break;
 
-                            case "on": //for testing purpose, let you spawn a FurSuit on case 6,6 to test take command
+                            case "on": //for testing purpose, let you spawn a FurSuit on case 6,6 to test takeAt command
                                 terrain.spawnItem();
                                 break;
 
                             case "up":
                                 addLog("Picking up an item");
                                 isCorrectCMD = true;
-                                terrain.take(Vector2D.getVector2DUp());
+                                terrain.takeAt(Vector2D.getVector2DUp());
                                 break;
                             case "down":
                                 addLog("Picking up an item");
                                 isCorrectCMD = true;
-                                terrain.take(Vector2D.getVector2DDown());
+                                terrain.takeAt(Vector2D.getVector2DDown());
                                 break;
                             case "left":
                                 addLog("Picking up an item");
                                 isCorrectCMD = true;
-                                terrain.take(Vector2D.getVector2DLeft());
+                                terrain.takeAt(Vector2D.getVector2DLeft());
                                 break;
                             case "right":
                                 addLog("Picking up an item");
                                 isCorrectCMD = true;
-                                terrain.take(Vector2D.getVector2DRight());
+                                terrain.takeAt(Vector2D.getVector2DRight());
                                 break;
                         }
                         break;
