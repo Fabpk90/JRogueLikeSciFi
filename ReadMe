@@ -25,6 +25,17 @@ Scénario de démonstration:
 
 Manuel Technique:
 
+    Génération procédurale:
+        La génération se base sur une implémentation d'automate cellulaire suivant les lois 4 et 5.
+        Les lois appliquées permettent la génération de caves procéduralement.
+        Le principe de la génération est:
+            - Générer aléatoirement des murs
+            - Appliquer les lois sur la matrice de mur
+        L'algorithme se base sur une implémentation intérative, la matrice de la carte subit plusieurs fois le même algorithme.
+        La répétition du même algorithme, et donc des lois, permet d'obtenir des caves pseudo-aléatoire.
+
+        Le reste des objets générés se basent sur la matrice générée précédemment pour trouver une case libre.
+        Les objets sont eux aussi générés pseudo-aléatoirement, certains en fonctions de la profondeur de la cave (le niveau) d'autres entre des intervalles constants.
 
 
 

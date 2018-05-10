@@ -159,7 +159,7 @@ public class MapGenerator
                     wallCount = 0;
                     if(i - 2 >= 0 && i + 2 <= size - 1 && j - 2 >= 0 && j + 2 <= size - 1) // check for array boundaries
                     {
-                        //we count surrounding walls
+                        //we count surrounding walls, 8 cells
                         // applying 4-5 rule
                         if(mapData.getTileAt(i - 1,j).getGlyph() == Placeable.Tile.WALL.getGlyph())
                             wallCount++;
