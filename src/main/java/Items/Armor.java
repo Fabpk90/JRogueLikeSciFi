@@ -1,11 +1,18 @@
 package Items;
 
 import Actors.Player;
+import Utils.NameGenerator;
 import Utils.Vector2D;
 
 public class Armor extends Equipment {
 
     private int def;
+
+    public Armor (Tile tile, Vector2D position, int def)
+    {
+        super(tile, position, NameGenerator.getRandomArmorName(), 0);
+        this.def = def;
+    }
 
     public Armor (Tile tile, Vector2D position, String name, int def)
     {

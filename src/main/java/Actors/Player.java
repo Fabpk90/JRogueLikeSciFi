@@ -36,7 +36,8 @@ public class Player extends Actor {
 
             for(Item i : inv)
             {
-                System.out.println(ct + " - " + i.toString());
+                if(i == null) System.out.println("WHAT");
+                else System.out.println(ct + " - " + i.toString());
                 ct++;
             }
             System.out.println();
