@@ -53,3 +53,7 @@ build/
 \.idea/
 
 save\.yaya
+
+org\.apache\.felix\.karaf\.shell\.console-1\.0\.0\.jar
+
+RogueLike\.iml

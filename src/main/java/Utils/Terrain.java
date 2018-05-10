@@ -219,20 +219,25 @@ public class Terrain implements Serializable {
     }
 
     //Drop an item from the player's inventory
-    public void dropItem(String name, Vector2D vec)
+    public void dropItem(int id, Vector2D vec)
     {
         Vector2D vecPosition = new Vector2D(vec.getX(), vec.getY());
         vecPosition.add(player.getPosition());
 
-        Item tmp = player.searchInventory(name);
 
-        if(tmp != null)
-        {
-            if(mapData.getTileAt(vecPosition) == Placeable.Tile.FLOOR)  //Make sure the target is an empty space
-            tmp.setPosition(vecPosition);
-            mapData.setTileAt(tmp.getPosition(), Placeable.Tile.ITEM);  //Update the map
-            itemsOnTheGround.add(tmp);
-            player.removeInventory(tmp);
+        if(mapData.getTileAt(vecPosition) == Placeable.Tile.FLOOR){  //Make sure the target is an empty space player.getItemAt(id).setPosition(vecPosition);
+
+            if(player.getArm() == player.getItemAt(id))
+                player.unequipArm();
+
+            if(player.getWeap() == player.getItemAt(id))
+                player.unequipWeap();
+
+            player.getItemAt(id).setPosition(vecPosition);
+            mapData.setTileAt(player.getItemAt(id).getPosition(), Placeable.Tile.ITEM);  //Update the map
+            itemsOnTheGround.add(player.getItemAt(id));
+
+            player.removeInventory(player.getItemAt(id));
         }
     }
 

@@ -1,6 +1,7 @@
 package Actors;
 
 import Items.Armor;
+import Items.Equipment;
 import Items.Item;
 import Items.Weapon;
 import Utils.GameManager;
@@ -21,8 +22,8 @@ public class Player extends Actor {
     {
         super(Tile.PLAYER, health, atk, def, Vector2D.getVector2DZero(), "Player");
         inv = new ArrayList <>();
-        arm = new Armor(Placeable.Tile.ITEM, new Vector2D(-1,-1), "Suit", 5 );
-        weap = new Weapon(Placeable.Tile.ITEM, null, "Fist", 5 );
+        arm = null;
+        weap = null;
     }
 
     public void openInventory()
@@ -31,53 +32,73 @@ public class Player extends Actor {
             System.out.println("Your inventory is empty. Sad Face");
         else
         {
+            int ct = 0;
+
             for(Item i : inv)
             {
-                System.out.print(i.toString() + " ");
+                System.out.println(ct + " - " + i.toString());
+                ct++;
             }
             System.out.println();
         }
     }
 
-    //look for an item in the inventory
-    public Item searchInventory(String name)
+    public Item getItemAt(int id)
     {
-        if(inv.isEmpty())
-            System.out.println("Can't equip something that doesn't exit jackass");
-        else {
-            for (Item i : inv)
-                if (i.getName().equals(name)) return i;
+        if(id >= 0 && id < inv.size())
+            return inv.get(id);
 
-        }
-
-        System.out.println(name + " isn't in the inventory");
+        System.out.println("id is either too big or too small");
         return null;
     }
 
-    //look for the item in the inventory then equip it
-    public void equipItem(String name)
+    public void displayStats()
     {
+        System.out.println("Health: " + getHealth());
 
-        Item tmp = searchInventory(name);
+        if(weap == null)    System.out.println("Atk: " + getAtk());
+        else System.out.println("Atk: " + (getAtk() + weap.getAtk()));
 
-        if(tmp != null)
+        if(arm == null)    System.out.println("Def: " + getDef());
+        else System.out.println("Def: " + (getDef() + arm.getDef()));
+    }
+
+    public void equip(Item i)
+    {
+        Equipment e = null;
+        boolean cont = true;
+
+        try{
+            e = Equipment.class.cast(i);
+        }catch(ClassCastException exc)
         {
-            tmp.equip(this);
-            inv.remove(tmp);
+            System.out.println("You can't equip that item");
+            cont = false;
         }
 
-    }
+        if(cont)
+            switch(e.getEquipmentType())
+            {
+                case 0:
+                {
+                    try {
+                        arm = Armor.class.cast(e);
+                    }catch(ClassCastException exc)
+                    {
+                        System.out.println("Dunno what happened but you can't do that");
+                    }
+                }
+                case 1:{
+                    try {
+                        weap = Weapon.class.cast(e);
+                    }catch(ClassCastException exc)
+                    {
+                        System.out.println("Dunno what happened but you can't do that");
+                    }
+                }
 
-    public void equipArmor(Armor A)
-    {
-        addInventory(this.arm);
-        arm = new Armor(A);
-    }
+            }
 
-    public void equipWeapon(Weapon W)
-    {
-        addInventory(this.weap);
-        weap = new Weapon(W);
     }
 
     public void addInventory(Item i)
@@ -95,6 +116,11 @@ public class Player extends Actor {
                             //Gros concept. Probablement parceque j'ai fait de la chiasse
         inv.add(new Armor(Tile.ITEM, new Vector2D(6,6),"Test", 10));
     }
+
+    public Armor getArm() {return arm;}
+    public Weapon getWeap() {return weap;}
+    public void unequipArm() { this.arm = null;}
+    public void unequipWeap() {this.weap = null;}
 
     @Override
     void onDie()

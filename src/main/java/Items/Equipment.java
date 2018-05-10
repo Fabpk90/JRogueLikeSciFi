@@ -11,9 +11,15 @@ import Utils.Vector2D;
 public abstract class Equipment extends Item
 {
 
-    public Equipment(Tile tile, Vector2D position, String name)
+    private static int type;
+    public Equipment(Tile tile, Vector2D position, String name, int type)
     {
         super(tile, position, name);
+        this.type = type;
+    }
+
+    public int getEquipmentType(){
+        return type;
     }
 
     @Override

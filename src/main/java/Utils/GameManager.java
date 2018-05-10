@@ -4,6 +4,7 @@ import Actors.Actor;
 import Actors.Placeable;
 import Actors.Player;
 import Items.Weapon;   //Only needed for a test command
+import Items.Potion;   //Only needed for a test command
 //import org.fusesource.jansi.Ansi;
 
 import java.io.Serializable;
@@ -37,6 +38,7 @@ public class GameManager implements Serializable
     public void render()
     {
         Scanner sc = new Scanner(System.in);
+        MenuManager menuMan = new MenuManager(terrain);
 
         do {
             terrain.printMap();
@@ -44,7 +46,7 @@ public class GameManager implements Serializable
             printLog();
             printStats();
 
-            parseCMD(sc);
+            parseCMD(sc, menuMan);
 
             if(!exitGame)
                 terrain.updateTerrain();
@@ -77,7 +79,7 @@ public class GameManager implements Serializable
         log = new StringBuilder();
     }
 
-    private void parseCMD(Scanner sc)
+    private void parseCMD(Scanner sc, MenuManager menuMan)
     {
         boolean isCorrectCMD = false;
         String input;
@@ -159,13 +161,14 @@ public class GameManager implements Serializable
 
                     case "equip":
                         isCorrectCMD = true;
-                        player.equipItem(commands[1]);
+                        //player.equipItem(commands[1]);
                         break;
-
                     case "take":
                         switch (commands[1]) {
                             case "off": //for testing purpose, let you add an item to test the equip command
                                 player.addInventory(new Weapon(Placeable.Tile.ITEM, null, "BigFist", 5));
+                                player.addInventory(new Weapon(Placeable.Tile.ITEM, null, "FistAndFurious", 45));
+                                player.addInventory(new Potion(Placeable.Tile.ITEM, null, "Herbe verte de resident evil", 3));
                                 break;
 
                             case "on": //for testing purpose, let you spawn a FurSuit on case 6,6 to test take command
@@ -189,7 +192,7 @@ public class GameManager implements Serializable
                                 terrain.take(Vector2D.getVector2DRight());
                                 break;
                         }
-                        break;
+                        break;/*
                     case "drop":
                         if (commands.length == 3) //Cause i don't know how to change a signature to take a variable amount of args
                         {
@@ -215,7 +218,7 @@ public class GameManager implements Serializable
                                     terrain.dropItem(commands[2], Vector2D.getVector2DRight());
                                     break;
                             }
-                        }
+                        }*/
 
                     }
                 }
@@ -227,9 +230,14 @@ public class GameManager implements Serializable
             else if(input.equals("save"))
             {
                 if(SaveManager.saveInstance(this))
-                    System.out.println("Saved successful");
+                    System.out.println("Saved successfully");
                 else
                     System.out.println("Error during saving");
+            }
+            else if(input.equals("menu")) {
+                isCorrectCMD = true;
+                System.out.println("YES WHAT");
+                menuMan.menuManaging(player);
             }
         }
 
