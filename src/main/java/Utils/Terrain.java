@@ -239,7 +239,7 @@ public class Terrain implements Serializable {
         if(mapData.getTileAt(vecPosition) == Placeable.Tile.ITEM)
         {
             player.addInventory(getItemAt(vecPosition));
-            System.out.println(player.getName() + " found a" + getItemAt(vecPosition).getName());
+            System.out.println(player.getName() + " found a " + getItemAt(vecPosition).getName()); //need to scroll up to read it
             mapData.setTileAt(vecPosition, Placeable.Tile.FLOOR);
         }
 
@@ -273,6 +273,7 @@ public class Terrain implements Serializable {
 
             player.removeInventory(player.getItemAt(id));
         }
+        else System.out.println("You can't drop something here");
     }
 
     public void monsterDrop(Vector2D vec)

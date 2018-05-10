@@ -170,7 +170,7 @@ public class GameManager implements Serializable
                         isCorrectCMD = true;
                         //player.equipItem(commands[1]);
                         break;
-                    case "takeAt":
+                    case "take":
                         switch (commands[1]) {
                             case "off": //for testing purpose, let you add an item to test the equip command
                                 player.addInventory(new Weapon(Placeable.Tile.ITEM, null, "BigFist", 5));
