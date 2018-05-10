@@ -16,7 +16,19 @@ public class MainMenuManager
 
         boolean isSaveAvaible = SaveManager.saveExists();
 
-        System.out.println(ansi().fgBrightGreen().a("Hello adventurer!"));
+        System.out.println(ansi().fgBlue().a("Rogue Like | Science Fiction"));
+        System.out.println(ansi().fgRed().a("============================="));
+
+        System.out.println(ansi().fgBlue().a("Hello adventurer!"));
+        System.out.println(" __\n" +
+                "   \\ \\_____\n" +
+                "###[==_____>\n" +
+                "   /_/      __\n" +
+                "            \\ \\_____\n" +
+                "         ###[==_____>\n" +
+                "            /_/");
+        System.out.println(ansi().fgRed().a("============================="));
+        System.out.print(ansi().fgBlue().a(""));
 
         do {
             System.out.println("Start");
