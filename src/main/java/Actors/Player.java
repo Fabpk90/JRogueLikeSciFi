@@ -18,9 +18,9 @@ public class Player extends Actor {
     private Weapon weap;
 
 
-    public Player(int health, int atk, int def)
+    public Player(int health, int atk, int def, String name)
     {
-        super(Tile.PLAYER, health, atk, def, Vector2D.getVector2DZero(), "Player");
+        super(Tile.PLAYER, health, atk, def, Vector2D.getVector2DZero(), name);
         inv = new ArrayList <>();
         arm = null;
         weap = null;

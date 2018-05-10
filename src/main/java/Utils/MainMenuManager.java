@@ -55,7 +55,6 @@ public class MainMenuManager
                 gm.loaded();
                 gm.render();
             }
-
             else
                 System.out.println("Error in loading the save!");
         }
@@ -63,14 +62,18 @@ public class MainMenuManager
 
     static private Player createPlayer()
     {
-        Player p = new Player(15, 12, 10);
-
+        
         System.out.println("Welcome to the creation menu");
-        System.out.println("Please insert your name adventurer");
+        System.out.println("Please insert your name adventurer (min 3 characters)");
 
-        //TODO: check the input
+        String str = sc.nextLine();
 
-        p.setName(sc.nextLine());
-        return p;
+        while (str.length() < 2)
+        {
+            System.out.println("You need to type 3 characters at least");
+            str = sc.nextLine();
+        }
+
+        return new Player(15, 12, 0, str);
     }
 }
