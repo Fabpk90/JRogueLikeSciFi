@@ -1,8 +1,10 @@
 package Actors;
 
+import Items.Armor;
+import Items.Item;
+import Items.Weapon;
 import Utils.GameManager;
 import Utils.Vector2D;
-import org.fusesource.jansi.Ansi;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,8 @@
 package Utils;
 
 import Actors.*;
+import Items.Armor;
+import Items.Item;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ public class Terrain implements Serializable {
     private Player player;                  //Changé de Actor à Player
 
     private ArrayList<Monster> monsters;
-    private ArrayList<Item> itemOnTheGround;
+    private ArrayList<Item> itemsOnTheGround;
 
     public Terrain(int size, Player player)
     {
@@ -26,7 +28,7 @@ public class Terrain implements Serializable {
         mapData = new MapData(size);
 
         monsters = new ArrayList<Monster>();
-        itemOnTheGround = new ArrayList<>();
+        itemsOnTheGround = new ArrayList<>();
 
         generateMap();
     }
@@ -50,7 +52,7 @@ public class Terrain implements Serializable {
         else
         {
             monsters = new ArrayList<>();
-            itemOnTheGround = new ArrayList<>();
+            itemsOnTheGround = new ArrayList<>();
 
             System.out.println(mapData.getLevel() - 1 >= GameManager.levelMax);
             mapData = MapGenerator.getMap(size, mapData.getLevel(), this);
@@ -184,7 +186,7 @@ public class Terrain implements Serializable {
 
     public Item getItemAt(Vector2D positionToSearchFor)
     {
-        for(Item i : itemOnTheGround)
+        for(Item i : itemsOnTheGround)
         {
             if(i.getPosition().equals(positionToSearchFor))
                 return i;
@@ -213,7 +215,7 @@ public class Terrain implements Serializable {
     public void spawnItem()
     {
         mapData.setTileAt(6,6, Placeable.Tile.ITEM);
-        itemOnTheGround.add(new Armor(Placeable.Tile.ITEM, new Vector2D(6,6), "FurSuit", -10 ));
+        itemsOnTheGround.add(new Armor(Placeable.Tile.ITEM, new Vector2D(6,6), "FurSuit", -10 ));
     }
 
     //Drop an item from the player's inventory
@@ -229,7 +231,7 @@ public class Terrain implements Serializable {
             if(mapData.getTileAt(vecPosition) == Placeable.Tile.FLOOR)  //Make sure the target is an empty space
             tmp.setPosition(vecPosition);
             mapData.setTileAt(tmp.getPosition(), Placeable.Tile.ITEM);  //Update the map
-            itemOnTheGround.add(tmp);
+            itemsOnTheGround.add(tmp);
             player.removeInventory(tmp);
         }
     }

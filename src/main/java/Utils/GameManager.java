@@ -3,7 +3,7 @@ package Utils;
 import Actors.Actor;
 import Actors.Placeable;
 import Actors.Player;
-import Actors.Weapon;   //Only needed for a test command
+import Items.Weapon;   //Only needed for a test command
 //import org.fusesource.jansi.Ansi;
 
 import java.io.Serializable;

@@ -1,7 +1,7 @@
-package Actors;
+package Items;
 
+import Actors.Player;
 import Utils.Vector2D;
-import org.fusesource.jansi.Ansi;
 
 public class Weapon extends Equipment {
 

@@ -1,5 +1,7 @@
-package Actors;
+package Items;
 
+import Actors.Placeable;
+import Actors.Player;
 import Utils.Vector2D;
 import org.fusesource.jansi.Ansi;
 

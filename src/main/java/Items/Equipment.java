@@ -1,8 +1,9 @@
-package Actors;
+package Items;
 
 
+import Actors.Player;
+import Items.Item;
 import Utils.Vector2D;
-import org.fusesource.jansi.Ansi;
 
 //Exceedingly useful class, so much that I would go as far as to say that it embodies the very essence of
 //Mankind, Pancakes and irony.

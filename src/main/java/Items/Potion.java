@@ -1,8 +1,7 @@
-package Actors;
+package Items;
 
-import Utils.Usable;
+import Actors.Actor;
 import Utils.Vector2D;
-import org.fusesource.jansi.Ansi;
 
 public class Potion extends Item implements Usable
 {
