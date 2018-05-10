@@ -12,7 +12,7 @@ import java.util.List;
 public class Player extends Actor {
 
     private int exp;
-    public List<Item> inv; //Liste chainé représentant l'inventaire, je laisse en com le temps de faire les items
+    private List<Item> inv; //Liste chainé représentant l'inventaire, je laisse en com le temps de faire les items
     private Armor arm;     //Contient d'abord l'équipement de base puis l'armure équipé
     private Weapon weap;
 

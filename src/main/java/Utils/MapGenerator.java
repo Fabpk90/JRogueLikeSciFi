@@ -10,6 +10,7 @@ import Actors.Placeable;/*
     Ver 0.1: Working, but creating orphaned isle
 
  */
+import Actors.Trap;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -33,7 +34,7 @@ public class MapGenerator
         activeAutomaton(5);
         generateExit();
 
-        generateTraps();
+        generateTraps(terrain.getTraps());
 
         generateMonsters(terrain.getMonsters(), terrain);
 
@@ -42,21 +43,31 @@ public class MapGenerator
         return mapData;
     }
 
-    private static void generateTraps()
+    private static void generateTraps(ArrayList<Trap> traps)
     {
         Random r = new Random();
 
         int placed = 0;
-        int toPlace = r.nextInt(level+1 )+1;
+        int toPlace = r.nextInt(2 );
 
         int x,y;
 
-       /* while (placed != toPlace)
+        while (placed != toPlace)
         {
             x = r.nextInt(size);
             y = r.nextInt(size);
 
-        }*/
+            if(getNbFreeAdjacentTiles(mapData, x, y) > 3)
+            {
+                placed++;
+
+                Trap trap = new Trap(new Vector2D(x,y), 5);
+
+                mapData.setTileAt(x, y, trap.getTile());
+                traps.add(trap);
+            }
+
+        }
 
     }
 

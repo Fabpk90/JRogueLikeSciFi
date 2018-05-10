@@ -53,8 +53,12 @@ public class GameManager implements Serializable
             System.out.flush();
         }while(!exitGame && !winGame);
 
+        //printing in the case where the play dies because of traps
+        printLog();
+
         if(exitGame)
         {
+
             System.out.println("See you adventurer");
         }
         else if(winGame)
