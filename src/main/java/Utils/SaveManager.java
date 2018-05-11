@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 
 public class SaveManager {
 
-    final static public  String saveName = "save.yaya";
+    final static private  String saveName = "save.dat";
 
 
     static public boolean saveInstance(GameManager gm)
@@ -35,17 +35,8 @@ public class SaveManager {
             gm = (GameManager) in.readObject();
             in.close();
             fileIn.close();
-        }catch (FileNotFoundException e) {
+        }catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
-            return null;
-        } catch (ClassNotFoundException e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-         catch (IOException i)
-         {
-            i.printStackTrace();
             return null;
         }
 

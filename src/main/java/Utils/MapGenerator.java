@@ -119,6 +119,8 @@ public class MapGenerator
 
     }
 
+    //generates monsters according to the map level
+    // populate the arrayList given
     private static void generateMonsters(ArrayList<Monster> monsters, Terrain terrain)
     {
         int placed = 0;

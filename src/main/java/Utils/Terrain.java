@@ -150,7 +150,7 @@ public class Terrain implements Serializable {
     }
 
 
-    public Trap getTrapAt(Vector2D position)
+    private Trap getTrapAt(Vector2D position)
     {
         for (Trap trap : traps)
         {
@@ -207,7 +207,7 @@ public class Terrain implements Serializable {
     }
 
     // @return The monster at the position given
-    public Monster getMonsterAt(Vector2D positionToSearch)
+    private Monster getMonsterAt(Vector2D positionToSearch)
     {
         for(Monster m : monsters)
         {
@@ -219,7 +219,7 @@ public class Terrain implements Serializable {
     }
 
     // @return The item at the position given
-    public Item getItemAt(Vector2D positionToSearchFor)
+    private Item getItemAt(Vector2D positionToSearchFor)
     {
         for(Item i : itemsOnTheGround)
         {

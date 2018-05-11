@@ -15,7 +15,6 @@ public class MenuManager {
 
     public boolean menuManaging(Player player, GameManager gm)
     {
-
         displayMenu();
         return parsingMenu(player, gm);
     }
@@ -58,7 +57,8 @@ public class MenuManager {
         boolean isCorrectCMD = false;
         String input;
 
-        while (!isCorrectCMD) {
+        while (!isCorrectCMD)
+        {
             input = sc.nextLine();
 
             switch (input)
@@ -93,7 +93,8 @@ public class MenuManager {
         boolean isCorrectCMD = false;
         String input;
 
-        while (!isCorrectCMD) {
+        while (!isCorrectCMD)
+        {
             input = sc.nextLine();
 
             switch (input)
@@ -146,7 +147,8 @@ public class MenuManager {
         String input;
         int id = -2;
 
-        while (!isCorrectCMD) {
+        while (!isCorrectCMD)
+        {
             System.out.println("Select the item's id or '-1' to cancel");
             input = sc.nextLine();
 
@@ -165,7 +167,8 @@ public class MenuManager {
         }
     }
 
-    protected boolean parsingMenu(Player player, GameManager gm) {
+    private boolean parsingMenu(Player player, GameManager gm)
+    {
 
         Scanner sc = new Scanner(System.in);
         boolean isCorrectCMD = false;
@@ -174,8 +177,10 @@ public class MenuManager {
         while (!isCorrectCMD) {
             input = sc.nextLine();
             String[] commands = input.split(" ");
-            if(commands.length >= 1) {
-                switch (commands[0]) {
+            if(commands.length >= 1)
+            {
+                switch (commands[0])
+                {
                     case "stats": {
                         isCorrectCMD = true;
                         player.displayStats();
@@ -201,7 +206,8 @@ public class MenuManager {
                     }
 
                     case "exit": {
-                        if (commands.length == 2) {
+                        if (commands.length == 2)
+                        {
                             switch (commands[1]) {
                                 case "menu": {
                                     isCorrectCMD = true;
