@@ -156,10 +156,11 @@ public class MenuManager {
                 id = Integer.parseInt(input);
             }catch (NumberFormatException e) {
                 System.out.println("NaN");
+                id = -2;
             }
 
             if(id == -1) isCorrectCMD = true;
-            else
+            else if(id != -2)
             {
                 isCorrectCMD = true;
                 inventoryMenuManager(id, player);

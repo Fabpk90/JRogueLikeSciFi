@@ -157,32 +157,9 @@ public class GameManager implements Serializable
                         if (attackGoneWrong)
                             addLog("The player attacks the void..");
                         break;
-                    case "open":
-                        switch (commands[1]) {
-                            case "inventory":
-                                //isCorrectCMD = true; activer si on veut qu'ouvrir l'inventaire face passer un tour.
-                                addLog("Opening Inventory");
-                                player.openInventory();
-                                break;
-                        }
-                        break;
 
-                    case "equip":
-                        isCorrectCMD = true;
-                        //player.equipItem(commands[1]);
-                        break;
                     case "take":
                         switch (commands[1]) {
-                            case "off": //for testing purpose, let you add an item to test the equip command
-                                player.addInventory(new Weapon(Placeable.Tile.ITEM, null, "BigFist", 5));
-                                player.addInventory(new Weapon(Placeable.Tile.ITEM, null, "FistAndFurious", 45));
-                                player.addInventory(new Potion(Placeable.Tile.ITEM, null, "Herbe verte de resident evil", 3));
-                                break;
-
-                            case "on": //for testing purpose, let you spawn a FurSuit on case 6,6 to test takeAt command
-                                terrain.spawnItem();
-                                break;
-
                             case "up":
                                 addLog("Picking up an item");
                                 isCorrectCMD = true;
