@@ -235,7 +235,7 @@ public class GameManager implements Serializable
                 }
             }
             else if(input.equals("menu")) {
-                menuMan.menuManaging(player);
+                isCorrectCMD = menuMan.menuManaging(player, this);
             }
         }
 

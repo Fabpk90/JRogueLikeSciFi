@@ -13,10 +13,11 @@ public class MenuManager {
         this.terrain = terrain;
     }
 
-    public void menuManaging(Player player)
+    public boolean menuManaging(Player player, GameManager gm)
     {
+
         displayMenu();
-        parsingMenu(player);
+        return parsingMenu(player, gm);
     }
 
     private void displayMenu()
@@ -164,7 +165,7 @@ public class MenuManager {
         }
     }
 
-    protected void parsingMenu(Player player) {
+    protected boolean parsingMenu(Player player, GameManager gm) {
 
         Scanner sc = new Scanner(System.in);
         boolean isCorrectCMD = false;
@@ -191,6 +192,11 @@ public class MenuManager {
 
                     case "save": {
 
+                        isCorrectCMD = true;
+                        if(SaveManager.saveInstance(gm))
+                            System.out.println("Saved successfully");
+                        else
+                            System.out.println("Error during saving");
                         break;
                     }
 
@@ -203,8 +209,9 @@ public class MenuManager {
                                 }
 
                                 case "game": {
-
-                                    break;
+                                    //isCorrectCMD = true;
+                                    GameManager.exitGame = true;
+                                    return true;
                                 }
                             }
                         }
@@ -212,5 +219,6 @@ public class MenuManager {
                 }
             }
         }
+        return false;
     }
 }

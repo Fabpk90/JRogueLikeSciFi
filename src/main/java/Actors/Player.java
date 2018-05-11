@@ -59,8 +59,13 @@ public class Player extends Actor {
 
         System.out.println("Atk: " + (getAtk()));
 
-        if(arm == null)    System.out.println("Def: " + getDef());
-        else System.out.println("Def: " + (getDef() + arm.getDef()));
+        System.out.println("Def: " + getDef());
+
+        if(arm != null) System.out.println("Armor: " + arm.getName());
+        else System.out.println("Armor: nothing");
+
+        if(weap != null) System.out.println("Weapon: " + weap.getName());
+        else System.out.println("Weapon: nothing");
     }
 
     public void equip(Item i)
