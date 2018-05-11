@@ -19,7 +19,10 @@ Instruction de compilation et exécution:
 
 Scénario de démonstration:
 
-
+    - Lancement du jeu
+    - Insertion du nom du joueur
+    - En fonction de la génération de la map, le joueur peut décider de se déplacer (move) ou d'attaquer(attack)
+    - Le but étant de descendre 4 fois, c'est-à-dire atteindre 4 fois la sortie (E), le joueur peut préférer de se ruer bers la sortie
 
 
 
@@ -27,15 +30,16 @@ Manuel Technique:
 
     Génération procédurale:
         La génération se base sur une implémentation d'automate cellulaire suivant les lois 4 et 5.
-        Les lois appliquées permettent la génération de caves procéduralement.
+        Les lois appliquées permettent la génération de caves procédurales.
         Le principe de la génération est:
             - Générer aléatoirement des murs
             - Appliquer les lois sur la matrice de mur
+
         L'algorithme se base sur une implémentation intérative, la matrice de la carte subit plusieurs fois le même algorithme.
         La répétition du même algorithme, et donc des lois, permet d'obtenir des caves pseudo-aléatoire.
 
-        Le reste des objets générés se basent sur la matrice générée précédemment pour trouver une case libre.
-        Les objets sont eux aussi générés pseudo-aléatoirement, certains en fonctions de la profondeur de la cave (le niveau) d'autres entre des intervalles constants.
+        Le reste des objets générés dans la matrice se basent sur la matrice générée précédemment pour trouver une case libre.
+        Les objets sont eux aussi générés pseudo-aléatoirement, certains en fonctions de la profondeur de la cave (le niveau) d'autres en fonction d'intervalles constants.
 
 
 
