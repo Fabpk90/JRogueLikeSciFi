@@ -2,72 +2,99 @@ CABOUAT Charlotte
 LEBRET Lucas
 SANTORO Fabrizio
 
-RogueLike Science Fiction
+JRogueLike
+Science Fiction
 
 Cahier des charges:
-   - Génération procédurale de la carte
-   - Sauvegarde/Chargement d'une partie
-   - PNJ (Monstres)
-   - Système d'inventaire et équipement
+  - Génération procédurale de la carte: mur, sol, pièges, sortie
+  - Sauvegarde/Chargement d'une partie
+  - PNJ (Monstres)
+  - Système d'inventaire et équipement
 
 Instruction de compilation et exécution:
 
-    ./gradlew build
-    cd build/libs/
-    java -jar JRogueLike-1.jar
+   ./gradlew build
+   cd build/libs/
+   java -jar JRogueLike-0.1.jar
 
 
 Scénario de démonstration:
 
-    - Lancement du jeu
-    - Insertion du nom du joueur
-    - En fonction de la génération de la map, le joueur peut décider de se déplacer (move) ou d'attaquer(attack)
-    - Le but étant de descendre 4 fois, c'est-à-dire atteindre 4 fois la sortie (E), le joueur peut préférer de se ruer bers la sortie
-
+   - Lancement du jeu
+   - Start du jeu
+   - Insertion du nom du joueur
+   - En fonction de la génération de la map, le joueur peut décider de se déplacer (move) ou d'attaquer(attack)
+   - Si le joueur tue des monstres, ces derniers peuvent faire tomber des objets à leurs mort, il suffit de s’approcher de l’objet et d’utiliser la commande “take axe”, avec axe (up/right/down/left)
+   - Le but étant de descendre 4 fois, c'est-à-dire atteindre 4 fois la sortie (E), le joueur peut préférer de se ruer vers la sortie
 
 
 Manuel Technique:
 
-    Génération procédurale:
-        La génération se base sur une implémentation d'automate cellulaire suivant les lois 4 et 5.
-        Les lois appliquées permettent la génération de caves procédurales.
-        Le principe de la génération est:
-            - Générer aléatoirement des murs
-            - Appliquer les lois sur la matrice de mur
-
-        L'algorithme se base sur une implémentation intérative, la matrice de la carte subit plusieurs fois le même algorithme.
-        La répétition du même algorithme, et donc des lois, permet d'obtenir des caves pseudo-aléatoire.
-
-        Le reste des objets générés dans la matrice se basent sur la matrice générée précédemment pour trouver une case libre.
-        Les objets sont eux aussi générés pseudo-aléatoirement, certains en fonctions de la profondeur de la cave (le niveau) d'autres en fonction d'intervalles constants.
+    Représentation de la carte:
+        Pour la représentation, nous avons choisi une matrice d’énumération, sachant que nous utilisons JAnsi pour la couleur dans le terminal, l’énumération contient le caractère à afficher ainsi que sa couleur.
+        La classe MapGenerator s’occupe de toutes les fonctions propres à la génération, alors que la classe Terrain s’occupe de l’interaction avec la map.
+        La classe MapData permet d’encapsuler toutes les interactions avec la matrice d’énumérations.
 
 
+   Génération procédurale:
+       La génération se base sur une implémentation d'automate cellulaire suivant les lois 4 et 5.
+       Les lois appliquées permettent la génération de caves procédurales.
+       Le principe de la génération est:
+           - Générer aléatoirement des murs
+           - Appliquer les lois sur la matrice de mur
+
+       L'algorithme se base sur une implémentation itérative, la matrice de la carte subi plusieurs fois le même algorithme.
+       La répétition du même algorithme, et donc des lois, permet d'obtenir des caves pseudo-aléatoire.
+
+       Le reste des objets générés dans la matrice se basent sur la matrice générée précédemment pour trouver une case libre.
+       Les objets sont eux aussi générés pseudo-aléatoirement, certains en fonctions de la profondeur de la cave (le niveau) d'autres en fonction d'intervalles constants.
+
+
+Gestion des classes (c.f. diagramme de classe):
+
+    Chaque objet qui veut être affiché doit hériter de la classe Placeable, elle permet d’avoir les propriétés nécessaires pour être affiché.
+    En effet elle contient aussi la définition des tuiles utilisées dans tout le projet.
+
+Nous avons construit la hiérarchie des acteurs de cette manière:
+La classe principale de tous les acteurs est Actor, qui gère les scénarios basiques, tels l’attaque et le déplacement, elle contient les informations essentielles des acteurs (vie, attaque, def, position)
+Chaque acteur implémente la méthode onDie propre à lui, le joueur par exemple arrête le jeu, alors que le monstre non.
+
+    Les objets sont eux aussi dépendants d’une classe mère, Item, qui gère un objet jeu de base (nom). Chaque objet jeu doit alors hérité de la classe Equipement s’il veut pouvoir être équipé, ou hérité d’Item et implémenter l’interface Usable s’il veut pouvoir être utilisé (potion).
+
+    Pour comprendre au mieux la hiérarchie du projet, il est conseillé de se référer au diagramme de classe.
 
 Manuel Utilisateur:
 
-    Scenario: Rejoindre la sortie dans chaque salle en tentant de survivre aux monstres.
-
-    Retrouver le vaisseau !
-
-        Au lancement de l'application il est possible de: commencer une nouvelle partie (start), charger une partie, si elle existe, avec load ou fermer (exit).
-
-        Lors d'une nouvelle partie, la création du personnage nécessite un nom pour celui-ci, de minimum 3 charactères.
+       Un vaisseau contrôlé par une IA défectueuse se dirige droit vers le soleil avec pour but de s'accaparer toute l’énergie qu’il génère ce qui mettrait en péril la vie sur Terre.
+       Votre but est donc de pénétrer dans le vaisseau afin d’enclencher la procédure manuelle d’autodestruction du vaisseau et sauver la planète !
 
 
-        Une fois la partie lancée, plusieurs commandes sont disponibles:
 
-            - Mouvement: "move down/left/right/up"
+       Au lancement de l'application il est possible de: commencer une nouvelle partie (start), charger une partie, si elle existe, avec load ou fermer (exit).
 
-            - Attaquer : "attack down/left/right/up"
+       Lors d'une nouvelle partie, la création du personnage nécessite un nom pour celui-ci, de minimum 3 caractères.
 
-            - Sortir du jeu: "exit"
+       Une fois la partie lancée, plusieurs commandes sont disponibles:
 
-            - Enregistrer ou charger une partie: "load/save"
+           - Mouvement: "move down/left/right/up"
 
-            - Jeter un item: "drop down/left/right/up NomItem"
+           - Attaquer : "attack down/left/right/up"
 
-            - Ramasser un item: "take down/left/right/up"
+           - Sortir du jeu: "exit"
 
-        Le personnage dispose aussi d'un inventaire, pour y accéder, utiliser la commande open inventory.
-        Une fois l'inventaire ouvert, il est possible d'équiper certains objets, comme une arme ou une armure, avec "equip NomItem".
+           - Enregistrer ou charger une partie: "load/save"
 
+           - Ramasser un item: "take down/left/right/up"
+
+        - Ouvrir le sous-menu: “menu”
+            - Affichage des statistiques du joueur et nom des équipements “stats”
+            - Affichage et ouverture de l'inventaire: "inventory"
+            - Sélection d’un objet: "L'ID qui précède son affichage"
+            - Équiper l'objet sélectionné: "equip"
+            - Utiliser l'objet: "use"
+            - Déposer l'objet sur une case vide: "drop"
+                - Direction "down/left/right/up"
+
+            - Enregistrer ou charger une partie: "save” ou “load”
+            - Sortir du jeu: "exit game"
+       Le joueur peut à chaque étape décider de sortir du menu avec certaines commandes tel que "cancel" ou "exit menu" ou en sélectionnant “-1” comme ID.
