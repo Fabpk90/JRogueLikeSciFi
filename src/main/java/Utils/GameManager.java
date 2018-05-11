@@ -92,6 +92,7 @@ public class GameManager implements Serializable
         String input;
 
         while(!isCorrectCMD) {
+            System.out.println("Awaiting command");
             input = sc.nextLine();
             String[] commands = input.split(" "); //divide the input string in pieces
 
