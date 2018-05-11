@@ -81,6 +81,7 @@ public class MapGenerator
 
     }
 
+    //randomly generate items
     private static void generateItem(ArrayList<Item>  itemsOnTheGround)
     {
         Random r = new Random();

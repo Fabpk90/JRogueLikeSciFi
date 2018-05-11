@@ -1,11 +1,8 @@
 package Utils;
 
 import Actors.Actor;
-import Actors.Placeable;
+//import Actors.Placeable;
 import Actors.Player;
-import Items.Weapon;   //Only needed for a test command
-import Items.Potion;   //Only needed for a test command
-//import org.fusesource.jansi.Ansi;
 
 import java.io.Serializable;
 import java.util.Scanner;
@@ -182,7 +179,6 @@ public class GameManager implements Serializable
                                 break;
                         }
                         break;
-
                     }
                 }
             else if (input.equals("exit"))
@@ -213,7 +209,7 @@ public class GameManager implements Serializable
                 }
             }
             else if(input.equals("menu")) {
-                isCorrectCMD = menuMan.menuManaging(player, this);
+                isCorrectCMD = menuMan.menuManaging(player, this); //return value used to exit the game from the menu
             }
         }
 

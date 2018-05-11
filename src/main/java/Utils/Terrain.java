@@ -17,7 +17,7 @@ public class Terrain implements Serializable {
     private int size;
     private MapData mapData;
 
-    private Player player;                  //Changé de Actor à Player
+    private Player player;
 
     private ArrayList<Monster> monsters;
     private ArrayList<Item> itemsOnTheGround;
@@ -34,7 +34,7 @@ public class Terrain implements Serializable {
 
         mapData = new MapData(size);
 
-        monsters = new ArrayList<Monster>();
+        monsters = new ArrayList<>();
         itemsOnTheGround = new ArrayList<>();
         traps = new ArrayList<>();
 
@@ -245,13 +245,6 @@ public class Terrain implements Serializable {
 
     }
 
-    //Test function, spawn an item on square 6,6 regardless of what was there
-    public void spawnItem()
-    {
-        mapData.setTileAt(6,6, Placeable.Tile.ITEM);
-        itemsOnTheGround.add(new Armor(Placeable.Tile.ITEM, new Vector2D(6,6), "FurSuit", -10 ));
-    }
-
     //Drop an item from the player's inventory
     public void dropItemAt(int id, Vector2D vec)
     {
@@ -261,7 +254,7 @@ public class Terrain implements Serializable {
 
         if(mapData.getTileAt(vecPosition) == Placeable.Tile.FLOOR){  //Make sure the target is an empty space player.getItemAt(id).setPosition(vecPosition);
 
-            if(player.getArm() == player.getItemAt(id))
+            if(player.getArm() == player.getItemAt(id))              //If the dropped item was equipped, the player unequip it
                 player.unequipArm();
 
             if(player.getWeap() == player.getItemAt(id))
@@ -276,20 +269,22 @@ public class Terrain implements Serializable {
         else System.out.println("You can't drop something here");
     }
 
+    //When a monster dies it has a 50% to drop loot, the items are more powerful than loot found on the ground
     public void monsterDrop(Vector2D vec)
     {
         Random r = new Random();
 
+        //50% of the time
         if(r.nextInt(2) == 1) {
             switch (r.nextInt(3)) {
                 case 0:
-                    itemsOnTheGround.add(new Armor(Placeable.Tile.ITEM, new Vector2D(vec.getX(), vec.getY()), r.nextInt(8)));
+                    itemsOnTheGround.add(new Armor(Placeable.Tile.ITEM, new Vector2D(vec.getX(), vec.getY()), r.nextInt(8))); //Drop Armor
                     break;
                 case 1:
-                    itemsOnTheGround.add(new Weapon(Placeable.Tile.ITEM, new Vector2D(vec.getX(), vec.getY()), r.nextInt(8)));
+                    itemsOnTheGround.add(new Weapon(Placeable.Tile.ITEM, new Vector2D(vec.getX(), vec.getY()), r.nextInt(8))); //Drop Weapon
                     break;
                 case 2:
-                    itemsOnTheGround.add(new Potion(Placeable.Tile.ITEM, new Vector2D(vec.getX(), vec.getY()), r.nextInt(20)));
+                    itemsOnTheGround.add(new Potion(Placeable.Tile.ITEM, new Vector2D(vec.getX(), vec.getY()), r.nextInt(20))); //Drop items
                     break;
             }
 

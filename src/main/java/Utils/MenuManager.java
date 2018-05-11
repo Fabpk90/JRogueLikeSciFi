@@ -211,13 +211,12 @@ public class MenuManager {
                         {
                             switch (commands[1]) {
                                 case "menu": {
-                                    isCorrectCMD = true;
+                                    isCorrectCMD = true;                //exit menu
                                     break;
                                 }
 
                                 case "game": {
-                                    //isCorrectCMD = true;
-                                    GameManager.exitGame = true;
+                                    GameManager.exitGame = true;        //exit game
                                     return true;
                                 }
                             }

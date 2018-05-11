@@ -36,7 +36,7 @@ public class Player extends Actor {
 
             for(Item i : inv)
             {
-                if(i == null) System.out.println("WHAT");
+                if(i == null) System.out.println("An error seems to have occurred");
                 else System.out.println(ct + " - " + i.toString());
                 ct++;
             }
@@ -44,6 +44,7 @@ public class Player extends Actor {
         }
     }
 
+    //Return the item found at the id in the inventory
     public Item getItemAt(int id)
     {
         if(id >= 0 && id < inv.size())
@@ -53,6 +54,7 @@ public class Player extends Actor {
         return null;
     }
 
+    //Display the player stats and current equipment
     public void displayStats()
     {
         System.out.println("Health: " + getHealth());
@@ -68,21 +70,22 @@ public class Player extends Actor {
         else System.out.println("Weapon: nothing");
     }
 
+    //Equip the item given in argument
     public void equip(Item i)
     {
         Equipment e = null;
         boolean cont = true;
 
         try{
-            e = Equipment.class.cast(i);
+            e = Equipment.class.cast(i);                    //Cast in equipment to test if armor,weapon or other
         }catch(ClassCastException exc)
         {
-            System.out.println("You can't equip that item");
+            System.out.println("You can't equip that item"); //Not an equipment
             cont = false;
         }
 
         if(cont)
-            switch(e.getEquipmentType())
+            switch(e.getEquipmentType())                    //Will cast in armor or weapon, depending on the type value
             {
                 case 0:
                 {
@@ -128,13 +131,13 @@ public class Player extends Actor {
 
 
     @Override
-    public int getAtk()
+    public int getAtk()             //If nor weapon is equiped use actor function
     {
         if(weap != null) return super.getAtk() + weap.getAtk();
         else return super.getAtk();
     }
 
-    public int getDef()
+    public int getDef()             //If nor armor is equiped use actor function
     {
         if(arm != null) return super.getDef() + arm.getDef();
         else return super.getDef();
