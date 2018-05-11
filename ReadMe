@@ -59,7 +59,8 @@ Gestion des classes (c.f. diagramme de classe):
     La classe principale de tous les acteurs est Actor, qui gère les scénarios basiques, tels l’attaque et le déplacement, elle contient les informations essentielles des acteurs (vie, attaque, def, position)
     Chaque acteur implémente la méthode onDie propre à lui, le joueur par exemple arrête le jeu, alors que le monstre non.
 
-    Les objets sont eux aussi dépendants d’une classe mère, Item, qui gère un objet jeu de base (nom). Chaque objet jeu doit alors hérité de la classe Equipement s’il veut pouvoir être équipé, ou hérité d’Item et implémenter l’interface Usable s’il veut pouvoir être utilisé (potion).
+    Les objets sont eux aussi dépendants d’une classe mère, Item, qui gère un objet jeu de base (nom).
+    Chaque objet jeu doit alors hérité de la classe Equipement s’il veut pouvoir être équipé, ou hérité d’Item et implémenter l’interface Usable s’il veut pouvoir être utilisé (potion).
 
     Pour comprendre au mieux la hiérarchie du projet, il est conseillé de se référer au diagramme de classe.
 
@@ -67,7 +68,6 @@ Manuel Utilisateur:
 
        Un vaisseau contrôlé par une IA défectueuse se dirige droit vers le soleil avec pour but de s'accaparer toute l’énergie qu’il génère ce qui mettrait en péril la vie sur Terre.
        Votre but est donc de pénétrer dans le vaisseau afin d’enclencher la procédure manuelle d’autodestruction du vaisseau et sauver la planète !
-
 
 
        Au lancement de l'application il est possible de: commencer une nouvelle partie (start), charger une partie, si elle existe, avec load ou fermer (exit).
