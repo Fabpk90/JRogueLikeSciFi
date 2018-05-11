@@ -55,9 +55,9 @@ Gestion des classes (c.f. diagramme de classe):
     Chaque objet qui veut être affiché doit hériter de la classe Placeable, elle permet d’avoir les propriétés nécessaires pour être affiché.
     En effet elle contient aussi la définition des tuiles utilisées dans tout le projet.
 
-Nous avons construit la hiérarchie des acteurs de cette manière:
-La classe principale de tous les acteurs est Actor, qui gère les scénarios basiques, tels l’attaque et le déplacement, elle contient les informations essentielles des acteurs (vie, attaque, def, position)
-Chaque acteur implémente la méthode onDie propre à lui, le joueur par exemple arrête le jeu, alors que le monstre non.
+    Nous avons construit la hiérarchie des acteurs de cette manière:
+    La classe principale de tous les acteurs est Actor, qui gère les scénarios basiques, tels l’attaque et le déplacement, elle contient les informations essentielles des acteurs (vie, attaque, def, position)
+    Chaque acteur implémente la méthode onDie propre à lui, le joueur par exemple arrête le jeu, alors que le monstre non.
 
     Les objets sont eux aussi dépendants d’une classe mère, Item, qui gère un objet jeu de base (nom). Chaque objet jeu doit alors hérité de la classe Equipement s’il veut pouvoir être équipé, ou hérité d’Item et implémenter l’interface Usable s’il veut pouvoir être utilisé (potion).
 
